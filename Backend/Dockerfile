@@ -1,7 +1,12 @@
-FROM mcr.microsoft.com/dotnet/core/sdk
-COPY ./bin/Release/netcoreapp3.1/linux-x64/publish /app
-WORKDIR /app
-RUN chmod +x -R /app/TravelPlanner.App
-EXPOSE 5000
-EXPOSE 5001
-ENTRYPOINT ./TravelPlanner.App
+FROM mcr.microsoft.com/dotnet/core/sdk as build
+
+WORKDIR /build
+COPY . . 
+RUN dotnet build TravelPlanner.App
+
+FROM mcr.microsoft.com/dotnet/core/aspnet
+
+COPY --from=build /build/TravelPlanner.App/bin/Debug/netcoreapp3.1 ./bin
+COPY --from=build /build/TravelPlanner.App/obj/Debug/netcoreapp3.1 ./obj
+
+ENTRYPOINT dotnet bin/TravelPlanner.App.dll
