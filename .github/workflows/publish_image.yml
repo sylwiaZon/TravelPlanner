@@ -31,6 +31,6 @@ jobs:
           # Comma-delimited list of tags. These will be added to the registry/repository to form the image's tags
           tags: lastest
           # Path to the build context
-          path: Backend/
+          path: ./Backend
           # Path to the Dockerfile (Default is '{path}/Dockerfile')
-          dockerfile: Backend/Dockerfile.Release
+          dockerfile: ./Backend/Dockerfile.Release
