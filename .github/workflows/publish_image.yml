@@ -17,23 +17,10 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - 
-        name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: ./Backend
-          file: ./Backend/Dockerfile.Release
-          push: true
-          tags: travelplanner/backend:latest
+          - name: Login to DockerHub Registry
+            run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+          - name: Build the Docker image
+            run: docker build ./Backend --file ./Backend/Dockerfile.Release --tag travelplannerapp/backend
+          - name: Push the tagged Docker image
+            run: docker push travelplannerapp/backend
+           
