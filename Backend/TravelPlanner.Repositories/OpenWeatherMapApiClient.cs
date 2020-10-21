@@ -7,11 +7,18 @@ namespace TravelPlanner.Repositories
 {
     public class OpenWeatherMapApiClient
     {
-        static readonly HttpClient Client = new HttpClient();
+        private static readonly HttpClient Client = new HttpClient();
+        private static string Token;
+        private static readonly string Path = "http://api.openweathermap.org/data/2.5/";
+
+        public OpenWeatherMapApiClient()
+        {
+            Token = Environment.GetEnvironmentVariable("OPEN_WEATHER_API_KEY");
+        }
 
         public async Task<WeatherForecastApi> GetWeatherForecast()
         {
-            var responseMessage = await Client.GetAsync("http://api.openweathermap.org/data/2.5/forecast?q=Krakow&appid=18d25a9c31d163de33c8be953d20f040");
+            var responseMessage = await Client.GetAsync(Path + "forecast?q=Krakow&appid=" + Token);
             if (responseMessage.IsSuccessStatusCode)
             {
                 Console.WriteLine(responseMessage.Content);

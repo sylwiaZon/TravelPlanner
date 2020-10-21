@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using TravelPlanner.Core.Triposo;
+using TravelPlanner.Services;
 
 namespace TravelPlanner.App.Controllers
 {
@@ -6,7 +9,22 @@ namespace TravelPlanner.App.Controllers
     [ApiController]
     public class LocationInfoController : ControllerBase
     {
-        //[HttpGet]
-        //public object Get
+        private readonly TravelInfoService TravelInfoService;
+        public LocationInfoController()
+        {
+            TravelInfoService = new TravelInfoService();
+        }
+
+        [HttpGet]
+        async public Task<Location> GetLocationInfo(string cityName)
+        {
+            return await TravelInfoService.GetLocationInfoAsync(cityName);
+        }
+
+        [HttpGet("/tags")]
+        async public Task<Tag[]> GetAvailableTags(string cityName)
+        {
+            return await TravelInfoService.GetAvailableTagsAsync(cityName);
+        }
     }
 }
