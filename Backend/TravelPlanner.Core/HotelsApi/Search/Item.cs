@@ -4,7 +4,10 @@ namespace TravelPlanner.Core.HotelsApi.Search
 {
     public class Item
     {
-        [JsonProperty("items")]
-        public ItemProperties Properties { get; set; }
+        [JsonProperty("group")]
+        public string Group { get; set; }
+
+        [JsonProperty("entities")]
+        public ItemEntities[] Entities { get; set; }
     }
 }

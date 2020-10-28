@@ -9,7 +9,7 @@ namespace TravelPlanner.App.Controllers
     [ApiController]
     public class ArticlesController : ControllerBase
     {
-        private readonly TravelInfoService TravelInfoService;
+        private readonly ITravelInfoService TravelInfoService;
         public ArticlesController()
         {
             TravelInfoService = new TravelInfoService();

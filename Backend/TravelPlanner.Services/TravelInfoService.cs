@@ -19,7 +19,7 @@ namespace TravelPlanner.Services
 
     public class TravelInfoService : ITravelInfoService
     {
-        public static TriposoApiClient TriposoApiClient;
+        private static TriposoApiClient TriposoApiClient;
 
         public TravelInfoService()
         {

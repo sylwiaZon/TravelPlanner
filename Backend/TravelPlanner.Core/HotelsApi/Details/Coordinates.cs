@@ -5,9 +5,9 @@ namespace TravelPlanner.Core.HotelsApi.Details
     public class Coordinates
     {
         [JsonProperty("latitude")]
-        public int Latitude { get; set; }
+        public float Latitude { get; set; }
 
         [JsonProperty("longitude")]
-        public int Longitude { get; set; }
+        public float Longitude { get; set; }
     }
 }

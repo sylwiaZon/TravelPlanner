@@ -23,10 +23,10 @@ namespace TravelPlanner.Core.HotelsApi.Search
         public string RedirectPage { get; set; }
 
         [JsonProperty("latitude")]
-        public int Latitude { get; set; }
+        public float Latitude { get; set; }
 
         [JsonProperty("longitude")]
-        public int Longitude { get; set; }
+        public float Longitude { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

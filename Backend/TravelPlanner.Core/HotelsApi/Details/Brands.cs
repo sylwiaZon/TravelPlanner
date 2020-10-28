@@ -5,7 +5,7 @@ namespace TravelPlanner.Core.HotelsApi.Details
     public class Brands
     {
         [JsonProperty("scale")]
-        public int Scale { get; set; }
+        public float Scale { get; set; }
 
         [JsonProperty("formattedScale")]
         public string FormattedScale { get; set; }

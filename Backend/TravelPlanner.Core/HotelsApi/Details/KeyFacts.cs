@@ -8,12 +8,12 @@ namespace TravelPlanner.Core.HotelsApi.Details
         public string[] HotelSize { get; set; }
 
         [JsonProperty("arrivingLeaving")]
-        public KeyFacts ArrivingLeaving { get; set; }
+        public string[] ArrivingLeaving { get; set; }
 
         [JsonProperty("specialCheckInstructions")]
-        public KeyFacts SpecialCheckInstructions { get; set; }
+        public string[] SpecialCheckInstructions { get; set; }
 
         [JsonProperty("requiredAtCheckin")]
-        public KeyFacts RequiredAtCheckIn { get; set; }
+        public string[] RequiredAtCheckIn { get; set; }
     }
 }

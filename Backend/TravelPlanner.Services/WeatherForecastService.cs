@@ -13,7 +13,12 @@ namespace TravelPlanner.Services
 
     public class WeatherForecastService : IWeatherForecastService
     {
-        private readonly WeatherForecastConverter WeatherForecastConverter = new WeatherForecastConverter();
+        private WeatherForecastConverter WeatherForecastConverter;
+
+        public WeatherForecastService()
+        {
+            WeatherForecastConverter = new WeatherForecastConverter();
+        }
 
         async public Task<IEnumerable<WeatherForecast>> GetWeather()
         {

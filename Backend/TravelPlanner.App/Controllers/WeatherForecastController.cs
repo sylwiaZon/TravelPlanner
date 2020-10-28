@@ -10,7 +10,7 @@ namespace TravelPlanner.App.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly WeatherForecastService WeatherForecastService;
+        private readonly IWeatherForecastService WeatherForecastService;
         public WeatherForecastController()
         {
             WeatherForecastService = new WeatherForecastService();
