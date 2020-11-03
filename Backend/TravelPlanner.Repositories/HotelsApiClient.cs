@@ -1,8 +1,5 @@
 ﻿using System;
-using System.ComponentModel.Design;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using TravelPlanner.Core.HotelsApi.Details;
 using TravelPlanner.Core.HotelsApi.Photos;
@@ -19,9 +16,10 @@ namespace TravelPlanner.Repositories
         {
             Client = new HttpClient();
             //HOTELS_API_KEY
-            Client.DefaultRequestHeaders.Add("x-rapidapi-host", "hotels4.p.rapidapi.com");
-            Client.DefaultRequestHeaders.Add("x-rapidapi-key", "f236493602mshd55a7a6fdf19874p107f6ajsn8eb2487c5939");
-            //Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var hostEnv = Environment.GetEnvironmentVariable("HOTELS_API_HOST");
+            var keyEnv = Environment.GetEnvironmentVariable("HOTELS_API_KEY");
+            Client.DefaultRequestHeaders.Add("x-rapidapi-host", hostEnv);
+            Client.DefaultRequestHeaders.Add("x-rapidapi-key", keyEnv);
         }
 
         public async Task<HotelSearch> GetHotels(string cityName)

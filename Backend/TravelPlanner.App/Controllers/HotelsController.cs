@@ -27,14 +27,14 @@ namespace TravelPlanner.App.Controllers
         }
 
         [HttpGet]
-        [Route("/photos")]
+        [Route("photos")]
         public async Task<HotelPhotos> GetHotelPhotos(string hotelId)
         {
             return await HotelsService.GetHotelPhotos(hotelId);
         }
 
         [HttpGet]
-        [Route("/details")]
+        [Route("details")]
         public async Task<HotelDetails> GetHotelDetails(string hotelId, string checkIn, string checkOut, int adultsNumber, string childrenAges)
         {
             return await HotelsService.GetHotelDetails(hotelId, checkIn, checkOut, adultsNumber, childrenAges);

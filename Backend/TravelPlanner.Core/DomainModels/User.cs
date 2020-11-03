@@ -6,12 +6,12 @@ namespace TravelPlanner.Core
     public class User
     {
         [DataMember]
-        public string Login { get; set; }
-
-        [DataMember]
         public string Name { get; set; }
 
         [DataMember]
-        public string Surname { get; set; }
+        public string Password { get; set; }
+
+        [DataMember]
+        public string Mail { get; set; }
     }
 }

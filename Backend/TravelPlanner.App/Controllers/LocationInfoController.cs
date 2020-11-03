@@ -21,7 +21,7 @@ namespace TravelPlanner.App.Controllers
             return await TravelInfoService.GetLocationInfoAsync(cityName);
         }
 
-        [HttpGet("/tags")]
+        [HttpGet("tags")]
         async public Task<Tag[]> GetAvailableTags(string cityName)
         {
             return await TravelInfoService.GetAvailableTagsAsync(cityName);
