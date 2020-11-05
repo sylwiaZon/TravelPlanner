@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TravelPlanner.Core.Flights;
+using TravelPlanner.Core.DomainModels;
 using TravelPlanner.Services;
 
 namespace TravelPlanner.App.Controllers
@@ -16,14 +17,14 @@ namespace TravelPlanner.App.Controllers
         }
 
         [HttpGet]
-        async public Task<FlightsSchedule> GetSchedule(string origin, string destination, string date)
+        async public Task<IEnumerable<Flight>> GetSchedule(string origin, string destination, string date)
         {
             return await FlightsService.GetSchedule(origin, destination, date);
         }
 
         [HttpGet]
         [Route("status")]
-        async public Task<FlightStatusResponse> GetStatus(string flightNumber, string date)
+        async public Task<Flight> GetStatus(string flightNumber, string date)
         {
             return await FlightsService.GetFlightStatus(flightNumber, date);
         }

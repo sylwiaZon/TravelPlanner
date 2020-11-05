@@ -25,16 +25,6 @@ namespace TravelPlanner.Repositories
             GraphClient = new BoltGraphClient(new Uri(LocalEnvUrl), Login, Password);
         }
 
-        async public Task<IEnumerable<WeatherForecast>> GetWeather()
-        {
-            await GraphClient.ConnectAsync();
-            var resp = GraphClient.Cypher
-                .Match("(weather:Forecast)")
-                .Return(weather => weather.As<WeatherForecast>())
-                .ResultsAsync;
-            return await resp;
-        }
-
         async public Task RegisterUser(User user)
         {
             await GraphClient.ConnectAsync();

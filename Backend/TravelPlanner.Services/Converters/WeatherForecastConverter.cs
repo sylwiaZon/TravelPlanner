@@ -11,7 +11,7 @@ namespace TravelPlanner.Services.Converters
     {
         public IEnumerable<WeatherForecast> ToWeatherForecast(WeatherForecastApi weatherForecast)
         {
-            var r = weatherForecast.List.Select(el =>
+            return weatherForecast.List.Select(el =>
                 new WeatherForecast
                 {
                     Date = new DateTime(el.Date),
@@ -33,7 +33,6 @@ namespace TravelPlanner.Services.Converters
                             WeatherName = w.Main
                             }).ToList()
                 });
-            return r;
         }
     }
 }

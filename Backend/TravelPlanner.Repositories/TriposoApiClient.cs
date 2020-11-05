@@ -19,9 +19,9 @@ namespace TravelPlanner.Repositories
             Token = Environment.GetEnvironmentVariable("TRIPOSO_TOKEN");
         }
 
-        public async Task<Location> GetTripInfo(string cityName)
+        public async Task<Location> GetLocationInfo(string countryName)
         {
-            var responseMessage = await Client.GetAsync(ApiPath + "location.json?id=" +cityName+ "&account=" + AccountId+"&token="+Token);
+            var responseMessage = await Client.GetAsync(ApiPath + "location.json?part_of=" + countryName + "&account=" + AccountId+"&token="+Token);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var response = await responseMessage.Content.ReadAsAsync<ResponseObject<Location>>();

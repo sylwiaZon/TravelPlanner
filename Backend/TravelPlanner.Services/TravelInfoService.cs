@@ -7,7 +7,7 @@ namespace TravelPlanner.Services
 {
     public interface ITravelInfoService
     {
-        Task<Location> GetLocationInfoAsync(string cityName);
+        Task<Location> GetLocationInfoAsync(string countryName);
         Task<Tag[]> GetAvailableTagsAsync(string cityName);
         Task<Article[]> GetArticlesAsync(string cityName, string tag);
         Task<CommonTagLabel[]> GetAvailableTagsAsync();
@@ -26,9 +26,9 @@ namespace TravelPlanner.Services
             TriposoApiClient = new TriposoApiClient();
         }
 
-        async public Task<Location> GetLocationInfoAsync(string cityName)
+        async public Task<Location> GetLocationInfoAsync(string countryName)
         {
-            return await TriposoApiClient.GetTripInfo(cityName);
+            return await TriposoApiClient.GetLocationInfo(countryName);
         }
 
         async public Task<Tag[]> GetAvailableTagsAsync(string cityName)
