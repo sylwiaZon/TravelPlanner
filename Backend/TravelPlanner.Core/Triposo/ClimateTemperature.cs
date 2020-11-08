@@ -9,5 +9,5 @@ namespace TravelPlanner.Core.Triposo
 
         [JsonProperty("average_min")]
         public ClimateStatistics AverageMin { get; set; }
-}
+    }
 }

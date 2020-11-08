@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-using TravelPlanner.Core.Flights;
+﻿using System.Runtime.Serialization;
 
 namespace TravelPlanner.Core.DomainModels
 {

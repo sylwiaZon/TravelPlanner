@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using TravelPlanner.Core.Triposo;
@@ -8,6 +9,9 @@ namespace TravelPlanner.Core.DomainModels
     [DataContract]
     public class Travel
     {
+        [JsonProperty("identity")]
+        public int Identity { get; set; }
+
         [DataMember]
         public DateTime Date { get; set; }
 
@@ -43,12 +47,5 @@ namespace TravelPlanner.Core.DomainModels
 
         [DataMember]
         public List<LocalHighlights> LocalHighlights { get; set; }
-
-        public Travel(NewTravel newTravel)
-        {
-            Date = newTravel.Date;
-            Participants = newTravel.Participants;
-            TravelDestination = newTravel.TravelDestination;
-        }
     }
 }

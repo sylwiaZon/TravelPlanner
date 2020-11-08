@@ -16,9 +16,9 @@ namespace TravelPlanner.App.Controllers
         }
 
         [HttpGet]
-        async public Task<Location> GetLocationInfo(string countryName)
+        async public Task<Location> GetLocationInfo(string cityName)
         {
-            return await TravelInfoService.GetLocationInfoAsync(countryName);
+            return await TravelInfoService.GetLocationInfoAsync(cityName);
         }
     }
 }

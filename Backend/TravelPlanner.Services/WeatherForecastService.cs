@@ -13,13 +13,6 @@ namespace TravelPlanner.Services
 
     public class WeatherForecastService : IWeatherForecastService
     {
-        private WeatherForecastConverter WeatherForecastConverter;
-
-        public WeatherForecastService()
-        {
-            WeatherForecastConverter = new WeatherForecastConverter();
-        }
-
         async public Task<IEnumerable<WeatherForecast>> GetWeather()
         {
             var repo = new OpenWeatherMapApiClient();

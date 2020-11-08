@@ -73,6 +73,23 @@ namespace TravelPlanner.Repositories
             return null;
         }
 
+        public async Task<NearestAirport> GetNearestAirports(float latitude, float longitude)
+        {
+            await SetToken();
+
+            var responseMessage = await Client.GetAsync(Path + "references/airports/nearest/" + latitude + "," + longitude);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return await responseMessage.Content.ReadAsAsync<NearestAirport>();
+            }
+            if (responseMessage.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                Token = null;
+                return await GetNearestAirports(latitude, longitude);
+            }
+            return null;
+        }
+
         private async Task SetToken()
         {
             if (Token != null)

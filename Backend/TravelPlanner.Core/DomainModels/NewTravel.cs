@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace TravelPlanner.Core.DomainModels
 {
     [DataContract]
     public class NewTravel
     {
+        [DataMember]
+        public string TravelIdentity { get; set; }
+
         [DataMember]
         public DateTime Date { get; set; }
 

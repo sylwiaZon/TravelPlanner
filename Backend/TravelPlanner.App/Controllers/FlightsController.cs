@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TravelPlanner.Core.DomainModels;
+using TravelPlanner.Core.Flights;
 using TravelPlanner.Services;
+using Flight = TravelPlanner.Core.DomainModels.Flight;
 
 namespace TravelPlanner.App.Controllers
 {
@@ -27,6 +29,13 @@ namespace TravelPlanner.App.Controllers
         async public Task<Flight> GetStatus(string flightNumber, string date)
         {
             return await FlightsService.GetFlightStatus(flightNumber, date);
+        }
+
+        [HttpGet]
+        [Route("airports")]
+        async public Task<NearestAirport> GetNearestAirport(float latitude, float longitude)
+        {
+            return await FlightsService.GetNearestAirport(latitude, longitude);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TravelPlanner.Services.Converters
 {
     public class WeatherForecastConverter
     {
-        public IEnumerable<WeatherForecast> ToWeatherForecast(WeatherForecastApi weatherForecast)
+        public static IEnumerable<WeatherForecast> ToWeatherForecast(WeatherForecastApi weatherForecast)
         {
             return weatherForecast.List.Select(el =>
                 new WeatherForecast
