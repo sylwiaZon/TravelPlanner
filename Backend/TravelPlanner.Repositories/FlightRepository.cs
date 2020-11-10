@@ -26,16 +26,27 @@ namespace TravelPlanner.Repositories
             GraphClient = new BoltGraphClient(new Uri(LocalEnvUrl), Login, Password);
         }
 
-        async public Task AddFlight(Flight newFlight, string travelIdentity)
+        async public Task AddToFlight(Flight newFlight, string travelIdentity)
+        {
+            await AddFlight(newFlight, travelIdentity, "HasToFlight");
+        }
+
+        async public Task AddFromFlight(Flight newFlight, string travelIdentity)
+        {
+            await AddFlight(newFlight, travelIdentity, "HasFromFlight");
+        }
+
+        async private Task AddFlight(Flight newFlight, string travelIdentity, string relationName)
         {
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
-                .Match("(travel:Travel)--(flight:Flight)")
-                .Where((Travel travel) => travel.TravelIdentity == travelIdentity)
+                .Match($"(travel:Travel)-[:{relationName}]-(flight:Flight)")
+                .Where((Travel travel) => travel.TravelId == travelIdentity)
                 .Return(flight => flight.As<Flight>())
                 .ResultsAsync;
             if (resp.Any())
                 throw new TravelPlannerException(409, "Flight for this travel already exists");
+
             try
             {
                 await GraphClient.Cypher
@@ -49,12 +60,12 @@ namespace TravelPlanner.Repositories
                 if (!ce.Message.Contains("already exists", StringComparison.InvariantCultureIgnoreCase))
                     throw ce;
             }
+
             await GraphClient.Cypher
                 .Match("(flight:Flight)", "(travel:Travel)")
-                .Where((Travel travel) => travel.TravelIdentity == travelIdentity)
-                .AndWhere((Flight flight) => flight.AirlineId == newFlight.AirlineId 
-                    && flight.FlightNumber == newFlight.FlightNumber)
-                .Merge("(travel)-[r:HasFlight]->(flight)")
+                .Where((Travel travel) => travel.TravelId == travelIdentity)
+                .AndWhere((Flight flight) => flight.FlightId == newFlight.FlightId)
+                .Merge($"(travel)-[r:{relationName}]->(flight)")
                 .Return(flight => flight.As<Flight>())
                 .ResultsAsync;
         }
@@ -64,61 +75,13 @@ namespace TravelPlanner.Repositories
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
                 .Match("(flight:Flight)--(travel:Travel)")
-                .Where((Travel travel) => travel.TravelIdentity == travelIdentity)
+                .Where((Travel travel) => travel.TravelId == travelIdentity)
                 .Return(flight => flight.As<Flight>())
                 .ResultsAsync;
             if (resp.Any())
                 return resp.First();
             else
                 throw new TravelPlannerException(404, "Flight not found");
-        }
-
-        async public Task AddArrivalAirportFlightStatus(AirportFlightStatus newStatus, string airlineId, string flightNumber)
-        {
-            await AddAirportFlightStatus(newStatus, airlineId, flightNumber, "HasArrivalAirportFlightStatus");
-        }
-
-        async public Task AddDepartureAirportFlightStatus(AirportFlightStatus newStatus, string airlineId, string flightNumber)
-        {
-            await AddAirportFlightStatus(newStatus, airlineId, flightNumber, "HasDepartureAirportFlightStatus");
-        }
-
-        async private Task AddAirportFlightStatus(AirportFlightStatus newStatus, string airlineId, string flightNumber, string relationName)
-        {
-            await GraphClient.ConnectAsync();
-            var resp = await GraphClient.Cypher
-                .OptionalMatch($"(status:AirportFlightStatus)-{relationName}-(flight:Flight)")
-                .Where((Flight flight) => flight.AirlineId == airlineId 
-                    && flight.FlightNumber == flightNumber)
-                .Return(status => status.As<AirportFlightStatus>())
-                .ResultsAsync;
-            if (resp.Any())
-                throw new TravelPlannerException(409, "Status for this flight already exists");
-            try
-            {
-                await GraphClient.Cypher
-                    .Create("(status:AirportFlightStatus $status)")
-                    .WithParam("status", newStatus)
-                    .Return(status => status.As<AirportFlightStatus>())
-                    .ResultsAsync;
-            }
-            catch (ClientException ce)
-            {
-                if (!ce.Message.Contains("already exists", StringComparison.InvariantCultureIgnoreCase))
-                    throw ce;
-            }
-            await GraphClient.Cypher
-                .Match("(flight:Flight)", "(status:AirportFlightStatus)")
-                .Where((AirportFlightStatus status) => 
-                    status.AirportCode == newStatus.AirportCode
-                    && status.ScheduledTimeLocal == newStatus.ScheduledTimeLocal
-                    && status.TerminalName == status.TerminalName)
-                .AndWhere((Flight flight) => 
-                    flight.AirlineId == airlineId
-                    && flight.FlightNumber == flightNumber)
-                .Merge($"(flight)-[r:{relationName}]->(status)")
-                .Return(status => status.As<AirportFlightStatus>())
-                .ResultsAsync;
         }
     }
 }

@@ -1,10 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace TravelPlanner.Core.DomainModels
 {
     [DataContract]
     public class Flight
     {
+        [DataMember]
+        public string FlightId { get; set; } 
+
         [DataMember]
         public FlightDuration FlightDuration { get; set; }
 

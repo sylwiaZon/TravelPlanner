@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TravelPlanner.Core.DomainModels;
-using TriposoLocation = TravelPlanner.Core.Triposo.Location;
 using DBLocation = TravelPlanner.Core.DataBaseModels.Location;
 using DomainLocation = TravelPlanner.Core.DomainModels.Location;
 using TravelPlanner.Repositories;
@@ -14,9 +13,12 @@ namespace TravelPlanner.Services
     {
         Task<IEnumerable<NewTravel>> GetTravels(string user);
         Task<NewTravel> AddTravel(NewTravel travel, string userMail);
-        Task AddLocation(TriposoLocation location, string tarvelIdentity);
-        Task AddFlight(Flight flight, string tarvelIdentity);
+        Task AddLocation(DomainLocation location, string tarvelIdentity);
+        Task AddFromFlight(Flight flight, string tarvelIdentity);
+        Task AddToFlight(Flight flight, string tarvelIdentity);
         Task<DomainLocation> GetLocation(string tarvelIdentity);
+        Task AddHotel(Hotel newHotel, string tarvelIdentity);
+        Task<Hotel> GetHotel(string tarvelIdentity);
     }
 
     public class TravelService : ITravelService
@@ -24,12 +26,14 @@ namespace TravelPlanner.Services
         private TravelRepository TravelRepository;
         private LocationRepository LocationRepository;
         private FlightRepository FlightRepository;
+        private HotelRepository HotelRepository;
 
         public TravelService()
         {
             TravelRepository = new TravelRepository();
             LocationRepository = new LocationRepository();
             FlightRepository = new FlightRepository();
+            HotelRepository = new HotelRepository();
         }
 
         public async Task<IEnumerable<NewTravel>> GetTravels(string userMail)
@@ -40,15 +44,15 @@ namespace TravelPlanner.Services
 
         public async Task<NewTravel> AddTravel(NewTravel newTravel, string userMail)
         {
-            newTravel.TravelIdentity = userMail + newTravel.TravelDestination.City + newTravel.TravelDestination.Country + newTravel.Date;
+            newTravel.TravelId = userMail + newTravel.TravelDestination.City + newTravel.TravelDestination.Country + newTravel.Date;
             var dbTravel = TravelConverter.ToDbTravel(newTravel);
             var response =  await TravelRepository.AddTravelToUser(dbTravel, userMail);
             return TravelConverter.ToDomainTravel(response);
         }
 
-        public async Task AddLocation(TriposoLocation triposoLocation, string tarvelIdentity)
+        public async Task AddLocation(DomainLocation newLocation, string tarvelIdentity)
         {
-            var location = new DBLocation(triposoLocation);
+            var location = LocationConverter.ToDbLocation(newLocation);
             await LocationRepository.AddLocation(location, tarvelIdentity);
         }
 
@@ -58,14 +62,28 @@ namespace TravelPlanner.Services
             return new DomainLocation(response);
         }
 
-        public async Task AddFlight(Flight flight, string tarvelIdentity)
+        public async Task AddHotel(Hotel newHotel, string tarvelIdentity)
+        {
+            var hotel = HotelConverter.ToDbHotel(newHotel);
+            await HotelRepository.AddHotel(hotel, tarvelIdentity);
+        }
+
+        public async Task<Hotel> GetHotel(string tarvelIdentity)
+        {
+            var response = await HotelRepository.GetHotel(tarvelIdentity);
+            return HotelConverter.ToDomainHotel(response);
+        }
+
+        public async Task AddToFlight(Flight flight, string tarvelIdentity)
         {
             var dbFlight = FlightConverter.ToDBFlight(flight);
-            var arrivalFlightStatus = FlightConverter.ToDBAirportFlightStatus(flight.Arrival);
-            var departureFlightStatus = FlightConverter.ToDBAirportFlightStatus(flight.Departure);
-            await FlightRepository.AddFlight(dbFlight, tarvelIdentity);
-            await FlightRepository.AddArrivalAirportFlightStatus(arrivalFlightStatus, flight.AirlineId, flight.FlightNumber);
-            await FlightRepository.AddDepartureAirportFlightStatus(departureFlightStatus, flight.AirlineId, flight.FlightNumber);
+            await FlightRepository.AddToFlight(dbFlight, tarvelIdentity);
+        }
+
+        public async Task AddFromFlight(Flight flight, string tarvelIdentity)
+        {
+            var dbFlight = FlightConverter.ToDBFlight(flight);
+            await FlightRepository.AddFromFlight(dbFlight, tarvelIdentity);
         }
     }
 }

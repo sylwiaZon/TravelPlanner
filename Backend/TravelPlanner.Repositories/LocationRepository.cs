@@ -28,7 +28,7 @@ namespace TravelPlanner.Repositories
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
                 .Match("(travel:Travel)--(location:Location)")
-                .Where((Travel travel) => travel.TravelIdentity == travelIdentity)
+                .Where((Travel travel) => travel.TravelId == travelIdentity)
                 .Return(location => location.As<Location>())
                 .ResultsAsync;
             if (resp.Any())
@@ -48,8 +48,8 @@ namespace TravelPlanner.Repositories
             }
             await GraphClient.Cypher
                 .Match("(location:Location)", "(travel:Travel)")
-                .Where((Travel travel) => travel.TravelIdentity == travelIdentity)
-                .AndWhere((Location location) => location.Name == newLocation.Name)
+                .Where((Travel travel) => travel.TravelId == travelIdentity)
+                .AndWhere((Location location) => location.LocationId == newLocation.LocationId)
                 .Merge("(travel)-[r:HasLocation]->(location)")
                 .Return(location => location.As<Location>())
                 .ResultsAsync;
@@ -60,7 +60,7 @@ namespace TravelPlanner.Repositories
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
                 .Match("(location:Location)--(travel:Travel)")
-                .Where((Travel travel) => travel.TravelIdentity == travelIdentity)
+                .Where((Travel travel) => travel.TravelId == travelIdentity)
                 .Return(location => location.As<Location>())
                 .ResultsAsync;
             if (resp.Any())

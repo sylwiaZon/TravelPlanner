@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using TravelPlanner.Core.Triposo;
+using TravelPlanner.Core.DomainModels;
 using TravelPlanner.Services;
 
 namespace TravelPlanner.App.Controllers

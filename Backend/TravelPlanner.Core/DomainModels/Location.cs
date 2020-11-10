@@ -1,12 +1,16 @@
 ﻿using System.Runtime.Serialization;
 using TriposoLocation = TravelPlanner.Core.Triposo.Location;
 using DBLocation = TravelPlanner.Core.DataBaseModels.Location;
+using System;
 
 namespace TravelPlanner.Core.DomainModels
 {
     [DataContract]
     public class Location
     {
+        [DataMember]
+        public string LocationId { get; set; }
+
         [DataMember]
         public float Latitude { get; set; }
 
@@ -59,10 +63,12 @@ namespace TravelPlanner.Core.DomainModels
             Snippet = triposoLocation.Snippet;
             TagLabels = triposoLocation.TagLabels;
             Type = triposoLocation.Type;
+            LocationId = Latitude + Longitude + Name;
         }
 
         public Location(DBLocation domainLocation)
         {
+            LocationId = domainLocation.LocationId;
             Latitude = domainLocation.Latitude;
             Longitude = domainLocation.Longitude;
             CountryId = domainLocation.CountryId;

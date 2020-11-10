@@ -1,17 +1,20 @@
 ﻿using System.Dynamic;
 using System.Threading.Tasks;
-using TravelPlanner.Core.Triposo;
+using DomainLocations = TravelPlanner.Core.DomainModels.Location;
+using DomainCityWalk = TravelPlanner.Core.DomainModels.CityWalk;
 using TravelPlanner.Repositories;
+using TravelPlanner.Core.Triposo;
+using TravelPlanner.Services.Converters;
 
 namespace TravelPlanner.Services
 {
     public interface ITravelInfoService
     {
-        Task<Location> GetLocationInfoAsync(string cityName);
+        Task<DomainLocations> GetLocationInfoAsync(string cityName);
         Task<Tag[]> GetAvailableTagsAsync(string cityName);
         Task<Article[]> GetArticlesAsync(string cityName, string tag);
         Task<CommonTagLabel[]> GetAvailableTagsAsync();
-        Task<CityWalk[]> GetCityWalksAsync(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels, int? latitude = null, int? longitude = null);
+        Task<DomainCityWalk[]> GetCityWalksAsync(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels, int? latitude = null, int? longitude = null);
         Task<DayPlan[]> GetDayPlanAsync(string locationId, string arrivalTime, string departureTime, string startDate, string endDate, string hotelPoiId, int? itemsPerDay, int? maxDistance);
         Task<LocalHighlights[]> GetLocalHighlights(int latitude, int longitude, int? maxDistance);
         Task<Tour[]> GetTourInformation(string locationIds, string poiId, string tagLabels);
@@ -26,9 +29,10 @@ namespace TravelPlanner.Services
             TriposoApiClient = new TriposoApiClient();
         }
 
-        async public Task<Location> GetLocationInfoAsync(string cityName)
+        async public Task<DomainLocations> GetLocationInfoAsync(string cityName)
         {
-            return await TriposoApiClient.GetLocationInfo(cityName);
+            var result = await TriposoApiClient.GetLocationInfo(cityName);
+            return LocationConverter.ToDomainLocation(result);
         }
 
         async public Task<Tag[]> GetAvailableTagsAsync(string cityName)
@@ -50,10 +54,14 @@ namespace TravelPlanner.Services
             return await TriposoApiClient.GetArticlesWithSpecifiedTag(cityName, tag); 
         }
 
-        async public Task<CityWalk[]> GetCityWalksAsync(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels, int? latitude = null, int? longitude = null)
+        async public Task<DomainCityWalk[]> GetCityWalksAsync(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels, int? latitude = null, int? longitude = null)
         {
-            if (!(latitude is null) && !(longitude is null)) return await TriposoApiClient.GetCityWalksWithSpecifiedLocation(cityName, totalTime, optimal, goInside, tagLabels, (int)latitude, (int)longitude );
-            return await TriposoApiClient.GetCityWalks(cityName, totalTime, optimal, goInside, tagLabels);
+            CityWalk cityWalk;
+            if (!(latitude is null) && !(longitude is null)) 
+                cityWalk = await TriposoApiClient.GetCityWalksWithSpecifiedLocation(cityName, totalTime, optimal, goInside, tagLabels, (int)latitude, (int)longitude );
+            else 
+                cityWalk = await TriposoApiClient.GetCityWalks(cityName, totalTime, optimal, goInside, tagLabels);
+            return 
         }
 
         async public Task<DayPlan[]> GetDayPlanAsync(string locationId, string arrivalTime, string departureTime, string startDate, string endDate, string hotelPoiId, int? itemsPerDay, int? maxDistance)

@@ -8,6 +8,9 @@ namespace TravelPlanner.Core.DataBaseModels
     public class Location
     {
         [DataMember]
+        public string LocationId { get; set; }
+
+        [DataMember]
         public float Latitude { get; set; }
 
         [DataMember]

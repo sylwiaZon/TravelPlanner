@@ -9,7 +9,7 @@ namespace TravelPlanner.Services.Converters
         {
             return new DbTravel
             {
-                TravelIdentity = travel.TravelIdentity,
+                TravelId = travel.TravelId,
                 Date = travel.Date,
                 Children = travel.Participants.Children,
                 ChildrenAges = travel.Participants.ChildrenAges,
@@ -23,7 +23,7 @@ namespace TravelPlanner.Services.Converters
         {
             return new NewTravel
             {
-                TravelIdentity = travel.TravelIdentity,
+                TravelId = travel.TravelId,
                 Date = travel.Date,
                 Participants = new TravelParticipants 
                 { 

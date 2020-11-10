@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TravelPlanner.Core.DomainModels;
-using TriposoLocation = TravelPlanner.Core.Triposo.Location;
 using TravelPlanner.Services;
+using TravelPlanner.Core.Exceptions;
 
 namespace TravelPlanner.App.Controllers
 {
@@ -31,7 +31,7 @@ namespace TravelPlanner.App.Controllers
 
         [HttpPost]
         [Route("location")]
-        public Task AddLocation([FromBody] TriposoLocation location, string tarvelIdentity)
+        public Task AddLocation([FromBody] Location location, string tarvelIdentity)
         {
             return TravelService.AddLocation(location, tarvelIdentity);
         }
@@ -44,10 +44,32 @@ namespace TravelPlanner.App.Controllers
         }
 
         [HttpPost]
-        [Route("flight")]
-        public Task AddFlight([FromBody] Flight flight, string tarvelIdentity)
+        [Route("hotel")]
+        public Task AddHotel([FromBody] Hotel hotel, string tarvelIdentity)
         {
-            return TravelService.AddFlight(flight, tarvelIdentity);
+            return TravelService.AddHotel(hotel, tarvelIdentity);
+        }
+
+        [HttpGet]
+        [Route("hotel")]
+        public Task<Hotel> GetHotel(string tarvelIdentity)
+        {
+            return TravelService.GetHotel(tarvelIdentity);
+        }
+
+        [HttpPost]
+        [Route("flight")]
+        public Task AddFlight([FromBody] Flight flight, string flightType, string tarvelIdentity)
+        {
+            if(flightType == "to")
+            {
+                return TravelService.AddToFlight(flight, tarvelIdentity);
+            }
+            if (flightType == "from")
+            {
+                return TravelService.AddFromFlight(flight, tarvelIdentity);
+            }
+            throw new TravelPlannerException(400, "Bad flight type: choose either 'to' or 'from'");
         }
     }
 }

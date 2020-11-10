@@ -7,7 +7,7 @@ namespace TravelPlanner.Core.DomainModels
     public class NewTravel
     {
         [DataMember]
-        public string TravelIdentity { get; set; }
+        public string TravelId { get; set; }
 
         [DataMember]
         public DateTime Date { get; set; }

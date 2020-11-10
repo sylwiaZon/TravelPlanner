@@ -5,10 +5,8 @@ using TravelPlanner.Core.DomainModels;
 using TravelPlanner.Core.Flights;
 using DomainFlight = TravelPlanner.Core.DomainModels.Flight;
 using DBFlight = TravelPlanner.Core.DataBaseModels.Flight;
-using DBAirportFlightStatus = TravelPlanner.Core.DataBaseModels.AirportFlightStatus;
 using DomainAirportFlightStatus = TravelPlanner.Core.DomainModels.AirportFlightStatus;
 using LufthansaAirportFlightStatus = TravelPlanner.Core.Flights.AirportFlightStatus;
-using TravelPlanner.Core.DataBaseModels;
 
 namespace TravelPlanner.Services.Converters
 {
@@ -20,6 +18,7 @@ namespace TravelPlanner.Services.Converters
                 return schedule.Flight.Select(f =>
                     new DomainFlight
                     {
+                        FlightId = f.MarketingCarrier.AirlineId + f.MarketingCarrier.FlightNumber + f.Arrival.ScheduledTimeLocal,
                         FlightDuration = ConvertToFlightDuration(schedule.TotalJourney.Duration),
                         Departure = ToDomainAirportFlightStatus(f.Departure),
                         Arrival = ToDomainAirportFlightStatus(f.Arrival),
@@ -37,6 +36,7 @@ namespace TravelPlanner.Services.Converters
                 .Select(f =>
                     new DomainFlight
                     {
+                        FlightId = f.MarketingCarrier.AirlineId + f.MarketingCarrier.FlightNumber + f.Arrival.ScheduledTimeLocal,
                         Departure = ToDomainAirportFlightStatus(f.Departure),
                         Arrival = ToDomainAirportFlightStatus(f.Arrival),
                         AirlineId = f.MarketingCarrier.AirlineId,
@@ -52,18 +52,26 @@ namespace TravelPlanner.Services.Converters
         {
             return new DBFlight
             {
+                FlightId = domainFlight.FlightId,
                 AirlineId = domainFlight.AirlineId,
                 FlightNumber = domainFlight.FlightNumber,
                 DurationDays = domainFlight.FlightDuration.Days,
                 DurationHours = domainFlight.FlightDuration.Hours,
-                DurationMinutes = domainFlight.FlightDuration.Minutes
+                DurationMinutes = domainFlight.FlightDuration.Minutes,
+                ArrivalAirportCode = domainFlight.Arrival.AirportCode,
+                ArrivalScheduledTimeLocal = domainFlight.Arrival.ScheduledTimeLocal,
+                ArrivalTerminalName = domainFlight.Arrival.TerminalName,
+                DepartureAirportCode = domainFlight.Departure.AirportCode,
+                DepartureScheduledTimeLocal = domainFlight.Departure.ScheduledTimeLocal,
+                DepartureTerminalName = domainFlight.Departure.TerminalName
             };
         }
 
-        public static DomainFlight ToDomainFlight(DBFlight flight, DBAirportFlightStatus departure, DBAirportFlightStatus arrival)
+        public static DomainFlight ToDomainFlight(DBFlight flight)
         {
             return new DomainFlight
             {
+                FlightId = flight.FlightId,
                 FlightDuration = new FlightDuration
                 {
                     Days = flight.DurationDays,
@@ -72,28 +80,18 @@ namespace TravelPlanner.Services.Converters
                 },
                 AirlineId = flight.AirlineId,
                 FlightNumber = flight.FlightNumber,
-                Departure = ToDomainAirportFlightStatus(departure),
-                Arrival = ToDomainAirportFlightStatus(arrival)
-            };
-        }
-
-        public static DomainAirportFlightStatus ToDomainAirportFlightStatus(DBAirportFlightStatus status)
-        {
-            return new DomainAirportFlightStatus
-            {
-                AirportCode = status.AirportCode,
-                ScheduledTimeLocal = status.ScheduledTimeLocal,
-                TerminalName = status.TerminalName
-            };
-        }
-
-        public static DBAirportFlightStatus ToDBAirportFlightStatus(DomainAirportFlightStatus status)
-        {
-            return new DBAirportFlightStatus
-            {
-                AirportCode = status.AirportCode,
-                ScheduledTimeLocal = status.ScheduledTimeLocal,
-                TerminalName = status.TerminalName
+                Arrival = new DomainAirportFlightStatus
+                {
+                    AirportCode = flight.ArrivalAirportCode,
+                    ScheduledTimeLocal = flight.ArrivalScheduledTimeLocal,
+                    TerminalName = flight.ArrivalTerminalName
+                },
+                Departure = new DomainAirportFlightStatus
+                {
+                    AirportCode = flight.DepartureAirportCode,
+                    ScheduledTimeLocal = flight.DepartureScheduledTimeLocal,
+                    TerminalName = flight.DepartureTerminalName
+                }
             };
         }
 

@@ -1,0 +1,10 @@
+{
+    "Date": "2019-10-26T00:00:00",
+    "Participants": {
+        "Adults": 2
+    },
+    "TravelDestination": {
+        "City": "Rome",
+        "Country": "Italy"
+    }
+}
