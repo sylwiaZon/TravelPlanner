@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace TravelPlanner.Core.DomainModels
+namespace TravelPlanner.Core.DataBaseModels
 {
     [DataContract]
     public class CityWalk
@@ -19,8 +19,5 @@ namespace TravelPlanner.Core.DomainModels
 
         [DataMember]
         public int WalkDuration { get; set; }
-
-        [DataMember]
-        public WayPoint[] WayPoints { get; set; }
     }
 }

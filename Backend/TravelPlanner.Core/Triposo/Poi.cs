@@ -50,7 +50,7 @@ namespace TravelPlanner.Core.Triposo
         public OpeningHours OpeningHours { get; set; }
 
         [JsonProperty("price_tier")]
-        public int PriceTier { get; set; }
+        public int? PriceTier { get; set; }
 
         [JsonProperty("properties")]
         public Property[] Properties { get; set; }

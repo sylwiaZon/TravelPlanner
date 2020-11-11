@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace TravelPlanner.Core.DomainModels
+namespace TravelPlanner.Core.DataBaseModels
 {
     [DataContract]
     public class WayPoint
@@ -13,9 +13,6 @@ namespace TravelPlanner.Core.DomainModels
 
         [DataMember]
         public float Longitude { get; set; }
-
-        [DataMember]
-        public Poi Poi { get; set; }
 
         [DataMember]
         public int VisitTime { get; set; }

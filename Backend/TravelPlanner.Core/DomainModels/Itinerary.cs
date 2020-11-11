@@ -1,0 +1,17 @@
+﻿using System.Runtime.Serialization;
+
+namespace TravelPlanner.Core.DomainModels
+{
+    [DataContract]
+    public class Itinerary
+    {
+        [DataMember]
+        public string ItineraryId { get; set; }
+
+        [DataMember]
+        public string Date { get; set; }
+
+        [DataMember]
+        public ItineraryItem[] ItineraryItems { get; set; }
+    }
+}

@@ -68,7 +68,8 @@ namespace TravelPlanner.Repositories
 
         public async Task<CityWalk[]> GetCityWalksWithSpecifiedLocation(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels, int latitude, int longitude)
         {
-            var path = ApiPath + "city_walk.json?location_id=" + cityName + "&tag_labels=" + tagLabels + "&longitude=" + longitude + "&latitude=" + latitude + "&total_time=" + totalTime + "&optimal=" + optimal + "&go_inside=" + goInside + "&account=" + AccountId + "&token=" + Token;
+            var tagl = tagLabels == null ? "" : "&tag_labels=" + tagLabels;
+            var path = ApiPath + "city_walk.json?location_id=" + cityName + tagl + "&longitude=" + longitude + "&latitude=" + latitude + "&total_time=" + totalTime + "&optimal=" + optimal + "&go_inside=" + goInside + "&account=" + AccountId + "&token=" + Token;
             var responseMessage = await Client.GetAsync(path);
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -80,7 +81,8 @@ namespace TravelPlanner.Repositories
 
         public async Task<CityWalk[]> GetCityWalks(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels)
         {
-            var path = ApiPath + "city_walk.json?location_id=" + cityName + "&tag_labels=" + tagLabels + totalTime + "&optimal=" + optimal + "&go_inside=" + goInside + "&account=" + AccountId + "&token=" + Token;
+            var tagl = tagLabels == null ? "" : "&tag_labels=" + tagLabels;
+            var path = ApiPath + "city_walk.json?location_id=" + cityName + "&total_time=" + totalTime + "&optimal=" + optimal + tagl + "&go_inside=" + goInside + "&account=" + AccountId + "&token=" + Token;
             var responseMessage = await Client.GetAsync(path);
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -92,7 +94,7 @@ namespace TravelPlanner.Repositories
 
         public async Task<DayPlan[]> GetDayPlan(DayPlannerRequest dayPlannerRequest)
         {
-            var path = ApiPath + "city_walk.json?location_id=" + dayPlannerRequest.LocationId;
+            var path = ApiPath + "day_planner.json?location_id=" + dayPlannerRequest.LocationId;
             if (!(dayPlannerRequest.HotelPoiId is null)) path += "&hotel_poi_id=" + dayPlannerRequest.HotelPoiId;
             if (!(dayPlannerRequest.StartDate is null)) path += "&start_date=" + dayPlannerRequest.StartDate;
             if (!(dayPlannerRequest.EndDate is null)) path += "&end_date=" + dayPlannerRequest.EndDate;

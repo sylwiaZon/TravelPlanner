@@ -6,10 +6,7 @@ namespace TravelPlanner.Core.DomainModels
     public class Poi
     {
         [DataMember]
-        public string SourceID { get; set; }
-
-        [DataMember]
-        public string Url { get; set; }
+        public string PoiId { get; set; }
 
         [DataMember]
         public string Price { get; set; }
@@ -18,10 +15,10 @@ namespace TravelPlanner.Core.DomainModels
         public string Currency { get; set; }
 
         [DataMember]
-        public float Latitude { get; set; }
+        public float? Latitude { get; set; }
 
         [DataMember]
-        public float Longitude { get; set; }
+        public float? Longitude { get; set; }
 
         [DataMember]
         public string Id { get; set; }
@@ -36,7 +33,7 @@ namespace TravelPlanner.Core.DomainModels
         public string Name { get; set; }
 
         [DataMember]
-        public float Score { get; set; }
+        public float? Score { get; set; }
 
         [DataMember]
         public string Snippet { get; set; }

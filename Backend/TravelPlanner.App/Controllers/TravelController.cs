@@ -58,6 +58,34 @@ namespace TravelPlanner.App.Controllers
         }
 
         [HttpPost]
+        [Route("citywalk")]
+        public Task AddCityWalk([FromBody] CityWalk walk, string tarvelIdentity)
+        {
+            return TravelService.AddCityWalk(walk, tarvelIdentity);
+        }
+
+        [HttpGet]
+        [Route("citywalk")]
+        public Task<CityWalk[]> GetCityWalks(string tarvelIdentity)
+        {
+            return TravelService.GetCityWalks(tarvelIdentity);
+        }
+
+        [HttpPost]
+        [Route("dayplan")]
+        public Task AddDayPlan([FromBody] DayPlan plan, string tarvelIdentity)
+        {
+            return TravelService.AddDayPlan(plan, tarvelIdentity);
+        }
+
+        [HttpGet]
+        [Route("dayplan")]
+        public Task<DayPlan[]> GetDayPlans(string tarvelIdentity)
+        {
+            return TravelService.GetDayPlans(tarvelIdentity);
+        }
+
+        [HttpPost]
         [Route("flight")]
         public Task AddFlight([FromBody] Flight flight, string flightType, string tarvelIdentity)
         {

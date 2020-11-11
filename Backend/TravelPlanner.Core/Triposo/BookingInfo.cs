@@ -14,6 +14,6 @@ namespace TravelPlanner.Core.Triposo
         public string VendorObjectId { get; set; }
 
         [JsonProperty("vendor_object_url")]
-        public string[] VendorObjectUrl { get; set; }
+        public string VendorObjectUrl { get; set; }
     }
 }

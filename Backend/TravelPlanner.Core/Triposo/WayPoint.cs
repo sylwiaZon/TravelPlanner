@@ -11,7 +11,7 @@ namespace TravelPlanner.Core.Triposo
         public Poi Poi { get; set; }
 
         [JsonProperty("visit_time")]
-        public int VistiTime { get; set; }
+        public int VisitTime { get; set; }
 
         [JsonProperty("walk_to_next_distance")]
         public int WalkToNextDistance { get; set; }

@@ -1,10 +1,13 @@
 ﻿using System.Dynamic;
 using System.Threading.Tasks;
 using DomainLocations = TravelPlanner.Core.DomainModels.Location;
+using DomainDayPlan= TravelPlanner.Core.DomainModels.DayPlan;
 using DomainCityWalk = TravelPlanner.Core.DomainModels.CityWalk;
 using TravelPlanner.Repositories;
 using TravelPlanner.Core.Triposo;
 using TravelPlanner.Services.Converters;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TravelPlanner.Services
 {
@@ -15,7 +18,7 @@ namespace TravelPlanner.Services
         Task<Article[]> GetArticlesAsync(string cityName, string tag);
         Task<CommonTagLabel[]> GetAvailableTagsAsync();
         Task<DomainCityWalk[]> GetCityWalksAsync(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels, int? latitude = null, int? longitude = null);
-        Task<DayPlan[]> GetDayPlanAsync(string locationId, string arrivalTime, string departureTime, string startDate, string endDate, string hotelPoiId, int? itemsPerDay, int? maxDistance);
+        Task<DomainDayPlan[]> GetDayPlanAsync(string locationId, string arrivalTime, string departureTime, string startDate, string endDate, string hotelPoiId, int? itemsPerDay, int? maxDistance);
         Task<LocalHighlights[]> GetLocalHighlights(int latitude, int longitude, int? maxDistance);
         Task<Tour[]> GetTourInformation(string locationIds, string poiId, string tagLabels);
     }
@@ -56,15 +59,15 @@ namespace TravelPlanner.Services
 
         async public Task<DomainCityWalk[]> GetCityWalksAsync(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels, int? latitude = null, int? longitude = null)
         {
-            CityWalk cityWalk;
+            CityWalk[] cityWalks;
             if (!(latitude is null) && !(longitude is null)) 
-                cityWalk = await TriposoApiClient.GetCityWalksWithSpecifiedLocation(cityName, totalTime, optimal, goInside, tagLabels, (int)latitude, (int)longitude );
+                cityWalks = await TriposoApiClient.GetCityWalksWithSpecifiedLocation(cityName, totalTime, optimal, goInside, tagLabels, (int)latitude, (int)longitude );
             else 
-                cityWalk = await TriposoApiClient.GetCityWalks(cityName, totalTime, optimal, goInside, tagLabels);
-            return 
+                cityWalks = await TriposoApiClient.GetCityWalks(cityName, totalTime, optimal, goInside, tagLabels);
+            return cityWalks.Select(c => CityWalkConverter.ToDomainCityWalk(c)).ToArray();
         }
 
-        async public Task<DayPlan[]> GetDayPlanAsync(string locationId, string arrivalTime, string departureTime, string startDate, string endDate, string hotelPoiId, int? itemsPerDay, int? maxDistance)
+        async public Task<DomainDayPlan[]> GetDayPlanAsync(string locationId, string arrivalTime, string departureTime, string startDate, string endDate, string hotelPoiId, int? itemsPerDay, int? maxDistance)
         {
             var dayPlannerRequest = new DayPlannerRequest
             {
@@ -77,7 +80,8 @@ namespace TravelPlanner.Services
                 MaxDistance = maxDistance,
                 LocationId = locationId
             };
-            return await TriposoApiClient.GetDayPlan(dayPlannerRequest);
+            var response = await TriposoApiClient.GetDayPlan(dayPlannerRequest);
+            return response.Select(r => DayPlanConverter.ToDomainDayPlan(r)).ToArray();
         }
 
         async public Task<LocalHighlights[]> GetLocalHighlights(int latitude, int longitude, int? maxDistance)

@@ -36,7 +36,7 @@ namespace TravelPlanner.Services.Converters
                 .Select(f =>
                     new DomainFlight
                     {
-                        FlightId = f.MarketingCarrier.AirlineId + f.MarketingCarrier.FlightNumber + f.Arrival.ScheduledTimeLocal,
+                        FlightId = f.MarketingCarrier.AirlineId + f.MarketingCarrier.FlightNumber + f.Arrival.ScheduledTimeLocal.DateTime,
                         Departure = ToDomainAirportFlightStatus(f.Departure),
                         Arrival = ToDomainAirportFlightStatus(f.Arrival),
                         AirlineId = f.MarketingCarrier.AirlineId,
@@ -117,7 +117,7 @@ namespace TravelPlanner.Services.Converters
             {
                 AirportCode = status.AirportCode,
                 ScheduledTimeLocal = DateTime.Parse(status.ScheduledTimeLocal.DateTime),
-                TerminalName = status.Terminal.Name
+                TerminalName = status.Terminal?.Name
             };
         }
 
