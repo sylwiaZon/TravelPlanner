@@ -31,71 +31,142 @@ namespace TravelPlanner.App.Controllers
 
         [HttpPost]
         [Route("location")]
-        public Task AddLocation([FromBody] Location location, string tarvelIdentity)
+        public Task AddLocation([FromBody] Location location, string travelIdentity)
         {
-            return TravelService.AddLocation(location, tarvelIdentity);
+            return TravelService.AddLocation(location, travelIdentity);
         }
 
         [HttpGet]
         [Route("location")]
-        public Task<Location> GetLocation(string tarvelIdentity)
+        public Task<Location> GetLocation(string travelIdentity)
         {
-            return TravelService.GetLocation(tarvelIdentity);
+            return TravelService.GetLocation(travelIdentity);
         }
 
         [HttpPost]
         [Route("hotel")]
-        public Task AddHotel([FromBody] Hotel hotel, string tarvelIdentity)
+        public Task AddHotel([FromBody] Hotel hotel, string travelIdentity)
         {
-            return TravelService.AddHotel(hotel, tarvelIdentity);
+            return TravelService.AddHotel(hotel, travelIdentity);
         }
 
         [HttpGet]
         [Route("hotel")]
-        public Task<Hotel> GetHotel(string tarvelIdentity)
+        public Task<Hotel> GetHotel(string travelIdentity)
         {
-            return TravelService.GetHotel(tarvelIdentity);
+            return TravelService.GetHotel(travelIdentity);
         }
 
         [HttpPost]
         [Route("citywalk")]
-        public Task AddCityWalk([FromBody] CityWalk walk, string tarvelIdentity)
+        public Task AddCityWalk([FromBody] CityWalk walk, string travelIdentity)
         {
-            return TravelService.AddCityWalk(walk, tarvelIdentity);
+            return TravelService.AddCityWalk(walk, travelIdentity);
         }
 
         [HttpGet]
         [Route("citywalk")]
-        public Task<CityWalk[]> GetCityWalks(string tarvelIdentity)
+        public Task<CityWalk[]> GetCityWalks(string travelIdentity)
         {
-            return TravelService.GetCityWalks(tarvelIdentity);
+            return TravelService.GetCityWalks(travelIdentity);
         }
 
         [HttpPost]
         [Route("dayplan")]
-        public Task AddDayPlan([FromBody] DayPlan plan, string tarvelIdentity)
+        public Task AddDayPlan([FromBody] DayPlan plan, string travelIdentity)
         {
-            return TravelService.AddDayPlan(plan, tarvelIdentity);
+            return TravelService.AddDayPlan(plan, travelIdentity);
         }
 
         [HttpGet]
         [Route("dayplan")]
-        public Task<DayPlan[]> GetDayPlans(string tarvelIdentity)
+        public Task<DayPlan[]> GetDayPlans(string travelIdentity)
         {
-            return TravelService.GetDayPlans(tarvelIdentity);
+            return TravelService.GetDayPlans(travelIdentity);
+        }
+
+        [HttpGet]
+        [Route("tour")]
+        public Task<Tour[]> GetTours(string travelIdentity)
+        {
+            return TravelService.GetTours(travelIdentity);
+        }
+
+        [HttpPost]
+        [Route("tour")]
+        public Task AddTour([FromBody] Tour tour, string travelIdentity)
+        {
+            return TravelService.AddTour(tour, travelIdentity);
+        }
+
+        [HttpGet]
+        [Route("todo")]
+        public Task<ToDoItem[]> GetToDoItem(string travelIdentity)
+        {
+            return TravelService.GetToDoItems(travelIdentity);
+        }
+
+        [HttpPost]
+        [Route("todo")]
+        public Task<ToDoItem> AddToDo([FromBody] ToDoItem item, string travelIdentity)
+        {
+            return TravelService.AddToDoItem(item, travelIdentity);
+        }
+
+        [HttpPatch]
+        [Route("todo")]
+        public Task<ToDoItem> UpdateToDo([FromBody] ToDoItem item)
+        {
+            return TravelService.UpdateToDoItem(item);
+        }
+
+        [HttpGet]
+        [Route("tosee")]
+        public Task<ToSeeItem[]> GetToSeeItem(string travelIdentity)
+        {
+            return TravelService.GetToSeeItem(travelIdentity);
+        }
+
+        [HttpPost]
+        [Route("tosee")]
+        public Task<ToSeeItem> AddToSeeItem([FromBody] ToSeeItem item, string poiId, string travelIdentity)
+        {
+            return TravelService.AddToSeeItem(item, poiId, travelIdentity);
+        }
+
+        [HttpPatch]
+        [Route("tosee")]
+        public Task<ToSeeItem> UpdateToDo([FromBody] ToSeeItem item)
+        {
+            return TravelService.UpdateToSeeItem(item);
+        }
+
+        [HttpGet]
+        [Route("flight")]
+        public async Task<Flight> GetFlight(string flightType, string travelIdentity)
+        {
+            if (flightType == "to")
+            {
+                return await TravelService.GetToFlight(travelIdentity);
+            }
+            if (flightType == "from")
+            {
+                return await TravelService.GetFromFlight(travelIdentity);
+            }
+            throw new TravelPlannerException(400, "Bad flight type: choose either 'to' or 'from'");
         }
 
         [HttpPost]
         [Route("flight")]
-        public Task AddFlight([FromBody] Flight flight, string flightType, string tarvelIdentity)
+        public Task AddFlight([FromBody] Flight flight, string flightType, string travelIdentity)
         {
             if(flightType == "to")
             {
-                return TravelService.AddToFlight(flight, tarvelIdentity);
+                return TravelService.AddToFlight(flight, travelIdentity);
             }
             if (flightType == "from")
             {
-                return TravelService.AddFromFlight(flight, tarvelIdentity);
+                return TravelService.AddFromFlight(flight, travelIdentity);
             }
             throw new TravelPlannerException(400, "Bad flight type: choose either 'to' or 'from'");
         }

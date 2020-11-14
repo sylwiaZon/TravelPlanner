@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DomainLocations = TravelPlanner.Core.DomainModels.Location;
 using DomainDayPlan= TravelPlanner.Core.DomainModels.DayPlan;
 using DomainCityWalk = TravelPlanner.Core.DomainModels.CityWalk;
+using DomainTour = TravelPlanner.Core.DomainModels.Tour;
 using TravelPlanner.Repositories;
 using TravelPlanner.Core.Triposo;
 using TravelPlanner.Services.Converters;
@@ -20,7 +21,7 @@ namespace TravelPlanner.Services
         Task<DomainCityWalk[]> GetCityWalksAsync(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels, int? latitude = null, int? longitude = null);
         Task<DomainDayPlan[]> GetDayPlanAsync(string locationId, string arrivalTime, string departureTime, string startDate, string endDate, string hotelPoiId, int? itemsPerDay, int? maxDistance);
         Task<LocalHighlights[]> GetLocalHighlights(int latitude, int longitude, int? maxDistance);
-        Task<Tour[]> GetTourInformation(string locationIds, string poiId, string tagLabels);
+        Task<DomainTour[]> GetTourInformation(string locationIds, string poiId, string tagLabels);
     }
 
     public class TravelInfoService : ITravelInfoService
@@ -89,9 +90,10 @@ namespace TravelPlanner.Services
             return await TriposoApiClient.GetLocalHighlights(latitude, longitude, maxDistance);
         }
 
-        async public Task<Tour[]> GetTourInformation(string locationIds, string poiId, string tagLabels)
+        async public Task<DomainTour[]> GetTourInformation(string locationIds, string poiId, string tagLabels)
         {
-            return await TriposoApiClient.GetTourInformation(locationIds, poiId, tagLabels);
+            var tours = await TriposoApiClient.GetTourInformation(locationIds, poiId, tagLabels);
+            return tours.Select(t => TourConverter.ToDomainTour(t)).ToArray();
         }
     }
 }

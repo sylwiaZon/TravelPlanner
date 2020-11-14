@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace TravelPlanner.Core.DomainModels
+namespace TravelPlanner.Core.DataBaseModels
 {
     [DataContract]
     public class ToSeeItem
@@ -13,8 +13,5 @@ namespace TravelPlanner.Core.DomainModels
 
         [DataMember]
         public string Name { get; set; }
-
-        [DataMember]
-        public Poi PointOfInterest { get; set; }
     }
 }

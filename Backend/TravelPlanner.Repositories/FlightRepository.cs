@@ -36,6 +36,16 @@ namespace TravelPlanner.Repositories
             await AddFlight(newFlight, travelIdentity, "HasFromFlight");
         }
 
+        async public Task<Flight> GetToFlight(string travelIdentity)
+        {
+            return await GetFlight(travelIdentity, "HasToFlight");
+        }
+
+        async public Task<Flight> GetFromFlight(string travelIdentity)
+        {
+            return await GetFlight(travelIdentity, "HasFromFlight");
+        }
+
         async private Task AddFlight(Flight newFlight, string travelIdentity, string relationName)
         {
             await GraphClient.ConnectAsync();
@@ -70,11 +80,11 @@ namespace TravelPlanner.Repositories
                 .ResultsAsync;
         }
 
-        async public Task<Flight> GetFlight(string travelIdentity)
+        async private Task<Flight> GetFlight(string travelIdentity, string relationName)
         {
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
-                .Match("(flight:Flight)--(travel:Travel)")
+                .Match($"(travel:Travel)-[:{relationName}]-(flight:Flight)")
                 .Where((Travel travel) => travel.TravelId == travelIdentity)
                 .Return(flight => flight.As<Flight>())
                 .ResultsAsync;

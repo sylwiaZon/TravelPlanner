@@ -113,5 +113,19 @@ namespace TravelPlanner.Repositories
                 .Return(poi => poi.As<Poi>())
                 .ResultsAsync;
         }
+
+        public async Task<Poi> GetPoi(string id)
+        {
+            await GraphClient.ConnectAsync();
+            var resp = await GraphClient.Cypher
+                .Match("(poi:Poi)")
+                .Where((Poi poi) => poi.Id == id)
+                .Return(poi => poi.As<Poi>())
+                .ResultsAsync;
+            if (resp.Any())
+                return resp.First();
+            else
+                throw new TravelPlannerException(404, "Poi not found");
+        }
     }
 }

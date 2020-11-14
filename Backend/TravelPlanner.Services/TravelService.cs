@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TravelPlanner.Core.DomainModels;
-using DBLocation = TravelPlanner.Core.DataBaseModels.Location;
 using DomainLocation = TravelPlanner.Core.DomainModels.Location;
 using TravelPlanner.Repositories;
 using TravelPlanner.Services.Converters;
 using System.Linq;
+using System;
 
 namespace TravelPlanner.Services
 {
@@ -13,16 +13,26 @@ namespace TravelPlanner.Services
     {
         Task<IEnumerable<NewTravel>> GetTravels(string user);
         Task<NewTravel> AddTravel(NewTravel travel, string userMail);
-        Task AddLocation(DomainLocation location, string tarvelIdentity);
-        Task AddFromFlight(Flight flight, string tarvelIdentity);
-        Task AddToFlight(Flight flight, string tarvelIdentity);
-        Task<DomainLocation> GetLocation(string tarvelIdentity);
-        Task AddHotel(Hotel newHotel, string tarvelIdentity);
-        Task<Hotel> GetHotel(string tarvelIdentity);
-        Task AddCityWalk(CityWalk newHotel, string tarvelIdentity);
-        Task<CityWalk[]> GetCityWalks(string tarvelIdentity);
-        Task AddDayPlan(DayPlan newDayPlan, string tarvelIdentity);
-        Task<DayPlan[]> GetDayPlans(string tarvelIdentity);
+        Task AddLocation(DomainLocation location, string travelIdentity);
+        Task AddFromFlight(Flight flight, string travelIdentity);
+        Task AddToFlight(Flight flight, string travelIdentity);
+        Task<Flight> GetToFlight(string travelIdentity);
+        Task<Flight> GetFromFlight(string travelIdentity);
+        Task<DomainLocation> GetLocation(string travelIdentity);
+        Task AddHotel(Hotel newHotel, string travelIdentity);
+        Task<Hotel> GetHotel(string travelIdentity);
+        Task AddCityWalk(CityWalk newHotel, string travelIdentity);
+        Task<CityWalk[]> GetCityWalks(string travelIdentity);
+        Task AddDayPlan(DayPlan newDayPlan, string travelIdentity);
+        Task<DayPlan[]> GetDayPlans(string travelIdentity);
+        Task AddTour(Tour newTour, string travelIdentity);
+        Task<Tour[]> GetTours(string travelIdentity);
+        Task<ToDoItem> AddToDoItem(ToDoItem newItem, string travelIdentity);
+        Task<ToDoItem[]> GetToDoItems(string travelIdentity);
+        Task<ToDoItem> UpdateToDoItem(ToDoItem newItem);
+        Task<ToSeeItem> AddToSeeItem(ToSeeItem newItem, string poiId, string travelIdentity);
+        Task<ToSeeItem[]> GetToSeeItem(string travelIdentity);
+        Task<ToSeeItem> UpdateToSeeItem(ToSeeItem newItem);
     }
 
     public class TravelService : ITravelService
@@ -34,6 +44,8 @@ namespace TravelPlanner.Services
         private CityWalkRepository CityWalkRepository;
         private PoiRepository PoiRepository;
         private DayPlanRepository DayPlanRepository;
+        private TourRepository TourRepository;
+        private ListsRepository ListsRepository;
 
         public TravelService()
         {
@@ -44,7 +56,8 @@ namespace TravelPlanner.Services
             CityWalkRepository = new CityWalkRepository();
             PoiRepository = new PoiRepository();
             DayPlanRepository = new DayPlanRepository();
-            DayPlanRepository = new DayPlanRepository();
+            TourRepository = new TourRepository();
+            ListsRepository = new ListsRepository();
         }
 
         public async Task<IEnumerable<NewTravel>> GetTravels(string userMail)
@@ -61,47 +74,59 @@ namespace TravelPlanner.Services
             return TravelConverter.ToDomainTravel(response);
         }
 
-        public async Task AddLocation(DomainLocation newLocation, string tarvelIdentity)
+        public async Task AddLocation(DomainLocation newLocation, string travelIdentity)
         {
             var location = LocationConverter.ToDbLocation(newLocation);
-            await LocationRepository.AddLocation(location, tarvelIdentity);
+            await LocationRepository.AddLocation(location, travelIdentity);
         }
 
-        public async Task<DomainLocation> GetLocation(string tarvelIdentity)
+        public async Task<DomainLocation> GetLocation(string travelIdentity)
         {
-            var response = await LocationRepository.GetLocation(tarvelIdentity);
+            var response = await LocationRepository.GetLocation(travelIdentity);
             return new DomainLocation(response);
         }
 
-        public async Task AddHotel(Hotel newHotel, string tarvelIdentity)
+        public async Task AddHotel(Hotel newHotel, string travelIdentity)
         {
             var hotel = HotelConverter.ToDbHotel(newHotel);
-            await HotelRepository.AddHotel(hotel, tarvelIdentity);
+            await HotelRepository.AddHotel(hotel, travelIdentity);
         }
 
-        public async Task<Hotel> GetHotel(string tarvelIdentity)
+        public async Task<Hotel> GetHotel(string travelIdentity)
         {
-            var response = await HotelRepository.GetHotel(tarvelIdentity);
+            var response = await HotelRepository.GetHotel(travelIdentity);
             return HotelConverter.ToDomainHotel(response);
         }
 
-        public async Task AddToFlight(Flight flight, string tarvelIdentity)
+        public async Task AddToFlight(Flight flight, string travelIdentity)
         {
             var dbFlight = FlightConverter.ToDBFlight(flight);
-            await FlightRepository.AddToFlight(dbFlight, tarvelIdentity);
+            await FlightRepository.AddToFlight(dbFlight, travelIdentity);
         }
 
-        public async Task AddFromFlight(Flight flight, string tarvelIdentity)
+        public async Task AddFromFlight(Flight flight, string travelIdentity)
         {
             var dbFlight = FlightConverter.ToDBFlight(flight);
-            await FlightRepository.AddFromFlight(dbFlight, tarvelIdentity);
+            await FlightRepository.AddFromFlight(dbFlight, travelIdentity);
         }
 
-        public async Task AddCityWalk(CityWalk newWalk, string tarvelIdentity) 
+        public async Task<Flight> GetToFlight(string travelIdentity)
         {
-            var location = await LocationRepository.GetLocation(tarvelIdentity);
+            var flight = await FlightRepository.GetToFlight(travelIdentity);
+            return FlightConverter.ToDomainFlight(flight);
+        }
+
+        public async Task<Flight> GetFromFlight(string travelIdentity)
+        {
+            var flight = await FlightRepository.GetFromFlight(travelIdentity);
+            return FlightConverter.ToDomainFlight(flight);
+        }
+
+        public async Task AddCityWalk(CityWalk newWalk, string travelIdentity) 
+        {
+            var location = await LocationRepository.GetLocation(travelIdentity);
             var dbWalk = CityWalkConverter.ToDbCityWalk(newWalk);
-            var walk = await CityWalkRepository.AddCityWalk(dbWalk, tarvelIdentity, location.LocationId);
+            var walk = await CityWalkRepository.AddCityWalk(dbWalk, travelIdentity, location.LocationId);
             foreach(var domainPoint in newWalk.WayPoints)
             {
                 var dbPoint = CityWalkConverter.ToDbWayPoint(domainPoint);
@@ -111,9 +136,9 @@ namespace TravelPlanner.Services
             }
         }
         
-        public async Task<CityWalk[]> GetCityWalks(string tarvelIdentity)
+        public async Task<CityWalk[]> GetCityWalks(string travelIdentity)
         {
-            var dbWalks = await CityWalkRepository.GetCityWalks(tarvelIdentity);
+            var dbWalks = await CityWalkRepository.GetCityWalks(travelIdentity);
             var domainWalks = new List<CityWalk>();
             foreach (var walk in dbWalks)
             {
@@ -131,11 +156,11 @@ namespace TravelPlanner.Services
             return domainWalks.ToArray();
         }
 
-        public async Task AddDayPlan(DayPlan newDayPlan, string tarvelIdentity) 
+        public async Task AddDayPlan(DayPlan newDayPlan, string travelIdentity) 
         {
-            var location = await LocationRepository.GetLocation(tarvelIdentity);
+            var location = await LocationRepository.GetLocation(travelIdentity);
             var dbDayPlan = DayPlanConverter.ToDbDayPlan(newDayPlan);
-            await DayPlanRepository.AddDayPlan(dbDayPlan, tarvelIdentity, location.LocationId);
+            await DayPlanRepository.AddDayPlan(dbDayPlan, travelIdentity, location.LocationId);
             foreach(var day in newDayPlan.Days)
             {
                 var dbDay = DayPlanConverter.ToDbItinerary(day);
@@ -151,9 +176,9 @@ namespace TravelPlanner.Services
 
         }
 
-        public async Task<DayPlan[]> GetDayPlans(string tarvelIdentity) 
+        public async Task<DayPlan[]> GetDayPlans(string travelIdentity) 
         {
-            var dbPlans = await DayPlanRepository.GetDayPlans(tarvelIdentity);
+            var dbPlans = await DayPlanRepository.GetDayPlans(travelIdentity);
             var domainDayPlans = new List<DayPlan>();
             foreach (var plan in dbPlans)
             {
@@ -177,6 +202,78 @@ namespace TravelPlanner.Services
                 domainDayPlans.Add(domainDayPlan);
             }
             return domainDayPlans.ToArray();
+        }
+
+        public async Task AddTour(Tour newTour, string travelIdentity)
+        {
+            var dbTour = TourConverter.ToDbTour(newTour);
+            await TourRepository.AddTour(dbTour, travelIdentity);
+        }
+
+        public async Task<Tour[]> GetTours(string travelIdentity)
+        {
+            var tours = await TourRepository.GetTours(travelIdentity);
+            return tours.Select(t => TourConverter.ToDomainTour(t)).ToArray();
+        }
+
+        public async Task<ToDoItem> AddToDoItem(ToDoItem newItem, string travelIdentity)
+        {
+            var toDo = ToDoItemConverter.ToDbToDoItem(newItem);
+            if(toDo.Id == null)
+            {
+                toDo.Id = Guid.NewGuid().ToString();
+            }
+            var addedItem = await ListsRepository.AddToDoItem(toDo, travelIdentity);
+            return ToDoItemConverter.ToDomainToDoItem(addedItem);
+        }
+
+        public async Task<ToDoItem[]> GetToDoItems(string travelIdentity)
+        {
+            var items = await ListsRepository.GetToDoItems(travelIdentity);
+            return items.Select(i => ToDoItemConverter.ToDomainToDoItem(i)).ToArray();
+        }
+
+        public async Task<ToDoItem> UpdateToDoItem(ToDoItem newItem)
+        {
+            var item = ToDoItemConverter.ToDbToDoItem(newItem);
+            var resp = await ListsRepository.EditToDoItem(item);
+            return ToDoItemConverter.ToDomainToDoItem(resp);
+        }
+
+        public async Task<ToSeeItem> AddToSeeItem(ToSeeItem newItem, string poiId, string travelIdentity)
+        {
+            var toDo = ToSeeItemConverter.ToDbToSeeItem(newItem);
+            if (toDo.Id == null)
+            {
+                toDo.Id = Guid.NewGuid().ToString();
+            }
+            var addedItem = await ListsRepository.AddToSeeItem(toDo, poiId, travelIdentity);
+            var poi = await ListsRepository.GetToSeeItemPoi(addedItem.Id);
+            var convertedPoi = PoiConverter.ToDomainPoi(poi);
+            return ToSeeItemConverter.ToDomainToSeeItem(addedItem, convertedPoi);
+        }
+
+        public async Task<ToSeeItem[]> GetToSeeItem(string travelIdentity)
+        {
+            var items = await ListsRepository.GetToSeeItems(travelIdentity);
+            var domainItems = new List<ToSeeItem>();
+            foreach(var item in items)
+            {
+                var poi = await ListsRepository.GetToSeeItemPoi(item.Id);
+                var convertedPoi = PoiConverter.ToDomainPoi(poi);
+                var domainItem = ToSeeItemConverter.ToDomainToSeeItem(item, convertedPoi);
+                domainItems.Add(domainItem);
+            }
+            return domainItems.ToArray();
+        }
+
+        public async Task<ToSeeItem> UpdateToSeeItem(ToSeeItem newItem)
+        {
+            var item = ToSeeItemConverter.ToDbToSeeItem(newItem);
+            var resp = await ListsRepository.EditToSeeItem(item);
+            var poi = await ListsRepository.GetToSeeItemPoi(resp.Id);
+            var convertedPoi = PoiConverter.ToDomainPoi(poi);
+            return ToSeeItemConverter.ToDomainToSeeItem(resp, convertedPoi);
         }
     }
 }

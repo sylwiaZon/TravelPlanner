@@ -6,12 +6,12 @@ namespace TravelPlanner.Core.DomainModels
     public class ToDoItem
     {
         [DataMember]
+        public string Id { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
 
         [DataMember]
         public bool Checked { get; set; }
-
-        [DataMember]
-        public bool Deleted { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace TravelPlanner.Core.Triposo
         public Content Content { get; set; }
 
         [JsonProperty("duration")]
-        public float Duartion { get; set; }
+        public float? Duartion { get; set; }
 
         [JsonProperty("duration_unit")]
         public string DurationUnit { get; set; }
@@ -50,7 +50,7 @@ namespace TravelPlanner.Core.Triposo
         public Property[] Properties { get; set; }
 
         [JsonProperty("score")]
-        public float Score { get; set; }
+        public float? Score { get; set; }
 
         [JsonProperty("structured_content")]
         public StructuredContent StructuredContent { get; set; }

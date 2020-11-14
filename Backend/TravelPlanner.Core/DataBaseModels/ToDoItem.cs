@@ -1,20 +1,17 @@
 ﻿using System.Runtime.Serialization;
 
-namespace TravelPlanner.Core.DomainModels
+namespace TravelPlanner.Core.DataBaseModels
 {
     [DataContract]
-    public class ToSeeItem
+    public class ToDoItem
     {
         [DataMember]
         public string Id { get; set; }
 
         [DataMember]
-        public bool Checked { get; set; }
-
-        [DataMember]
         public string Name { get; set; }
 
         [DataMember]
-        public Poi PointOfInterest { get; set; }
+        public bool Checked { get; set; }
     }
 }
