@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TravelPlanner.Core.DomainModels;
+using TravelPlanner.App.Helpers;
 using TravelPlanner.Core.Flights;
 using TravelPlanner.Services;
 using Flight = TravelPlanner.Core.DomainModels.Flight;
@@ -12,30 +12,33 @@ namespace TravelPlanner.App.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
-        private readonly IFlightsService FlightsService;
-        public FlightsController()
+        private readonly IFlightsService _flightsService;
+        public FlightsController(IFlightsService flightsService)
         {
-            FlightsService = new FlightsService();
+            _flightsService = flightsService;
         }
 
+        [Authorize]
         [HttpGet]
         async public Task<IEnumerable<Flight>> GetSchedule(string origin, string destination, string date)
         {
-            return await FlightsService.GetSchedule(origin, destination, date);
+            return await _flightsService.GetSchedule(origin, destination, date);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("status")]
         async public Task<Flight> GetStatus(string flightNumber, string date)
         {
-            return await FlightsService.GetFlightStatus(flightNumber, date);
+            return await _flightsService.GetFlightStatus(flightNumber, date);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("airports")]
         async public Task<NearestAirport> GetNearestAirport(float latitude, float longitude)
         {
-            return await FlightsService.GetNearestAirport(latitude, longitude);
+            return await _flightsService.GetNearestAirport(latitude, longitude);
         }
     }
 }

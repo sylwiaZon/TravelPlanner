@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TravelPlanner.App.Helpers;
 using TravelPlanner.Core.HotelsApi.Details;
 using TravelPlanner.Core.HotelsApi.Photos;
 using TravelPlanner.Core.HotelsApi.Search;
@@ -14,30 +12,33 @@ namespace TravelPlanner.App.Controllers
     [ApiController]
     public class HotelsController : ControllerBase
     {
-        private readonly IHotelsService HotelsService;
-        public HotelsController()
+        private readonly IHotelsService _hotelsService;
+        public HotelsController(IHotelsService hotelsService)
         {
-            HotelsService = new HotelsService();
+            _hotelsService = hotelsService;
         }
 
+        [Authorize]
         [HttpGet]
         async public Task<HotelSearch> GetHotels(string cityName)
         {
-            return await HotelsService.GetHotels(cityName);
+            return await _hotelsService.GetHotels(cityName);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("photos")]
         public async Task<HotelPhotos> GetHotelPhotos(string hotelId)
         {
-            return await HotelsService.GetHotelPhotos(hotelId);
+            return await _hotelsService.GetHotelPhotos(hotelId);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("details")]
         public async Task<HotelDetails> GetHotelDetails(string hotelId, string checkIn, string checkOut, int adultsNumber, string childrenAges)
         {
-            return await HotelsService.GetHotelDetails(hotelId, checkIn, checkOut, adultsNumber, childrenAges);
+            return await _hotelsService.GetHotelDetails(hotelId, checkIn, checkOut, adultsNumber, childrenAges);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace TravelPlanner.Core
 {
@@ -9,6 +10,7 @@ namespace TravelPlanner.Core
         public string Name { get; set; }
 
         [DataMember]
+        [JsonIgnore]
         public string Password { get; set; }
 
         [DataMember]

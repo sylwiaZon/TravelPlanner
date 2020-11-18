@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TravelPlanner.App.Helpers;
 using TravelPlanner.Core;
 using TravelPlanner.Services;
 
@@ -10,16 +11,17 @@ namespace TravelPlanner.App.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly IWeatherForecastService WeatherForecastService;
-        public WeatherForecastController()
+        private readonly IWeatherForecastService _weatherForecastService;
+        public WeatherForecastController(IWeatherForecastService weatherForecastService)
         {
-            WeatherForecastService = new WeatherForecastService();
+            _weatherForecastService = weatherForecastService;
         }
 
+        [Authorize]
         [HttpGet]
         public Task<IEnumerable<WeatherForecast>> Get()
         {
-            return WeatherForecastService.GetWeather();
+            return _weatherForecastService.GetWeather();
         }
     }
 }

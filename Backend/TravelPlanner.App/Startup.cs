@@ -11,7 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TravelPlanner.App.Helpers;
 using TravelPlanner.App.Middleware;
+using TravelPlanner.Services;
 
 namespace TravelPlanner.App
 {
@@ -24,7 +26,6 @@ namespace TravelPlanner.App
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
@@ -39,17 +40,22 @@ namespace TravelPlanner.App
 
                 c.CustomSchemaIds(x => x.FullName);
             });
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IFlightsService, FlightsService>();
+            services.AddScoped<IHotelsService, HotelsService>();
+            services.AddScoped<ITravelInfoService, TravelInfoService>();
+            services.AddScoped<ITravelService, TravelService>();
+            services.AddScoped<IWeatherForecastService, WeatherForecastService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //app.UseHttpsRedirection();
 
             app.UseSwagger();
 
@@ -62,6 +68,8 @@ namespace TravelPlanner.App
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

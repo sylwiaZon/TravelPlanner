@@ -18,12 +18,10 @@ namespace TravelPlanner.Services
     public class FlightsService : IFlightsService
     {
         private static FlightsApiClient FlightsApiClient;
-        private FlightConverter FlightConverter;
 
         public FlightsService()
         {
             FlightsApiClient = new FlightsApiClient();
-            FlightConverter = new FlightConverter();
         }
 
         public async Task<IEnumerable<Flight>> GetSchedule(string origin, string destination, string date)

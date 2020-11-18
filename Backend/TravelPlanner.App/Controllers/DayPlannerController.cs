@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TravelPlanner.App.Helpers;
 using TravelPlanner.Core.DomainModels;
 using TravelPlanner.Services;
 
@@ -9,16 +10,17 @@ namespace TravelPlanner.App.Controllers
     [ApiController]
     public class DayPlannerController : ControllerBase
     {
-        private readonly ITravelInfoService TravelInfoService;
-        public DayPlannerController()
+        private readonly ITravelInfoService _travelInfoService;
+        public DayPlannerController(ITravelInfoService travelInfoService)
         {
-            TravelInfoService = new TravelInfoService();
+            _travelInfoService = travelInfoService;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<DayPlan[]> GetDayPlan(string locationId, string arrivalTime, string departureTime, string startDate, string endDate, string hotelPoiId = null, int? itemsPerDay = null, int? maxDistance = null)
         {
-            return await TravelInfoService.GetDayPlanAsync(locationId, arrivalTime, departureTime, startDate, endDate, hotelPoiId, itemsPerDay, maxDistance);
+            return await _travelInfoService.GetDayPlanAsync(locationId, arrivalTime, departureTime, startDate, endDate, hotelPoiId, itemsPerDay, maxDistance);
         }
     }
 }

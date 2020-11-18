@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TravelPlanner.Core.DomainModels;
 using TravelPlanner.Services;
 using TravelPlanner.Core.Exceptions;
+using TravelPlanner.App.Helpers;
 
 namespace TravelPlanner.App.Controllers
 {
@@ -11,162 +12,181 @@ namespace TravelPlanner.App.Controllers
     [Route("[controller]")]
     public class TravelController : ControllerBase
     {
-        private readonly ITravelService TravelService;
-        public TravelController()
+        private readonly ITravelService _travelService;
+        public TravelController(ITravelService travelService)
         {
-            TravelService = new TravelService();
+            _travelService = travelService;
         }
 
+        [Authorize]
         [HttpGet]
         public Task<IEnumerable<NewTravel>> GetTravels(string userMail)
         {
-            return TravelService.GetTravels(userMail);
+            return _travelService.GetTravels(userMail);
         }
 
+        [Authorize]
         [HttpPost]
         public Task<NewTravel> AddTravel([FromBody] NewTravel travel, string userMail)
         {
-            return TravelService.AddTravel(travel, userMail);
+            return _travelService.AddTravel(travel, userMail);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("location")]
         public Task AddLocation([FromBody] Location location, string travelIdentity)
         {
-            return TravelService.AddLocation(location, travelIdentity);
+            return _travelService.AddLocation(location, travelIdentity);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("location")]
         public Task<Location> GetLocation(string travelIdentity)
         {
-            return TravelService.GetLocation(travelIdentity);
+            return _travelService.GetLocation(travelIdentity);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("hotel")]
         public Task AddHotel([FromBody] Hotel hotel, string travelIdentity)
         {
-            return TravelService.AddHotel(hotel, travelIdentity);
+            return _travelService.AddHotel(hotel, travelIdentity);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("hotel")]
         public Task<Hotel> GetHotel(string travelIdentity)
         {
-            return TravelService.GetHotel(travelIdentity);
+            return _travelService.GetHotel(travelIdentity);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("citywalk")]
         public Task AddCityWalk([FromBody] CityWalk walk, string travelIdentity)
         {
-            return TravelService.AddCityWalk(walk, travelIdentity);
+            return _travelService.AddCityWalk(walk, travelIdentity);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("citywalk")]
         public Task<CityWalk[]> GetCityWalks(string travelIdentity)
         {
-            return TravelService.GetCityWalks(travelIdentity);
+            return _travelService.GetCityWalks(travelIdentity);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("dayplan")]
         public Task AddDayPlan([FromBody] DayPlan plan, string travelIdentity)
         {
-            return TravelService.AddDayPlan(plan, travelIdentity);
+            return _travelService.AddDayPlan(plan, travelIdentity);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("dayplan")]
         public Task<DayPlan[]> GetDayPlans(string travelIdentity)
         {
-            return TravelService.GetDayPlans(travelIdentity);
+            return _travelService.GetDayPlans(travelIdentity);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("tour")]
         public Task<Tour[]> GetTours(string travelIdentity)
         {
-            return TravelService.GetTours(travelIdentity);
+            return _travelService.GetTours(travelIdentity);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("tour")]
         public Task AddTour([FromBody] Tour tour, string travelIdentity)
         {
-            return TravelService.AddTour(tour, travelIdentity);
+            return _travelService.AddTour(tour, travelIdentity);
         }
 
         [HttpGet]
         [Route("todo")]
         public Task<ToDoItem[]> GetToDoItem(string travelIdentity)
         {
-            return TravelService.GetToDoItems(travelIdentity);
+            return _travelService.GetToDoItems(travelIdentity);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("todo")]
         public Task<ToDoItem> AddToDo([FromBody] ToDoItem item, string travelIdentity)
         {
-            return TravelService.AddToDoItem(item, travelIdentity);
+            return _travelService.AddToDoItem(item, travelIdentity);
         }
 
+        [Authorize]
         [HttpPatch]
         [Route("todo")]
         public Task<ToDoItem> UpdateToDo([FromBody] ToDoItem item)
         {
-            return TravelService.UpdateToDoItem(item);
+            return _travelService.UpdateToDoItem(item);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("tosee")]
         public Task<ToSeeItem[]> GetToSeeItem(string travelIdentity)
         {
-            return TravelService.GetToSeeItem(travelIdentity);
+            return _travelService.GetToSeeItem(travelIdentity);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("tosee")]
         public Task<ToSeeItem> AddToSeeItem([FromBody] ToSeeItem item, string poiId, string travelIdentity)
         {
-            return TravelService.AddToSeeItem(item, poiId, travelIdentity);
+            return _travelService.AddToSeeItem(item, poiId, travelIdentity);
         }
 
+        [Authorize]
         [HttpPatch]
         [Route("tosee")]
         public Task<ToSeeItem> UpdateToDo([FromBody] ToSeeItem item)
         {
-            return TravelService.UpdateToSeeItem(item);
+            return _travelService.UpdateToSeeItem(item);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("flight")]
         public async Task<Flight> GetFlight(string flightType, string travelIdentity)
         {
             if (flightType == "to")
             {
-                return await TravelService.GetToFlight(travelIdentity);
+                return await _travelService.GetToFlight(travelIdentity);
             }
             if (flightType == "from")
             {
-                return await TravelService.GetFromFlight(travelIdentity);
+                return await _travelService.GetFromFlight(travelIdentity);
             }
             throw new TravelPlannerException(400, "Bad flight type: choose either 'to' or 'from'");
         }
 
+        [Authorize]
         [HttpPost]
         [Route("flight")]
         public Task AddFlight([FromBody] Flight flight, string flightType, string travelIdentity)
         {
             if(flightType == "to")
             {
-                return TravelService.AddToFlight(flight, travelIdentity);
+                return _travelService.AddToFlight(flight, travelIdentity);
             }
             if (flightType == "from")
             {
-                return TravelService.AddFromFlight(flight, travelIdentity);
+                return _travelService.AddFromFlight(flight, travelIdentity);
             }
             throw new TravelPlannerException(400, "Bad flight type: choose either 'to' or 'from'");
         }

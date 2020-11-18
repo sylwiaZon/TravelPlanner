@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TravelPlanner.App.Helpers;
 using TravelPlanner.Core.DomainModels;
 using TravelPlanner.Services;
 
@@ -9,16 +10,17 @@ namespace TravelPlanner.App.Controllers
     [ApiController]
     public class TourInformationController : ControllerBase
     {
-        private readonly ITravelInfoService TravelInfoService;
-        public TourInformationController()
+        private readonly ITravelInfoService _travelInfoService;
+        public TourInformationController(ITravelInfoService travelInfoService)
         {
-            TravelInfoService = new TravelInfoService();
+            _travelInfoService = travelInfoService;
         }
 
+        [Authorize]
         [HttpGet]
         public Task<Tour[]> GetTourInformation(string locationIds, string poiId, string tagLabels)
         {
-            return TravelInfoService.GetTourInformation(locationIds, poiId, tagLabels);
+            return _travelInfoService.GetTourInformation(locationIds, poiId, tagLabels);
         }
     }
 }
