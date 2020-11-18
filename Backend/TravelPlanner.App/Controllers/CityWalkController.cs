@@ -15,6 +15,7 @@ namespace TravelPlanner.App.Controllers
             TravelInfoService = new TravelInfoService();
         }
 
+        [HttpGet]
         public async Task<CityWalk[]> GetCityWalkAsync(string cityName, int totalTime, int? latitude = null, int? longitude = null, bool optimal = false, bool goInside = true, string tagLabels = null)
         {
             if (totalTime < 20 || totalTime > 360) return null;

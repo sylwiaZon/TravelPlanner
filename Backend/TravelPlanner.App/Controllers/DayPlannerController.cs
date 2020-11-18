@@ -15,6 +15,7 @@ namespace TravelPlanner.App.Controllers
             TravelInfoService = new TravelInfoService();
         }
 
+        [HttpGet]
         public async Task<DayPlan[]> GetDayPlan(string locationId, string arrivalTime, string departureTime, string startDate, string endDate, string hotelPoiId = null, int? itemsPerDay = null, int? maxDistance = null)
         {
             return await TravelInfoService.GetDayPlanAsync(locationId, arrivalTime, departureTime, startDate, endDate, hotelPoiId, itemsPerDay, maxDistance);

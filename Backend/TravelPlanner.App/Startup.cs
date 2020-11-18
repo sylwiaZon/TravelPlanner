@@ -36,6 +36,8 @@ namespace TravelPlanner.App
                     Title = "TravelPlanner API",
                     Description = "A TravelPlanner ASP.NET Core Web API"
                 });
+
+                c.CustomSchemaIds(x => x.FullName);
             });
         }
 
@@ -54,6 +56,7 @@ namespace TravelPlanner.App
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TravelPlanner V1");
+                c.RoutePrefix = string.Empty;
             });
 
             app.UseRouting();
