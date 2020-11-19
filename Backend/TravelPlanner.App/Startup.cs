@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using TravelPlanner.App.Helpers;
 using TravelPlanner.App.Middleware;
 using TravelPlanner.Core;
@@ -38,6 +39,16 @@ namespace TravelPlanner.App
                     Title = "TravelPlanner API",
                     Description = "A TravelPlanner ASP.NET Core Web API"
                 });
+
+                c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
 
                 c.CustomSchemaIds(x => x.FullName);
             });
