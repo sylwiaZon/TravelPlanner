@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using TravelPlanner.App.Helpers;
 using TravelPlanner.App.Middleware;
+using TravelPlanner.Core;
 using TravelPlanner.Services;
 
 namespace TravelPlanner.App
@@ -28,6 +23,12 @@ namespace TravelPlanner.App
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<DbSettings>(
+                Configuration.GetSection(nameof(DbSettings)));
+
+            services.AddSingleton<DbSettings>(sp =>
+                sp.GetRequiredService<IOptions<DbSettings>>().Value);
+
             services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
             services.AddSwaggerGen(c =>
             {

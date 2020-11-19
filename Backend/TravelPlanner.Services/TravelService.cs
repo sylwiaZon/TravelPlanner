@@ -6,6 +6,7 @@ using TravelPlanner.Repositories;
 using TravelPlanner.Services.Converters;
 using System.Linq;
 using System;
+using TravelPlanner.Core;
 
 namespace TravelPlanner.Services
 {
@@ -47,17 +48,17 @@ namespace TravelPlanner.Services
         private TourRepository TourRepository;
         private ListsRepository ListsRepository;
 
-        public TravelService()
+        public TravelService(DbSettings dbSettings)
         {
-            TravelRepository = new TravelRepository();
-            LocationRepository = new LocationRepository();
-            FlightRepository = new FlightRepository();
-            HotelRepository = new HotelRepository();
-            CityWalkRepository = new CityWalkRepository();
-            PoiRepository = new PoiRepository();
-            DayPlanRepository = new DayPlanRepository();
-            TourRepository = new TourRepository();
-            ListsRepository = new ListsRepository();
+            TravelRepository = new TravelRepository(dbSettings);
+            LocationRepository = new LocationRepository(dbSettings);
+            FlightRepository = new FlightRepository(dbSettings);
+            HotelRepository = new HotelRepository(dbSettings);
+            CityWalkRepository = new CityWalkRepository(dbSettings);
+            PoiRepository = new PoiRepository(dbSettings);
+            DayPlanRepository = new DayPlanRepository(dbSettings);
+            TourRepository = new TourRepository(dbSettings);
+            ListsRepository = new ListsRepository(dbSettings);
         }
 
         public async Task<IEnumerable<NewTravel>> GetTravels(string userMail)

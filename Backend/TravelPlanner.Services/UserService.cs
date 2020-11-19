@@ -26,9 +26,9 @@ namespace TravelPlanner.Services
         private UserRepository UserRepository;
         private readonly AppSettings _appSettings;
 
-        public UserService(IOptions<AppSettings> appSettings)
+        public UserService(IOptions<AppSettings> appSettings, DbSettings dbSettings)
         {
-            UserRepository = new UserRepository();
+            UserRepository = new UserRepository(dbSettings);
             _appSettings = appSettings.Value;
         }
 

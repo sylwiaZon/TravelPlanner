@@ -22,17 +22,17 @@ namespace TravelPlanner.App.Middleware
             _appSettings = appSettings.Value;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService)
+        public async Task Invoke(HttpContext context)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                AttachUserToContextAsync(context, userService, token);
+                AttachUserToContextAsync(context, token);
 
             await _next(context);
         }
 
-        private void AttachUserToContextAsync(HttpContext context, IUserService userService, string token)
+        private void AttachUserToContextAsync(HttpContext context, string token)
         {
             try
             {

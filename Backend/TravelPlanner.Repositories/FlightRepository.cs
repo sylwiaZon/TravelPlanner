@@ -1,11 +1,9 @@
 ﻿using Neo4j.Driver;
 using Neo4jClient;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using TravelPlanner.Core;
 using TravelPlanner.Core.DataBaseModels;
 using TravelPlanner.Core.Exceptions;
 
@@ -16,14 +14,12 @@ namespace TravelPlanner.Repositories
         private static string Login;
         private static string Password;
         private static BoltGraphClient GraphClient;
-        private static readonly string LocalEnvUrl = "bolt://40.69.36.20:7687";
-        private static readonly string VMEnvUrl = "db";
 
-        public FlightRepository()
+        public FlightRepository(DbSettings dbSettings)
         {
             Login = Environment.GetEnvironmentVariable("NEO4J_USER_NAME");
             Password = Environment.GetEnvironmentVariable("NEO4J_PASSWORD");
-            GraphClient = new BoltGraphClient(new Uri(LocalEnvUrl), Login, Password);
+            GraphClient = new BoltGraphClient(new Uri(dbSettings.DbConnectionString), Login, Password);
         }
 
         async public Task AddToFlight(Flight newFlight, string travelIdentity)
