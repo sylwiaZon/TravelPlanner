@@ -6,9 +6,11 @@ RUN dotnet publish -c Release TravelPlanner.App
 
 FROM mcr.microsoft.com/dotnet/core/aspnet
 
+WORKDIR /app
+
 COPY --from=build /build/TravelPlanner.App/bin/Release/netcoreapp3.1/publish ./bin
 COPY --from=build /build/TravelPlanner.App/obj/Release/netcoreapp3.1 ./obj
 
-ENV ASPNETCORE_ENVIRONMENT="Production"
+WORKDIR /app/bin
 
-ENTRYPOINT dotnet bin/TravelPlanner.App.dll
+ENTRYPOINT dotnet TravelPlanner.App.dll
