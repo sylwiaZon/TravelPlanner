@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_travel"
+            android:icon="@drawable/ic_baseline_card_travel_24"
+            android:title="@string/menu_travel" />
+        <item
+            android:id="@+id/nav_add_travel"
+            android:icon="@drawable/ic_outline_add_circle_outline_24"
+            android:title="@string/menu_new_travel" />
+        <item
+            android:id="@+id/nav_all_travels"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_all_travels" />
+    </group>
+</menu>
