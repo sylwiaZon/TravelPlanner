@@ -20,15 +20,17 @@ namespace TravelPlanner.App.Controllers
 
         [Authorize]
         [HttpGet]
-        public Task<IEnumerable<NewTravel>> GetTravels(string userMail)
+        public Task<IEnumerable<TravelsResponse>> GetTravels()
         {
+            var userMail = (string)HttpContext.Items["User"];
             return _travelService.GetTravels(userMail);
         }
 
         [Authorize]
         [HttpPost]
-        public Task<NewTravel> AddTravel([FromBody] NewTravel travel, string userMail)
+        public Task<NewTravel> AddTravel([FromBody] NewTravel travel)
         {
+            var userMail = (string)HttpContext.Items["User"];
             return _travelService.AddTravel(travel, userMail);
         }
 

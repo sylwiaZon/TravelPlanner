@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace TravelPlanner.Core.Triposo
 {
@@ -20,7 +21,7 @@ namespace TravelPlanner.Core.Triposo
         public string CountryId { get; set; }
 
         [JsonProperty("images")]
-        public Image[] Images { get; set; }
+        public IEnumerable<Image> Images { get; set; }
 
         [JsonProperty("intro")]
         public string Intro { get; set; }

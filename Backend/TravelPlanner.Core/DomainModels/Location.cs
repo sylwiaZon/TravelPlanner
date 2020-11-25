@@ -47,6 +47,9 @@ namespace TravelPlanner.Core.DomainModels
         [DataMember]
         public string Type { get; set; }
 
+        [DataMember]
+        public string PhotoUrl { get; set; }
+
         public Location() { }
 
         public Location(TriposoLocation triposoLocation)

@@ -1,4 +1,5 @@
-﻿using TravelPlanner.Core.DomainModels;
+﻿using System.Linq;
+using TravelPlanner.Core.DomainModels;
 using DbLocation = TravelPlanner.Core.DataBaseModels.Location;
 using TriposoLocation = TravelPlanner.Core.Triposo.Location;
 
@@ -21,7 +22,8 @@ namespace TravelPlanner.Services.Converters
                 PartOf = location.PartOf,
                 Snippet = location.Snippet,
                 TagLabels = location.TagLabels,
-                Type = location.Type
+                Type = location.Type,
+                PhotoUrl = location.PhotoUrl
             };
         }
 
@@ -40,7 +42,8 @@ namespace TravelPlanner.Services.Converters
                 PartOf = location.PartOf,
                 Snippet = location.Snippet,
                 TagLabels = location.TagLabels,
-                Type = location.Type
+                Type = location.Type,
+                PhotoUrl = location.PhotoUrl
             };
         }
 
@@ -59,8 +62,16 @@ namespace TravelPlanner.Services.Converters
                 Snippet = location.Snippet,
                 TagLabels = location.TagLabels,
                 Type = location.Type,
-                LocationId = location.Coordinates.Latitude + ":" + location.Coordinates.Longitude + location.Name
+                LocationId = location.Coordinates.Latitude + ":" + location.Coordinates.Longitude + location.Name,
+                PhotoUrl = GetPhotoUrl(location)
             };
+        }
+
+        private static string GetPhotoUrl(TriposoLocation location)
+        {
+            if (location.Images?.FirstOrDefault().Sizes.Medium != null)
+                return location.Images?.FirstOrDefault().Sizes.Medium.Url;
+            else return location.Images?.FirstOrDefault().Sizes.Original.Url;
         }
     }
 }

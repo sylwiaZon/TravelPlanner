@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace TravelPlanner.Core.DomainModels
 {
     [DataContract]
-    public class NewTravel
+    public class TravelsResponse
     {
         [DataMember]
         public string TravelId { get; set; }
@@ -20,5 +20,8 @@ namespace TravelPlanner.Core.DomainModels
 
         [DataMember]
         public TravelDestination TravelDestination { get; set; }
+
+        [DataMember]
+        public string PhotoUrl { get; set; }
     }
 }

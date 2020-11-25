@@ -13,7 +13,10 @@ namespace TravelPlanner.Core.DomainModels
         public int Identity { get; set; }
 
         [DataMember]
-        public DateTime Date { get; set; }
+        public DateTime ArrivalDate { get; set; }
+
+        [DataMember]
+        public DateTime DepartureDate { get; set; }
 
         [DataMember]
         public TravelParticipants Participants { get; set; }

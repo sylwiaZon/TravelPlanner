@@ -10,7 +10,10 @@ namespace TravelPlanner.Core.DataBaseModels
         public string TravelId { get; set; }
 
         [DataMember]
-        public DateTime Date { get; set; }
+        public DateTime ArrivalDate { get; set; }
+
+        [DataMember]
+        public DateTime DepartureDate { get; set; }
 
         [DataMember]
         public int Children { get; set; }

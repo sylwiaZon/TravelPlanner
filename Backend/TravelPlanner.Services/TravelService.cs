@@ -12,7 +12,7 @@ namespace TravelPlanner.Services
 {
     public interface ITravelService
     {
-        Task<IEnumerable<NewTravel>> GetTravels(string user);
+        Task<IEnumerable<TravelsResponse>> GetTravels(string user);
         Task<NewTravel> AddTravel(NewTravel travel, string userMail);
         Task AddLocation(DomainLocation location, string travelIdentity);
         Task AddFromFlight(Flight flight, string travelIdentity);
@@ -61,15 +61,21 @@ namespace TravelPlanner.Services
             ListsRepository = new ListsRepository(dbSettings);
         }
 
-        public async Task<IEnumerable<NewTravel>> GetTravels(string userMail)
+        public async Task<IEnumerable<TravelsResponse>> GetTravels(string userMail)
         {
             var response = await TravelRepository.GetTravels(userMail);
-            return response.Select(t => TravelConverter.ToDomainTravel(t)).ToList();
+            var travelsList = new List<TravelsResponse>();
+            foreach(var travel in response)
+            {
+                var location = await LocationRepository.GetLocation(travel.TravelId);
+                travelsList.Add(TravelConverter.ToDomainTravel(travel, location));
+            }
+            return travelsList;
         }
 
         public async Task<NewTravel> AddTravel(NewTravel newTravel, string userMail)
         {
-            newTravel.TravelId = userMail + newTravel.TravelDestination.City + newTravel.TravelDestination.Country + newTravel.Date;
+            newTravel.TravelId = userMail + newTravel.TravelDestination.City + newTravel.TravelDestination.Country + newTravel.ArrivalDate;
             var dbTravel = TravelConverter.ToDbTravel(newTravel);
             var response =  await TravelRepository.AddTravelToUser(dbTravel, userMail);
             return TravelConverter.ToDomainTravel(response);
