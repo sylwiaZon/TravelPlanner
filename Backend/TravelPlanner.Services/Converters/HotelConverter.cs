@@ -71,7 +71,7 @@ namespace TravelPlanner.Services.Converters
             };
         }
 
-        public static IEnumerable<DomainTransport> ToDomainHotelDetails(HotelDetails details)
+        public static IEnumerable<DomainTransport> ToDomainHotelTransport(HotelDetails details)
         {
             return details.Transportation.TransportLocations.Select(t =>
                 new DomainTransport
@@ -85,6 +85,16 @@ namespace TravelPlanner.Services.Converters
                         DistanceInTime = l.DistanceInTime
                     }).ToArray()
                 });
+        }
+
+        public static DomainTransportLocation ToDomainTransportLocation(DbTransport transport)
+        {
+            return new DomainTransportLocation
+                {
+                    Name = transport.Name,
+                    Distance = transport.Distance,
+                    DistanceInTime = transport.DistanceInTime
+                };
         }
 
         public static DbTransport ToDbTransportLocation(DomainTransportLocation transport)

@@ -123,5 +123,34 @@ namespace TravelPlanner.Repositories
                     .ResultsAsync;
             }
         }
+
+        async public Task<IEnumerable<HotelTransport>> GetTransportCategories(string hotelId)
+        {
+            await GraphClient.ConnectAsync();
+            var resp = await GraphClient.Cypher
+                .Match("(hotel:Hotel)--(transport:HotelTransport)")
+                .Where((Hotel hotel) => hotel.HotelId == hotelId)
+                .Return(transport => transport.As<HotelTransport>())
+                .ResultsAsync;
+            if (resp.Any())
+                return resp;
+            else
+                return null;
+        }
+
+        async public Task<IEnumerable<TransportLocation>> GetTransport(string hotelId, string category)
+        {
+            await GraphClient.ConnectAsync();
+            var resp = await GraphClient.Cypher
+                .Match("(hotel:Hotel)--(hotelTransport:HotelTransport)--(transport:TransportLocation)")
+                .Where((Hotel hotel) => hotel.HotelId == hotelId)
+                .AndWhere((HotelTransport hotelTransport) => hotelTransport.Category == category)
+                .Return(transport => transport.As<TransportLocation>())
+                .ResultsAsync;
+            if (resp.Any())
+                return resp;
+            else
+                return null;
+        }
     }
 }

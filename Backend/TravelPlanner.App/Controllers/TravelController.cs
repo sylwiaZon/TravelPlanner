@@ -61,7 +61,7 @@ namespace TravelPlanner.App.Controllers
         [Authorize]
         [HttpGet]
         [Route("hotel")]
-        public Task<Hotel> GetHotel(string travelIdentity)
+        public Task<HotelWithDetails> GetHotel(string travelIdentity)
         {
             return _travelService.GetHotel(travelIdentity);
         }

@@ -7,30 +7,115 @@
     tools:context=".ui.travel.TravelFragment">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/travel_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Data"/>
+        <ImageView
+            android:id="@+id/travel_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="center"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/travel_destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="City"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:text="ROME"
+            android:textAppearance="?attr/textAppearanceHeadline3" />
+
+        <TextView
+            android:id="@+id/travel_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23 maj 2020 - 27 maj 2020"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="10dp"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            style="@style/Widget.MaterialComponents.Chip.Action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:chipSpacingVertical="8dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/weather_forecast_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weather forecast"
+                app:chipBackgroundColor="@color/stroke_color"
+                app:chipIcon="@drawable/ic_baseline_wb_sunny_24"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/hotel_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hotel"
+                app:chipBackgroundColor="@color/stroke_color"
+                app:chipIcon="@drawable/ic_baseline_hotel_24" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/flights_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flights"
+                app:chipBackgroundColor="@color/stroke_color"
+                app:chipIcon="@drawable/ic_baseline_flight_24" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/local_highlights_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Local highlights"
+                app:chipBackgroundColor="@color/stroke_color"
+                app:chipIcon="@drawable/ic_baseline_museum_24" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/city_walk_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City walks"
+                app:chipBackgroundColor="@color/stroke_color"
+                app:chipIcon="@drawable/ic_baseline_directions_walk_24" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/day_plans_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day plans"
+                app:chipBackgroundColor="@color/stroke_color"
+                app:chipIcon="@drawable/ic_baseline_today_24" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/to_see_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To see list"
+                app:chipBackgroundColor="@color/stroke_color"
+                app:chipIcon="@drawable/ic_baseline_list_24" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/to_do_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To do list"
+                app:chipBackgroundColor="@color/stroke_color"
+                app:chipIcon="@drawable/ic_baseline_list_24" />
+
+        </com.google.android.material.chip.ChipGroup>
+
     </LinearLayout>
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 

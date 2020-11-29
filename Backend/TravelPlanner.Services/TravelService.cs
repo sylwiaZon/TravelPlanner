@@ -22,7 +22,7 @@ namespace TravelPlanner.Services
         Task<Flight> GetFromFlight(string travelIdentity);
         Task<DomainLocation> GetLocation(string travelIdentity);
         Task AddHotel(Hotel newHotel, string travelIdentity);
-        Task<Hotel> GetHotel(string travelIdentity);
+        Task<HotelWithDetails> GetHotel(string travelIdentity);
         Task AddCityWalk(CityWalk newHotel, string travelIdentity);
         Task<CityWalk[]> GetCityWalks(string travelIdentity);
         Task AddDayPlan(DayPlan newDayPlan, string travelIdentity);
@@ -109,10 +109,26 @@ namespace TravelPlanner.Services
             }
         }
 
-        public async Task<Hotel> GetHotel(string travelIdentity)
+        public async Task<HotelWithDetails> GetHotel(string travelIdentity)
         {
-            var response = await HotelRepository.GetHotel(travelIdentity);
-            return HotelConverter.ToDomainHotel(response);
+            var hotel = await HotelRepository.GetHotel(travelIdentity);
+            var transportCategories = await HotelRepository.GetTransportCategories(hotel.HotelId);
+            var transports = new List<HotelTransport>();
+            foreach(var category in transportCategories)
+            {
+                var transport = await HotelRepository.GetTransport(hotel.HotelId, category.Category);
+                var tr = new HotelTransport
+                {
+                    Category = category.Category,
+                    TransportLocations = transport.Select(t => HotelConverter.ToDomainTransportLocation(t)).ToArray()
+                };
+            }
+
+            return new HotelWithDetails
+            {
+                Hotel = HotelConverter.ToDomainHotel(hotel),
+                Transport = transports
+            };
         }
 
         public async Task AddToFlight(Flight flight, string travelIdentity)
