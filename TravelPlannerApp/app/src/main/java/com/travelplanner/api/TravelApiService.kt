@@ -9,5 +9,5 @@ import retrofit2.http.Query
 interface TravelApiService {
 
     @GET("travel")
-    fun getTravels(@Query("userMail") userMail: String): Single<List<Travel>>
+    fun getTravels(): Single<List<Travel>>
 }

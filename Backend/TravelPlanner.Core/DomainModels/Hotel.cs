@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-using TravelPlanner.Core.HotelsApi.Details;
-using TravelPlanner.Core.HotelsApi.Search;
+﻿using System.Runtime.Serialization;
 
 namespace TravelPlanner.Core.DomainModels
 {

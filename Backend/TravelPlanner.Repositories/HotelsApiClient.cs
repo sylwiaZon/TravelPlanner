@@ -41,6 +41,17 @@ namespace TravelPlanner.Repositories
             }
             return null;
         }
+        public async Task<HotelDetails> GetHotelDetails(string hotelId)
+        {
+            var queryPath = Path +
+                "properties/get-details?locale=en_US&currency=USD&id=" + hotelId;
+            var responseMessage = await Client.GetAsync(queryPath);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return await responseMessage.Content.ReadAsAsync<HotelDetails>();
+            }
+            return null;
+        }
 
         public async Task<HotelDetails> GetHotelDetails(string hotelId, string checkIn, string checkOut, int adultsNumber, string childrenAges)
         {

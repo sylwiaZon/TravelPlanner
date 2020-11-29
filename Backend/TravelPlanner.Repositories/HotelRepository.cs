@@ -1,6 +1,7 @@
 ﻿using Neo4j.Driver;
 using Neo4jClient;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelPlanner.Core;
@@ -84,6 +85,43 @@ namespace TravelPlanner.Repositories
                 return resp.First();
             else
                 throw new TravelPlannerException(404, "Hotel not found");
+        }
+
+        async public Task AddHotelTransport(string hotelId, HotelTransport transportCategory, IEnumerable<TransportLocation> transports)
+        {
+            await GraphClient.ConnectAsync();
+            try
+            {
+                await GraphClient.Cypher
+                    .Create("(category:HotelTransport $category)")
+                    .WithParam("category", transportCategory)
+                    .Return(category => category.As<HotelTransport>())
+                    .ResultsAsync;
+            }
+            catch (ClientException ce)
+            {
+                if (!ce.Message.Contains("already exists", StringComparison.InvariantCultureIgnoreCase))
+                    throw ce;
+            }
+            await GraphClient.Cypher
+                .Match("(hotel:Hotel)", "(category:HotelTransport)")
+                .Where((HotelTransport category) => category.Category == transportCategory.Category)
+                .AndWhere((Hotel hotel) => hotel.HotelId == hotelId)
+                .Merge("(hotel)-[r:HasTransportType]->(category)")
+                .Return(category => category.As<HotelTransport>())
+                .ResultsAsync;
+
+            foreach(var transport in transports)
+            {
+                await GraphClient.Cypher
+                    .Match("(category:HotelTransport)")
+                    .Where((HotelTransport category) => category.Category == transportCategory.Category)
+                    .Create("(transp:TransportLocation $transp)")
+                    .WithParam("transp", transport)
+                    .Create("(category)-[r:HasTransport]->(transp)")
+                    .Return(transp => transp.As<TransportLocation>())
+                    .ResultsAsync;
+            }
         }
     }
 }

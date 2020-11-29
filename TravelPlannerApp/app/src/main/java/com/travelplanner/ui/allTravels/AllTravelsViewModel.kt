@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
 class AllTravelsViewModel : ViewModel() {
     private val travelApiService = DIContainer.travelApiService
     private val _travelsList = MutableLiveData<List<Travel>>().apply {
-        travelApiService.getTravels("Mailek")
+        travelApiService.getTravels()
                 .applySchedulers()
                 .subscribe { t ->
                     value = t

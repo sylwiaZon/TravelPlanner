@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TravelPlanner.App.Helpers;
+using TravelPlanner.Core.DomainModels;
 using TravelPlanner.Core.HotelsApi.Details;
 using TravelPlanner.Core.HotelsApi.Photos;
-using TravelPlanner.Core.HotelsApi.Search;
 using TravelPlanner.Services;
 
 namespace TravelPlanner.App.Controllers
@@ -20,7 +21,7 @@ namespace TravelPlanner.App.Controllers
 
         [Authorize]
         [HttpGet]
-        async public Task<HotelSearch> GetHotels(string cityName)
+        async public Task<IEnumerable<Hotel>> GetHotels(string cityName)
         {
             return await _hotelsService.GetHotels(cityName);
         }

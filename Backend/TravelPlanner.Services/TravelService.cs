@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using TravelPlanner.Core.DomainModels;
 using DomainLocation = TravelPlanner.Core.DomainModels.Location;
+using DbHotelTransport = TravelPlanner.Core.DataBaseModels.HotelTransport;
 using TravelPlanner.Repositories;
 using TravelPlanner.Services.Converters;
 using System.Linq;
@@ -47,6 +48,7 @@ namespace TravelPlanner.Services
         private DayPlanRepository DayPlanRepository;
         private TourRepository TourRepository;
         private ListsRepository ListsRepository;
+        private HotelsApiClient HotelsApiClient;
 
         public TravelService(DbSettings dbSettings)
         {
@@ -59,6 +61,7 @@ namespace TravelPlanner.Services
             DayPlanRepository = new DayPlanRepository(dbSettings);
             TourRepository = new TourRepository(dbSettings);
             ListsRepository = new ListsRepository(dbSettings);
+            HotelsApiClient = new HotelsApiClient();
         }
 
         public async Task<IEnumerable<TravelsResponse>> GetTravels(string userMail)
@@ -96,7 +99,14 @@ namespace TravelPlanner.Services
         public async Task AddHotel(Hotel newHotel, string travelIdentity)
         {
             var hotel = HotelConverter.ToDbHotel(newHotel);
+            var hotelDetails = await HotelsApiClient.GetHotelDetails(hotel.DestinationId);
             await HotelRepository.AddHotel(hotel, travelIdentity);
+            foreach(var location in hotelDetails.Transportation.TransportLocations)
+            {
+                var transports = location.Locations.Select(l => HotelConverter.ToDbTransportLocation(l));
+                var transportCategory = new DbHotelTransport { Category = location.Category };
+                await HotelRepository.AddHotelTransport(hotel.HotelId, transportCategory, transports);
+            }
         }
 
         public async Task<Hotel> GetHotel(string travelIdentity)

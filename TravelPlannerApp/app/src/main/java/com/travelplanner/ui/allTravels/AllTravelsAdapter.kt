@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.travelplanner.R
 import com.travelplanner.models.Travel
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 class AllTravelsAdapter : RecyclerView.Adapter<AllTravelsAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -27,11 +30,13 @@ class AllTravelsAdapter : RecyclerView.Adapter<AllTravelsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val holderView = holder.itemView
+        val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
         holderView.findViewById<TextView>(R.id.item_destination).text = travelsList[position].travelDestination.city
-        holderView.findViewById<TextView>(R.id.item_dates).text = travelsList[position].date.toString()
+        val datesString = travelsList[position].arrivalDate.format(formatter) + " - " + travelsList[position].departureDate.format(formatter)
+        holderView.findViewById<TextView>(R.id.item_dates).text = datesString
         Glide
                 .with(holderView.context)
-                .load("https://farm5.staticflickr.com/4064/4437116960_ef1b509217_o.jpg")
+                .load(travelsList[position].photoUrl)
                 .into(holderView.findViewById(R.id.item_image));
     }
 
