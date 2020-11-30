@@ -9,9 +9,6 @@ namespace TravelPlanner.Core.DomainModels
         public string PoiId { get; set; }
 
         [DataMember]
-        public string Price { get; set; }
-
-        [DataMember]
         public string Currency { get; set; }
 
         [DataMember]
@@ -37,5 +34,17 @@ namespace TravelPlanner.Core.DomainModels
 
         [DataMember]
         public string Snippet { get; set; }
+
+        [DataMember]
+        public Attribution[] Attribution { get; set; }
+        
+        [DataMember]
+        public string PhotoUrl { get; set; }
+
+        [DataMember]
+        public string Price { get; set; }
+
+        [DataMember]
+        public string VendorUrl { get; set; }
     }
 }

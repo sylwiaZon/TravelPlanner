@@ -5,8 +5,8 @@ using DbWayPoint = TravelPlanner.Core.DataBaseModels.WayPoint;
 using DomainWayPoint = TravelPlanner.Core.DomainModels.WayPoint;
 using DomainCityWalk = TravelPlanner.Core.DomainModels.CityWalk;
 using System.Linq;
-using TravelPlanner.Core.DataBaseModels;
 using System;
+using TravelPlanner.Core.DomainModels;
 
 namespace TravelPlanner.Services.Converters
 {
@@ -83,10 +83,11 @@ namespace TravelPlanner.Services.Converters
             {
                 Latitude = point.Latitude,
                 Longitude = point.Longitude,
-                Poi = PoiConverter.ToDomainPoi(poi),
+                Poi = poi,
                 VisitTime = point.VisitTime,
                 WalkToNextDistance = point.WalkToNextDistance,
-                WalkToNextDuration = point.WalkToNextDuration
+                WalkToNextDuration = point.WalkToNextDuration,
+                WayPointId = point.WayPointId
             };
         }
     }

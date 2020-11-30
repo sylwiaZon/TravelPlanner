@@ -1,6 +1,7 @@
 ﻿using Neo4j.Driver;
 using Neo4jClient;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelPlanner.Core;
@@ -41,7 +42,7 @@ namespace TravelPlanner.Repositories
             }
         }
 
-        async public Task AddPoiToWayPoint(Poi newPoi, string pointId, string locationId)
+        async public Task AddPoiToWayPoint(Poi newPoi, IEnumerable<Attribution> attributions, string pointId, string locationId)
         {
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
@@ -69,11 +70,36 @@ namespace TravelPlanner.Repositories
             await GraphClient.Cypher
                 .Match("(poi:Poi)", "(point:WayPoint)", "(location:Location)")
                 .Where((WayPoint point) => point.WayPointId == pointId)
-                .AndWhere((Poi poi) => poi.Id == newPoi.Id)
+                .AndWhere((Poi poi) => poi.PoiId == newPoi.PoiId)
                 .AndWhere((Location location) => location.LocationId == locationId)
                 .Merge($"(point)-[r:HasPoi]->(poi)")
                 .Merge($"(location)-[k:HasPoi]->(poi)")
                 .Return(poi => poi.As<Poi>())
+                .ResultsAsync;
+        }
+
+        async public Task AddAttributionToPoi(string poiId, IEnumerable<Attribution> attributions)
+        {
+            foreach (var attr in attributions)
+            {
+                await GraphClient.Cypher
+                    .Match("(poi:Poi)")
+                    .Where((Poi poi) => poi.PoiId == poiId)
+                    .Create("(attribution:Attribution $newAttribution)")
+                    .WithParam("newAttribution", attr)
+                    .Create("(poi)-[r:HasAttribution]->(attr)")
+                    .Return(attribution => attribution.As<Attribution>())
+                    .ResultsAsync;
+            }
+        }
+
+        async public Task<IEnumerable<Attribution>> GetPoiAttributions(string poiId)
+        {
+            await GraphClient.ConnectAsync();
+            return await GraphClient.Cypher
+                .Match("(attribution:Attribution)--(poi:Poi)")
+                .Where((Poi poi) => poi.PoiId == poiId)
+                .Return(attribution => attribution.As<Attribution>())
                 .ResultsAsync;
         }
 

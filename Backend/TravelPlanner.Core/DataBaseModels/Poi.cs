@@ -9,7 +9,13 @@ namespace TravelPlanner.Core.DataBaseModels
         public string PoiId { get; set; }
 
         [DataMember]
+        public string PhotoUrl { get; set; }
+
+        [DataMember]
         public string Price { get; set; }
+
+        [DataMember]
+        public string VendorUrl { get; set; }
 
         [DataMember]
         public string Currency { get; set; }

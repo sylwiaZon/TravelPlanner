@@ -45,6 +45,7 @@ namespace TravelPlanner.Repositories
                 if (!ce.Message.Contains("already exists", StringComparison.InvariantCultureIgnoreCase))
                     throw ce;
             }
+
             await GraphClient.Cypher
                 .Match("(location:Location)", "(travel:Travel)")
                 .Where((Travel travel) => travel.TravelId == travelIdentity)

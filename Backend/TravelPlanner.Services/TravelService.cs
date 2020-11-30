@@ -165,7 +165,9 @@ namespace TravelPlanner.Services
                 var dbPoint = CityWalkConverter.ToDbWayPoint(domainPoint);
                 var point = await CityWalkRepository.AddWayPoint(dbPoint, walk.CityWalkId);
                 var poi = PoiConverter.ToDbPoi(domainPoint.Poi);
-                await PoiRepository.AddPoiToWayPoint(poi, point.WayPointId, location.LocationId);
+                var attributions = domainPoint.Poi.Attribution.Select(a => PoiConverter.ToDbAttribution(a));
+                await PoiRepository.AddPoiToWayPoint(poi, attributions, point.WayPointId, location.LocationId);
+                await PoiRepository.AddAttributionToPoi(poi.PoiId, attributions);
             }
         }
         
@@ -180,7 +182,11 @@ namespace TravelPlanner.Services
                 foreach(var point in dbPoints)
                 {
                     var dbPoi = await CityWalkRepository.GetPoi(point.WayPointId);
-                    var domainPoint = CityWalkConverter.ToDomainWayPoint(point, dbPoi);
+                    var dbAttributions = await PoiRepository.GetPoiAttributions(dbPoi.PoiId);
+                    var domainAttributions = dbAttributions.Select(a => PoiConverter.ToDomainAttribution(a));
+                    var domainPoi = PoiConverter.ToDomainPoi(dbPoi);
+                    domainPoi.Attribution = domainAttributions.ToArray();
+                    var domainPoint = CityWalkConverter.ToDomainWayPoint(point, domainPoi);
                     domainPoints.Add(domainPoint);
                 }
                 var domainWalk = CityWalkConverter.ToDomainCityWalk(walk, domainPoints.ToArray());
@@ -204,9 +210,10 @@ namespace TravelPlanner.Services
                     await DayPlanRepository.AddItineraryItem(dbItem, dbDay.ItineraryId);
                     var poi = PoiConverter.ToDbPoi(item.Poi);
                     await PoiRepository.AddPoiToDayItem(poi, item.ItineraryItemId, location.LocationId);
+                    var attributions = item.Poi.Attribution.Select(a => PoiConverter.ToDbAttribution(a));
+                    await PoiRepository.AddAttributionToPoi(poi.PoiId, attributions);
                 }
             }
-
         }
 
         public async Task<DayPlan[]> GetDayPlans(string travelIdentity) 
@@ -224,7 +231,10 @@ namespace TravelPlanner.Services
                     foreach (var item in dbDayItems)
                     {
                         var dbPoi = await DayPlanRepository.GetPoi(item.ItineraryItemId);
+                        var dbAttributions = await PoiRepository.GetPoiAttributions(dbPoi.PoiId);
+                        var domainattributions = dbAttributions.Select(a => PoiConverter.ToDomainAttribution(a));
                         var poi = PoiConverter.ToDomainPoi(dbPoi);
+                        poi.Attribution = domainattributions.ToArray();
                         var domainItem = DayPlanConverter.ToDomainItineraryItem(item, poi);
                         domainItems.Add(domainItem);
                     }
@@ -293,7 +303,10 @@ namespace TravelPlanner.Services
             foreach(var item in items)
             {
                 var poi = await ListsRepository.GetToSeeItemPoi(item.Id);
+                var dbAttributions = await PoiRepository.GetPoiAttributions(poi.PoiId);
+                var domainAttributions = dbAttributions.Select(a => PoiConverter.ToDomainAttribution(a));
                 var convertedPoi = PoiConverter.ToDomainPoi(poi);
+                convertedPoi.Attribution = domainAttributions.ToArray();
                 var domainItem = ToSeeItemConverter.ToDomainToSeeItem(item, convertedPoi);
                 domainItems.Add(domainItem);
             }
