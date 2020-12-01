@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace TravelPlanner.Core
+namespace TravelPlanner.DomainModels
 {
     [DataContract]
     public class WeatherForecast
@@ -38,7 +38,7 @@ namespace TravelPlanner.Core
         public double MaximalTemperature { get; set; }
 
         [DataMember]
-        public double Presurre { get; set; }
+        public double Pressure { get; set; }
 
         [DataMember]
         public double Humidity { get; set; }

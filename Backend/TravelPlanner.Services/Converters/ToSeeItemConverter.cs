@@ -13,7 +13,7 @@ namespace TravelPlanner.Services.Converters
                 Id = item.Id,
                 Checked = item.Checked,
                 Name = item.Name,
-                PointOfInterest = poi
+                Poi = poi
             };
         }
 

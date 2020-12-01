@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TravelPlanner.App.Helpers;
-using TravelPlanner.Core;
+using TravelPlanner.DomainModels;
 using TravelPlanner.Services;
 
 namespace TravelPlanner.App.Controllers
@@ -19,9 +19,9 @@ namespace TravelPlanner.App.Controllers
 
         [Authorize]
         [HttpGet]
-        public Task<IEnumerable<WeatherForecast>> Get()
+        public Task<IEnumerable<WeatherForecast>> Get(string cityName)
         {
-            return _weatherForecastService.GetWeather();
+            return _weatherForecastService.GetWeather(cityName);
         }
     }
 }

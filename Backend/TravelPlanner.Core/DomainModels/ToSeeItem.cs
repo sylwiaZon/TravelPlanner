@@ -15,6 +15,6 @@ namespace TravelPlanner.Core.DomainModels
         public string Name { get; set; }
 
         [DataMember]
-        public Poi PointOfInterest { get; set; }
+        public Poi Poi { get; set; }
     }
 }

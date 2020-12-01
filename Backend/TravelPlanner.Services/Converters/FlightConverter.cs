@@ -6,7 +6,9 @@ using TravelPlanner.Core.Flights;
 using DomainFlight = TravelPlanner.Core.DomainModels.Flight;
 using DBFlight = TravelPlanner.Core.DataBaseModels.Flight;
 using DomainAirportFlightStatus = TravelPlanner.Core.DomainModels.AirportFlightStatus;
+using DomainAirport= TravelPlanner.Core.DomainModels.Airport;
 using LufthansaAirportFlightStatus = TravelPlanner.Core.Flights.AirportFlightStatus;
+using LufthansaNearestAirport = TravelPlanner.Core.Flights.NearestAirport;
 
 namespace TravelPlanner.Services.Converters
 {
@@ -119,6 +121,23 @@ namespace TravelPlanner.Services.Converters
                 ScheduledTimeLocal = DateTime.Parse(status.ScheduledTimeLocal.DateTime),
                 TerminalName = status.Terminal?.Name
             };
+        }
+
+        public static IEnumerable<DomainAirport> ToDomainAirport(LufthansaNearestAirport lufthansaNearestAirport)
+        {
+            return lufthansaNearestAirport.NearestAirportResource.Airports.Airport.Select(a => 
+                new DomainAirport
+                {
+                    AirportCode = a.AirportCode,
+                    Latitude = a.Position.Coordinate.Latitude,
+                    Longitude = a.Position.Coordinate.Longitude,
+                    CityCode = a.CityCode,
+                    CountryCode = a.CountryCode, 
+                    LocationType = a.LocationType,
+                    Names = a.Names.Name.Select(n => new AirportName { LanguageCode = n.LanguageCode, WholeName = n.WholeName}).ToArray(),
+                    DistanceUnit = a.Distance.Unit,
+                    DistanceValue = a.Distance.Value
+                });
         }
 
         private static FlightDuration ConvertToFlightDuration(string duration)

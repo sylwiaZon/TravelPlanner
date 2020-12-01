@@ -25,7 +25,9 @@
             android:textColor="?android:attr/textColorSecondary" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/transport_category_recycler"
             android:layout_width="match_parent"
+            android:padding="5dp"
             android:layout_height="match_parent"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

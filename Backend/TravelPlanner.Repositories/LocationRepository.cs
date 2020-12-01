@@ -1,6 +1,7 @@
 ﻿using Neo4j.Driver;
 using Neo4jClient;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelPlanner.Core;
@@ -65,6 +66,24 @@ namespace TravelPlanner.Repositories
                 .ResultsAsync;
             if (resp.Any())
                 return resp.First();
+            else
+                throw new TravelPlannerException(404, "Location not found");
+        }
+
+        async public Task<IEnumerable<Poi>> GetPoisForLocation(string travelIdentity)
+        {
+            await GraphClient.ConnectAsync();
+            var resp = await GraphClient.Cypher
+                .Match("(location:Location)--(travel:Travel)")
+                .Where((Travel travel) => travel.TravelId == travelIdentity)
+                .Return(location => location.As<Location>())
+                .ResultsAsync;
+            if (resp.Any())
+                return await GraphClient.Cypher
+                .Match("(location:Location)--(poi:Poi)")
+                .Where((Location location) => location.LocationId == resp.First().LocationId)
+                .Return(poi => poi.As<Poi>())
+                .ResultsAsync;
             else
                 throw new TravelPlannerException(404, "Location not found");
         }

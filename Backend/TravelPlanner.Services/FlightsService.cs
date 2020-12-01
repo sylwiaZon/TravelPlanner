@@ -5,6 +5,8 @@ using TravelPlanner.Core.Flights;
 using TravelPlanner.Repositories;
 using TravelPlanner.Services.Converters;
 using Flight = TravelPlanner.Core.DomainModels.Flight;
+using Airport = TravelPlanner.Core.DomainModels.Airport;
+using System.Linq;
 
 namespace TravelPlanner.Services
 {
@@ -12,7 +14,7 @@ namespace TravelPlanner.Services
     {
         Task<IEnumerable<Flight>> GetSchedule(string origin, string destination, string date);
         Task<Flight> GetFlightStatus(string flightNumber, string date);
-        Task<NearestAirport> GetNearestAirport(float latitude, float longitude);
+        Task<Airport[]> GetNearestAirport(float latitude, float longitude);
     }
 
     public class FlightsService : IFlightsService
@@ -36,9 +38,10 @@ namespace TravelPlanner.Services
             return FlightConverter.ToDomainFlight(flightResponse);
         }
 
-        public async Task<NearestAirport> GetNearestAirport(float latitude, float longitude)
+        public async Task<Airport[]> GetNearestAirport(float latitude, float longitude)
         {
-            return await FlightsApiClient.GetNearestAirports(latitude, longitude);
+            var response = await FlightsApiClient.GetNearestAirports(latitude, longitude);
+            return FlightConverter.ToDomainAirport(response).ToArray();
         }
     }
 }

@@ -35,6 +35,7 @@ namespace TravelPlanner.Services
         Task<ToSeeItem> AddToSeeItem(ToSeeItem newItem, string poiId, string travelIdentity);
         Task<ToSeeItem[]> GetToSeeItem(string travelIdentity);
         Task<ToSeeItem> UpdateToSeeItem(ToSeeItem newItem);
+        Task<Poi[]> GetPoisForTravel(string travelId);
     }
 
     public class TravelService : ITravelService
@@ -93,7 +94,13 @@ namespace TravelPlanner.Services
         public async Task<DomainLocation> GetLocation(string travelIdentity)
         {
             var response = await LocationRepository.GetLocation(travelIdentity);
-            return new DomainLocation(response);
+            return LocationConverter.ToDomainLocation(response);
+        }
+
+        public async Task<Poi[]> GetPoisForTravel(string travelIdentity)
+        {
+            var response = await LocationRepository.GetPoisForLocation(travelIdentity);
+            return response.Select(r => PoiConverter.ToDomainPoi(r)).ToArray();
         }
 
         public async Task AddHotel(Hotel newHotel, string travelIdentity)

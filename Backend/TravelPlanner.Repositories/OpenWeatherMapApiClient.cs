@@ -16,9 +16,9 @@ namespace TravelPlanner.Repositories
             Token = Environment.GetEnvironmentVariable("OPEN_WEATHER_API_KEY");
         }
 
-        public async Task<WeatherForecastApi> GetWeatherForecast()
+        public async Task<WeatherForecastApi> GetWeatherForecast(string cityName)
         {
-            var responseMessage = await Client.GetAsync(Path + "forecast?q=Krakow&appid=" + Token);
+            var responseMessage = await Client.GetAsync(Path + "forecast?q=" + cityName + "& appid=" + Token);
             if (responseMessage.IsSuccessStatusCode)
             {
                 Console.WriteLine(responseMessage.Content);

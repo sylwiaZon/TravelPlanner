@@ -73,6 +73,9 @@
                 android:padding="5dp"
                 android:textAppearance="?attr/textAppearanceBody2" />
         </LinearLayout>
+        <include
+            layout="@layout/fragment_poi"
+            android:id="@+id/way_point_poi"/>
     </LinearLayout>
 
 

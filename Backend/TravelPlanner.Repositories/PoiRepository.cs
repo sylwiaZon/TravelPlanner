@@ -144,7 +144,7 @@ namespace TravelPlanner.Repositories
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
                 .Match("(poi:Poi)")
-                .Where((Poi poi) => poi.Id == id)
+                .Where((Poi poi) => poi.PoiId == id)
                 .Return(poi => poi.As<Poi>())
                 .ResultsAsync;
             if (resp.Any())

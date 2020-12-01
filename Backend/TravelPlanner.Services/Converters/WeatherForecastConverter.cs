@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TravelPlanner.Core;
 using TravelPlanner.Core.OpenWeatherMap;
-using static TravelPlanner.Core.WeatherForecast;
+using TravelPlanner.DomainModels;
+using static TravelPlanner.DomainModels.WeatherForecast;
 
 namespace TravelPlanner.Services.Converters
 {
@@ -23,7 +23,7 @@ namespace TravelPlanner.Services.Converters
                     TemperatureFeels = el.Main.FeelsLike,
                     MaximalTemperature = el.Main.TempMax,
                     MinimalTemperature = el.Main.TempMin,
-                    Presurre = el.Main.Preassure,
+                    Pressure = el.Main.Preassure,
                     Humidity = el.Main.Humidity,
                     Weather = el.Weather.Select(w => 
                         new WeatherProperties 

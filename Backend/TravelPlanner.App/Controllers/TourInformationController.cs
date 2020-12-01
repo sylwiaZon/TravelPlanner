@@ -18,9 +18,9 @@ namespace TravelPlanner.App.Controllers
 
         [Authorize]
         [HttpGet]
-        public Task<Tour[]> GetTourInformation(string locationIds, string poiId, string tagLabels)
+        public Task<Tour[]> GetTourInformation(string locationId, string poiId, string tagLabels)
         {
-            return _travelInfoService.GetTourInformation(locationIds, poiId, tagLabels);
+            return _travelInfoService.GetTourInformation(locationId, poiId, tagLabels);
         }
     }
 }

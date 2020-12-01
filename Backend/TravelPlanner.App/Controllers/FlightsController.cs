@@ -5,6 +5,7 @@ using TravelPlanner.App.Helpers;
 using TravelPlanner.Core.Flights;
 using TravelPlanner.Services;
 using Flight = TravelPlanner.Core.DomainModels.Flight;
+using Airport = TravelPlanner.Core.DomainModels.Airport;
 
 namespace TravelPlanner.App.Controllers
 {
@@ -36,7 +37,7 @@ namespace TravelPlanner.App.Controllers
         [Authorize]
         [HttpGet]
         [Route("airports")]
-        async public Task<NearestAirport> GetNearestAirport(float latitude, float longitude)
+        async public Task<Airport[]> GetNearestAirport(float latitude, float longitude)
         {
             return await _flightsService.GetNearestAirport(latitude, longitude);
         }

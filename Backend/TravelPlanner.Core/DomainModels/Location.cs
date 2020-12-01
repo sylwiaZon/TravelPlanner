@@ -49,41 +49,5 @@ namespace TravelPlanner.Core.DomainModels
 
         [DataMember]
         public string PhotoUrl { get; set; }
-
-        public Location() { }
-
-        public Location(TriposoLocation triposoLocation)
-        {
-            Latitude = triposoLocation.Coordinates.Latitude;
-            Longitude = triposoLocation.Coordinates.Longitude;
-            CountryId = triposoLocation.CountryId;
-            Intro = triposoLocation.Intro;
-            Name = triposoLocation.Name;
-            Names = triposoLocation.Names;
-            PartOf = triposoLocation.PartOf;
-            ParentId = triposoLocation.ParentId;
-            Score = triposoLocation.Score;
-            Snippet = triposoLocation.Snippet;
-            TagLabels = triposoLocation.TagLabels;
-            Type = triposoLocation.Type;
-            LocationId = Latitude + Longitude + Name;
-        }
-
-        public Location(DBLocation domainLocation)
-        {
-            LocationId = domainLocation.LocationId;
-            Latitude = domainLocation.Latitude;
-            Longitude = domainLocation.Longitude;
-            CountryId = domainLocation.CountryId;
-            Intro = domainLocation.Intro;
-            Name = domainLocation.Name;
-            Names = domainLocation.Names;
-            PartOf = domainLocation.PartOf;
-            ParentId = domainLocation.ParentId;
-            Score = domainLocation.Score;
-            Snippet = domainLocation.Snippet;
-            TagLabels = domainLocation.TagLabels;
-            Type = domainLocation.Type;
-        }
     }
 }

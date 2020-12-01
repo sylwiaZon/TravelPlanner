@@ -51,6 +51,14 @@ namespace TravelPlanner.App.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("poi")]
+        public Task<Poi[]> GetPois(string travelIdentity)
+        {
+            return _travelService.GetPoisForTravel(travelIdentity);
+        }
+
+        [Authorize]
         [HttpPost]
         [Route("hotel")]
         public Task AddHotel([FromBody] Hotel hotel, string travelIdentity)
@@ -156,7 +164,7 @@ namespace TravelPlanner.App.Controllers
         [Authorize]
         [HttpPatch]
         [Route("tosee")]
-        public Task<ToSeeItem> UpdateToDo([FromBody] ToSeeItem item)
+        public Task<ToSeeItem> UpdateToSeeItem([FromBody] ToSeeItem item)
         {
             return _travelService.UpdateToSeeItem(item);
         }
