@@ -134,7 +134,7 @@ namespace TravelPlanner.Services.Converters
                     CityCode = a.CityCode,
                     CountryCode = a.CountryCode, 
                     LocationType = a.LocationType,
-                    Names = a.Names.Name.Select(n => new AirportName { LanguageCode = n.LanguageCode, WholeName = n.WholeName}).ToArray(),
+                    Names = a.Names.Name.Select(n => n.WholeName).ToArray(),
                     DistanceUnit = a.Distance.Unit,
                     DistanceValue = a.Distance.Value
                 });

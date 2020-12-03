@@ -60,7 +60,7 @@ namespace TravelPlanner.Repositories
             if (resp.Any())
                 return resp;
             else
-                throw new TravelPlannerException(404, "Travels not found");
+                return new List<Travel>();
         }
     }
 }

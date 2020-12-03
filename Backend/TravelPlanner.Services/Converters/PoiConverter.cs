@@ -26,7 +26,7 @@ namespace TravelPlanner.Services.Converters
                 Name = poi.Name,
                 Score = poi.Score,
                 Snippet = poi.Snippet,
-                PhotoUrl = poi.Images[0]?.Sizes.Medium?.Url,
+                PhotoUrl = poi.Images.Length > 0 ? poi.Images[0].Sizes.Medium?.Url : null,
                 Attribution = poi.Attributions.Select(a => ToDomainAttribution(a)).ToArray()
             };
         }

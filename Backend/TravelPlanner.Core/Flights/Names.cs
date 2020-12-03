@@ -4,7 +4,7 @@ namespace TravelPlanner.Core.Flights
 {
     public class Names
     {
-        [JsonProperty("Names")]
+        [JsonProperty("Name")]
         public Name[] Name { get; set; }
     }
 }

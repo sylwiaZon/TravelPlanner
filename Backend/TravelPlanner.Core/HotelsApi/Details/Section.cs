@@ -12,8 +12,5 @@ namespace TravelPlanner.Core.HotelsApi.Details
 
         [JsonProperty("listItems")]
         public string[] ListItems { get; set; }
-
-        [JsonProperty("subsections")]
-        public string[] Subsections { get; set; }
     }
 }

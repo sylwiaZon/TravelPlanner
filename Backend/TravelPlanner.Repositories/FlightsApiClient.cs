@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Globalization;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -76,8 +77,8 @@ namespace TravelPlanner.Repositories
         public async Task<NearestAirport> GetNearestAirports(float latitude, float longitude)
         {
             await SetToken();
-
-            var responseMessage = await Client.GetAsync(Path + "references/airports/nearest/" + latitude + "," + longitude);
+            var endpointPath = Path + "references/airports/nearest/" + latitude.ToString("G", CultureInfo.InvariantCulture) + "," + longitude.ToString("G", CultureInfo.InvariantCulture);
+            var responseMessage = await Client.GetAsync(endpointPath);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return await responseMessage.Content.ReadAsAsync<NearestAirport>();

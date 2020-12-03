@@ -24,7 +24,7 @@ namespace TravelPlanner.Core.DomainModels
         public string LocationType { get; set; }
 
         [DataMember]
-        public AirportName[] Names { get; set; }
+        public string[] Names { get; set; }
 
         [DataMember]
         public float DistanceValue { get; set; }

@@ -10,7 +10,6 @@ namespace TravelPlanner.Core
         public string Name { get; set; }
 
         [DataMember]
-        [JsonIgnore]
         public string Password { get; set; }
 
         [DataMember]
