@@ -8,7 +8,7 @@ class DefaultHeadersInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request();
         val request: Request = original.newBuilder()
-                .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYWlsIjoiTWFpbGVrIiwibmJmIjoxNjA2MTU5NzM4LCJleHAiOjE2MDY3NjQ1MzgsImlhdCI6MTYwNjE1OTczOH0.v3zOQFSe1KQP-NZnz1n3nEDPadkIJzebqQuuX3TddaM")
+                .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYWlsIjoiTWFpbCIsIm5iZiI6MTYwNzAyODI5MiwiZXhwIjoxNjA3NjMzMDkyLCJpYXQiOjE2MDcwMjgyOTJ9.ROTmf-5tdyz6qb1WxVxSa19LqaeeNyLIOK6qFEKY3wE")
                 .header("Content-Type", "application/json")
                 .method(original.method(), original.body())
                 .build()

@@ -7,6 +7,7 @@
     tools:context=".ui.travel.TravelFragment">
 
     <LinearLayout
+        android:id="@+id/incoming_travel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -125,5 +126,8 @@
         </com.google.android.material.chip.ChipGroup>
 
     </LinearLayout>
+    <include
+        android:id="@+id/no_incoming_travel"
+        layout="@layout/no_incoming_travels_view"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

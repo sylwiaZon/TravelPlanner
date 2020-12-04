@@ -35,13 +35,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Local highlights"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/local_highlights"
                     android:layout_width="wrap_content"

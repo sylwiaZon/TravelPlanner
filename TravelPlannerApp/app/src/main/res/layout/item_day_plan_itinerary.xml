@@ -1,41 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:backgroundTintMode="src_atop"
     android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/itinerary_title"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/itinerary_image"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="afternoon plan"
-            android:textAppearance="?attr/textAppearanceHeadline6"/>
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/itinerary_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="There are quite some interesting things to see. Castelo de São Jorge is a good starting point. Up the hill, with a great view over the city and the river."
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="?android:attr/textColorSecondary"/>
+            <TextView
+                android:id="@+id/itinerary_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="afternoon plan"
+                android:textAppearance="?attr/textAppearanceHeadline5"/>
+            <TextView
+                android:id="@+id/itinerary_poi_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Taberna da Rua das Flores"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?android:attr/textColorSecondary"/>
+            <TextView
+                android:id="@+id/itinerary_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="There are quite some interesting things to see. Castelo de São Jorge is a good starting point. Up the hill, with a great view over the city and the river."
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="?android:attr/textColorSecondary"/>
 
-        <include
-            layout="@layout/fragment_poi"
-            android:id="@+id/itinerary_poi"/>
+            <TextView
+                android:id="@+id/poi_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="See Point of Interest"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/bottle_blue"/>
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

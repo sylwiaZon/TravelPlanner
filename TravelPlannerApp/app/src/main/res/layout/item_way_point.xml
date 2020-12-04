@@ -14,6 +14,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/city_walk_poi_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="La Degustation"
+            android:textAppearance="?attr/textAppearanceHeadline6"/>
+
+        <TextView
+            android:id="@+id/city_walk_poi_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Often voted as the best Czech restaurant, with price matching the quality."
+            android:textAppearance="?attr/textAppearanceBody1"/>
+
+        <TextView
+            android:id="@+id/poi_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="See whole Point of Interest"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/bottle_blue"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,9 +98,7 @@
                 android:padding="5dp"
                 android:textAppearance="?attr/textAppearanceBody2" />
         </LinearLayout>
-        <include
-            layout="@layout/fragment_poi"
-            android:id="@+id/way_point_poi"/>
+
     </LinearLayout>
 
 

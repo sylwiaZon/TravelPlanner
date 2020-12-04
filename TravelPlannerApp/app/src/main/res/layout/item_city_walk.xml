@@ -93,13 +93,33 @@
                     android:textAppearance="?attr/textAppearanceBody2" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Way points"
+            <LinearLayout
+                android:id="@+id/way_points_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:textAppearance="?attr/textAppearanceHeadline6"/>
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Way points"
+                    android:textAppearance="?attr/textAppearanceHeadline6"/>
+
+                <ImageView
+                    android:id="@+id/way_points_arrow_down"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerInside"
+                    tools:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+                <ImageView
+                    android:id="@+id/way_points_arrow_up"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerInside"
+                    tools:srcCompat="@drawable/ic_baseline_keyboard_arrow_up_24" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/way_point_recycler"

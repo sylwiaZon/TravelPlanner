@@ -9,7 +9,7 @@
     android:padding="5dp">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/item_card"
+        android:id="@+id/item_all_travels"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
