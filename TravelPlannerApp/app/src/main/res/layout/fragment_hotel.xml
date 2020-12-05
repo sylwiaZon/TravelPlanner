@@ -25,7 +25,6 @@
             android:text="Hotel name"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="?android:attr/textColorPrimary" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +34,7 @@
             android:textColor="?android:attr/textColorSecondary" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/hotels_recycler"
+            android:id="@+id/hotel_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

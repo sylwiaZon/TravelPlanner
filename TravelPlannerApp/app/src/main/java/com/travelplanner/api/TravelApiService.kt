@@ -23,7 +23,7 @@ interface TravelApiService {
     fun getPois(@Query("travelIdentity") travelIdentity: String): Single<List<Poi>>
 
     @GET("travel/hotel")
-    fun getHotel(@Query("travelIdentity") travelIdentity: String): Single<Hotel>
+    fun getHotel(@Query("travelIdentity") travelIdentity: String): Single<HotelWithDetails>
 
     @POST("travel/hotel")
     fun postHotel(@Body hotel: Hotel, @Query("travelIdentity") travelIdentity: String)

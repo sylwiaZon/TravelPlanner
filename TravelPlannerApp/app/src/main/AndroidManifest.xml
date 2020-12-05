@@ -31,6 +31,19 @@
             android:name=".ui.dayPlan.DayPlanActivity"
             android:label="@string/app_name">
         </activity>
+
+        <activity
+            android:name=".ui.cityWalk.CityWalkActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".ui.poi.PoiActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".ui.hotel.HotelActivity"
+            android:label="@string/app_name">
+        </activity>
     </application>
 
 </manifest>

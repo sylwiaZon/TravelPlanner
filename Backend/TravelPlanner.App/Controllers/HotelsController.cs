@@ -41,5 +41,13 @@ namespace TravelPlanner.App.Controllers
         {
             return await _hotelsService.GetHotelDetails(hotelId, checkIn, checkOut, adultsNumber, childrenAges);
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("shortDetails")]
+        public async Task<HotelDetails> GetHotelDetails(string hotelId)
+        {
+            return await _hotelsService.GetHotelDetails(hotelId);
+        }
     }
 }

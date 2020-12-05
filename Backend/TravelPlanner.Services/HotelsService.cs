@@ -13,6 +13,7 @@ namespace TravelPlanner.Services
         Task<IEnumerable<Hotel>> GetHotels(string cityName);
         Task<HotelPhotos> GetHotelPhotos(string hotelId);
         Task<HotelDetails> GetHotelDetails(string hotelId, string checkIn, string checkOut, int adultsNumber, string childrenAges);
+        Task<HotelDetails> GetHotelDetails(string hotelId);
     }
 
     public class HotelsService : IHotelsService
@@ -38,6 +39,11 @@ namespace TravelPlanner.Services
         public async Task<HotelDetails> GetHotelDetails(string hotelId, string checkIn, string checkOut, int adultsNumber, string childrenAges)
         {
             return await HotelsApiClient.GetHotelDetails(hotelId, checkIn, checkOut, adultsNumber, childrenAges);
+        }
+        
+        public async Task<HotelDetails> GetHotelDetails(string hotelId)
+        {
+            return await HotelsApiClient.GetHotelDetails(hotelId);
         }
     }
 }

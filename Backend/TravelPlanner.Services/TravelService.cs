@@ -129,6 +129,7 @@ namespace TravelPlanner.Services
                     Category = category.Category,
                     TransportLocations = transport.Select(t => HotelConverter.ToDomainTransportLocation(t)).ToArray()
                 };
+                transports.Add(tr);
             }
 
             return new HotelWithDetails

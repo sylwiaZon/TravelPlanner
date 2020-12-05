@@ -45,7 +45,8 @@ namespace TravelPlanner.Services.Converters
                 LocationId = poi.LocationId,
                 Name = poi.Name,
                 Score = poi.Score,
-                Snippet = poi.Snippet
+                Snippet = poi.Snippet,
+                PhotoUrl = poi.PhotoUrl
             };
         }
 

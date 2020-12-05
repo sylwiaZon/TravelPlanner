@@ -2,103 +2,119 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTintMode="src_atop"
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/city_walk_poi_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="La Degustation"
-            android:textAppearance="?attr/textAppearanceHeadline6"/>
-
-        <TextView
-            android:id="@+id/city_walk_poi_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="Often voted as the best Czech restaurant, with price matching the quality."
-            android:textAppearance="?attr/textAppearanceBody1"/>
-
-        <TextView
-            android:id="@+id/poi_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="See whole Point of Interest"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="@color/bottle_blue"/>
-
+        <ImageView
+            android:id="@+id/way_point_image"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Visit Time"
-                android:padding="5dp"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-            <TextView
-                android:id="@+id/item_way_point_visit_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1050 minutes"
-                android:padding="5dp"
-                android:textAppearance="?attr/textAppearanceBody2" />
-        </LinearLayout>
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
             <TextView
+                android:id="@+id/way_point_poi_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Walk to next distance"
                 android:padding="5dp"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-            <TextView
-                android:id="@+id/item_way_point_walk_to_next_distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1050 m"
-                android:padding="5dp"
-                android:textAppearance="?attr/textAppearanceBody2" />
-        </LinearLayout>
+                android:text="La Degustation"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
             <TextView
+                android:id="@+id/way_point_poi_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Walk to next duration"
                 android:padding="5dp"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-            <TextView
-                android:id="@+id/item_way_point_walk_to_next_duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1050 minutes"
-                android:padding="5dp"
-                android:textAppearance="?attr/textAppearanceBody2" />
-        </LinearLayout>
+                android:text="Often voted as the best Czech restaurant, with price matching the quality."
+                android:textAppearance="?attr/textAppearanceBody1"/>
 
+            <TextView
+                android:id="@+id/way_point_see_poi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="See whole Point of Interest"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/bottle_blue"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Visit Time"
+                    android:padding="5dp"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary" />
+                <TextView
+                    android:id="@+id/item_way_point_visit_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1050 minutes"
+                    android:padding="5dp"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Walk to next distance"
+                    android:padding="5dp"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary" />
+                <TextView
+                    android:id="@+id/item_way_point_walk_to_next_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1050 m"
+                    android:padding="5dp"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Walk to next duration"
+                    android:padding="5dp"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary" />
+                <TextView
+                    android:id="@+id/item_way_point_walk_to_next_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1050 minutes"
+                    android:padding="5dp"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
 
