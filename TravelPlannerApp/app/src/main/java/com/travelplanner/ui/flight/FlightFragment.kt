@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.findFragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.observe
+import androidx.viewpager2.adapter.FragmentViewHolder
 import com.travelplanner.R
-import com.travelplanner.ui.dayPlan.DayPlanAdapter
-import com.travelplanner.ui.dayPlan.DayPlanViewModel
 
 class FlightFragment : Fragment() {
     lateinit var viewModel: FlightViewModel
@@ -22,14 +23,14 @@ class FlightFragment : Fragment() {
         activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)?.let {
             viewModel.setTravelId(it)
         }
-        /*val toFlight = v.findViewById<RecyclerView>(R.id.to_flight)
-        val toFlight = v.findViewById<RecyclerView>(R.id.to_flight)
-        val adapter = DayPlanAdapter(context)
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(context)
-        viewModel.dayPlan.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
-        })*/
+        val toContainer = v.findViewById<FragmentContainerView>(R.id.to_flight);
+        val fromContainer = v.findViewById<FragmentContainerView>(R.id.from_flight);
+        viewModel.toFlight.observe(viewLifecycleOwner){
+            toContainer.findFragment<SingleFlightFragment>().setFlight(it)
+        }
+        viewModel.fromFlight.observe(viewLifecycleOwner){
+            fromContainer.findFragment<SingleFlightFragment>().setFlight(it)
+        }
         return v
     }
 

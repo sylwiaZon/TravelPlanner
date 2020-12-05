@@ -36,7 +36,7 @@ class DayPlanAdapter() : RecyclerView.Adapter<DayPlanAdapter.ViewHolder>() {
         val holderView = holder.itemView
         val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
         val recycler = holderView.findViewById<RecyclerView>(R.id.day_plan_itinerary_recycler)
-        val adapter = ItineraryAdapter(holderView.context)
+        val adapter = ItineraryAdapter()
         itinerariesList[position].itineraryItems?.let {
             adapter.setData(it)
         }
@@ -71,7 +71,7 @@ class DayPlanAdapter() : RecyclerView.Adapter<DayPlanAdapter.ViewHolder>() {
     }
 
     public fun setData(data: List<Itinerary>){
-        itinerariesList = data
+        itinerariesList = data.reversed()
         notifyDataSetChanged()
     }
 }

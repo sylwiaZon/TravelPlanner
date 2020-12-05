@@ -42,12 +42,19 @@ class WayPointAdapter : RecyclerView.Adapter<WayPointAdapter.ViewHolder>(){
         title.text = wayPointsList[position].poi.name
         description.text = wayPointsList[position].poi.snippet
         val image = holderView.findViewById<ImageView>(R.id.way_point_image)
-        Glide
+        if(wayPointsList[position].poi.photoUrl == null || wayPointsList[position].poi.photoUrl == "")
+            image.visibility = View.GONE
+        else
+            Glide
                 .with(holderView.context)
                 .load(wayPointsList[position].poi.photoUrl)
                 .into(image)
         val seePoi = holderView.findViewById<TextView>(R.id.day_plan_itinerary_see_poi)
-
+        seePoi.setOnClickListener {
+            val intent = Intent(holderView.context, PoiActivity::class.java)
+            intent.putExtra(PoiFragment.EXTRA_POI, wayPointsList[position].poi)
+            holderView.context.startActivity(intent)
+        }
     }
 
     public fun setData(data: List<WayPoint>){

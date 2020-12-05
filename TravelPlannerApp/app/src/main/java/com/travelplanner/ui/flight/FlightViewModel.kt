@@ -1,5 +1,6 @@
 package com.travelplanner.ui.flight
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,16 +15,20 @@ class FlightViewModel : ViewModel() {
     val toFlight: LiveData<Flight> = _toFlight
     val fromFlight: LiveData<Flight> = _toFlight
 
-    fun setTravelId(travelId: String){
+    fun setTravelId(travelId: String) {
         travelApiService.getFlight("to", travelId)
                 .applySchedulers()
-                .subscribe { t ->
+                .subscribe ({ t ->
                     _toFlight.value = t
-                }
+                },{
+                    Log.e("FlightViewModel", it.message.toString())
+                })
         travelApiService.getFlight("from", travelId)
                 .applySchedulers()
-                .subscribe { t ->
+                .subscribe ({ t ->
                     _fromFlight.value = t
-                }
+                },{
+                    Log.e("FlightViewModel", it.message.toString())
+                })
     }
 }

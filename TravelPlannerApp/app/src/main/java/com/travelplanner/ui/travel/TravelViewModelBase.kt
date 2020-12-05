@@ -7,12 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.travelplanner.models.Travel
 import io.reactivex.Observable
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 abstract class TravelViewModelBase : ViewModel() {
     private val _travel = MutableLiveData<Travel>()
     val travel: LiveData<Travel?> = _travel
+    val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
     val date: LiveData<String> = travel.map {
-        "${it?.arrivalDate.toString()} - ${it?.departureDate.toString()}"
+        "${it?.arrivalDate?.format(formatter)} - ${it?.departureDate?.format(formatter)}"
     }
 
     fun initTravel() {

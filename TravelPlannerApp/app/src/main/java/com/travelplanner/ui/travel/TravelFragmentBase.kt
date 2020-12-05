@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.travelplanner.R
 import com.travelplanner.ui.cityWalk.CityWalkActivity
@@ -17,8 +19,13 @@ import com.travelplanner.ui.cityWalk.CityWalkAdapter
 import com.travelplanner.ui.cityWalk.CityWalkFragment
 import com.travelplanner.ui.dayPlan.DayPlanActivity
 import com.travelplanner.ui.dayPlan.DayPlanFragment
+import com.travelplanner.ui.flight.FlightActivity
+import com.travelplanner.ui.flight.FlightFragment
 import com.travelplanner.ui.hotel.HotelActivity
 import com.travelplanner.ui.hotel.HotelFragment
+import com.travelplanner.ui.localHighlights.LocalHighlightsActivity
+import com.travelplanner.ui.localHighlights.LocalHighlightsAdapter
+import com.travelplanner.ui.localHighlights.LocalHighlightsFragment
 
 abstract class TravelFragmentBase : Fragment() {
 
@@ -40,10 +47,22 @@ abstract class TravelFragmentBase : Fragment() {
         travelViewModel.date.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+        val image = root?.findViewById<ImageView>(R.id.travel_image)
         val dayPlanButton = root.findViewById<Chip>(R.id.day_plans_chip)
         val cityWalkButton = root.findViewById<Chip>(R.id.city_walk_chip)
         val hotelButton = root.findViewById<Chip>(R.id.hotel_chip)
+        val flightsButton = root.findViewById<Chip>(R.id.flights_chip)
+        val localHighlightsButton = root.findViewById<Chip>(R.id.local_highlights_chip)
         travelViewModel.travel.observe(viewLifecycleOwner, Observer{t ->
+            if(t?.photoUrl == null || t?.photoUrl == "")
+                image?.visibility = View.GONE
+            else
+                image?.let {
+                    Glide
+                            .with(root.context)
+                            .load(t?.photoUrl)
+                            .into(it)
+                }
             dayPlanButton.setOnClickListener{
                 val intent = Intent(activity, DayPlanActivity::class.java)
                 intent.putExtra(DayPlanFragment.EXTRA_TRAVEL_ID, t?.travelId)
@@ -57,6 +76,16 @@ abstract class TravelFragmentBase : Fragment() {
             hotelButton.setOnClickListener{
                 val intent = Intent(activity, HotelActivity::class.java)
                 intent.putExtra(HotelFragment.EXTRA_TRAVEL_ID, t?.travelId)
+                activity?.startActivity(intent)
+            }
+            flightsButton.setOnClickListener{
+                val intent = Intent(activity, FlightActivity::class.java)
+                intent.putExtra(FlightFragment.EXTRA_TRAVEL_ID, t?.travelId)
+                activity?.startActivity(intent)
+            }
+            localHighlightsButton.setOnClickListener{
+                val intent = Intent(activity, LocalHighlightsActivity::class.java)
+                intent.putExtra(LocalHighlightsFragment.EXTRA_TRAVEL_ID, t?.travelId)
                 activity?.startActivity(intent)
             }
         })

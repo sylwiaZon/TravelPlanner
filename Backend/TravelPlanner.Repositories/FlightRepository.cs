@@ -71,7 +71,7 @@ namespace TravelPlanner.Repositories
                 .Match("(flight:Flight)", "(travel:Travel)")
                 .Where((Travel travel) => travel.TravelId == travelIdentity)
                 .AndWhere((Flight flight) => flight.FlightId == newFlight.FlightId)
-                .Merge($"(travel)-[r:{relationName}]->(flight)")
+                .Merge($"(travel)-[:{relationName}]->(flight)")
                 .Return(flight => flight.As<Flight>())
                 .ResultsAsync;
         }

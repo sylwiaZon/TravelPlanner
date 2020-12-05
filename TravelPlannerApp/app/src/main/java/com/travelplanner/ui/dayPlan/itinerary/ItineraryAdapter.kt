@@ -2,6 +2,7 @@ package com.travelplanner.ui.dayPlan.itinerary
 
 import android.content.Context
 import android.content.Intent
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ import com.travelplanner.ui.poi.PoiFragment
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-class ItineraryAdapter(val context: Context?) : RecyclerView.Adapter<ItineraryAdapter.ViewHolder>(){
+class ItineraryAdapter() : RecyclerView.Adapter<ItineraryAdapter.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -37,23 +38,30 @@ class ItineraryAdapter(val context: Context?) : RecyclerView.Adapter<ItineraryAd
         val title = holderView.findViewById<TextView>(R.id.itinerary_title)
         val poiTitle = holderView.findViewById<TextView>(R.id.itinerary_poi_title)
         val description = holderView.findViewById<TextView>(R.id.itinerary_description)
-        title.text = itineraryItemsList[position].title
+        if(itineraryItemsList[position].title == "")
+            title.visibility = View.GONE
+        else
+            title.text = itineraryItemsList[position].title
         poiTitle.text = itineraryItemsList[position].poi.name
         description.text = itineraryItemsList[position].description
-        Glide
-            .with(holderView.context)
-            .load(itineraryItemsList[position].poi.photoUrl)
-            .into(holderView.findViewById(R.id.itinerary_image))
+        val image = holderView.findViewById<ImageView>(R.id.itinerary_image)
+        if(itineraryItemsList[position].poi.photoUrl == null || itineraryItemsList[position].poi.photoUrl == "")
+            image.visibility = View.GONE
+        else
+            Glide
+                .with(holderView.context)
+                .load(itineraryItemsList[position].poi.photoUrl)
+                .into(image)
         val seePoi = holderView.findViewById<TextView>(R.id.day_plan_itinerary_see_poi)
         seePoi.setOnClickListener {
-            val intent = Intent(context, PoiActivity::class.java)
+            val intent = Intent(holderView.context, PoiActivity::class.java)
             intent.putExtra(PoiFragment.EXTRA_POI, itineraryItemsList[position].poi)
-            context?.startActivity(intent)
+            holderView.context.startActivity(intent)
         }
     }
 
     public fun setData(data: List<ItineraryItem>){
-        itineraryItemsList = data
+        itineraryItemsList = data.reversed()
         notifyDataSetChanged()
     }
 }

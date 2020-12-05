@@ -17,18 +17,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include
-            android:id="@+id/to_flight"
-            layout="@layout/item_flight"
+        <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"/>
-        <include
-            android:id="@+id/from_flight"
-            layout="@layout/item_flight"
+            android:name="com.travelplanner.ui.flight.SingleFlightFragment"
+            android:id="@+id/to_flight"/>
+
+        <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"/>
+            android:name="com.travelplanner.ui.flight.SingleFlightFragment"
+            android:id="@+id/from_flight"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

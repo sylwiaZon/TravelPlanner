@@ -79,11 +79,14 @@ namespace TravelPlanner.Repositories
                 .Return(location => location.As<Location>())
                 .ResultsAsync;
             if (resp.Any())
+            {
+                var locationId = resp.First().LocationId;
                 return await GraphClient.Cypher
                 .Match("(location:Location)--(poi:Poi)")
-                .Where((Location location) => location.LocationId == resp.First().LocationId)
+                .Where((Location location) => location.LocationId == locationId)
                 .Return(poi => poi.As<Poi>())
                 .ResultsAsync;
+            }
             else
                 throw new TravelPlannerException(404, "Location not found");
         }

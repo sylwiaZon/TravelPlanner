@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/poi_image"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
@@ -50,6 +50,7 @@
                 android:text="Booking Information"
                 android:textAppearance="?attr/textAppearanceBody1"/>
             <LinearLayout
+                android:id="@+id/poi_booking_info_price"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -69,6 +70,7 @@
                     android:textAppearance="?attr/textAppearanceBody2" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/poi_booking_info_vendor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
