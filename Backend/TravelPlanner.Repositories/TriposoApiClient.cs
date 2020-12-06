@@ -154,5 +154,19 @@ namespace TravelPlanner.Repositories
             }
             return null;
         }
+
+        public async Task<Tour[]> GetTourInformation(string locationIds)
+        {
+            var path = ApiPath + "tour.json?";
+            if (!(locationIds is null)) path += "&location_ids=" + locationIds;
+            path += "&account=" + AccountId + "&token=" + Token;
+            var responseMessage = await Client.GetAsync(path);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var response = await responseMessage.Content.ReadAsAsync<ResponseObject<Tour>>();
+                return response.Results;
+            }
+            return null;
+        }
     }
 }

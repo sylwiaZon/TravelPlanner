@@ -50,6 +50,7 @@ namespace TravelPlanner.Services
         private TourRepository TourRepository;
         private ListsRepository ListsRepository;
         private HotelsApiClient HotelsApiClient;
+        private TriposoApiClient TriposoApiClient;
 
         public TravelService(DbSettings dbSettings)
         {
@@ -63,6 +64,7 @@ namespace TravelPlanner.Services
             TourRepository = new TourRepository(dbSettings);
             ListsRepository = new ListsRepository(dbSettings);
             HotelsApiClient = new HotelsApiClient();
+            TriposoApiClient = new TriposoApiClient();
         }
 
         public async Task<IEnumerable<TravelsResponse>> GetTravels(string userMail)
@@ -88,6 +90,12 @@ namespace TravelPlanner.Services
         public async Task AddLocation(DomainLocation newLocation, string travelIdentity)
         {
             var location = LocationConverter.ToDbLocation(newLocation);
+            var tours = await TriposoApiClient.GetTourInformation(location.Name);
+            var toursDb = tours.Select(t => TourConverter.ToDbTour(t));
+            foreach(var t in toursDb)
+            {
+                await TourRepository.AddTour(t, travelIdentity);
+            }
             await LocationRepository.AddLocation(location, travelIdentity);
         }
 

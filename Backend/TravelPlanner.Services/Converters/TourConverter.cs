@@ -54,5 +54,21 @@ namespace TravelPlanner.Services.Converters
             };
         }
 
+        public static DbTour ToDbTour(TriposoTour tour)
+        {
+            return new DbTour
+            {
+                Price = tour.Price?.Amount,
+                PriceCurrency = tour.Price?.Currency,
+                Vendor = tour.Vendor,
+                VendorTourUrl = tour.VendorTourUrl,
+                Duartion = tour.Duartion,
+                DurationUnit = tour.DurationUnit,
+                Id = tour.Id,
+                Intro = tour.Intro,
+                Name = tour.Name
+            };
+        }
+
     }
 }
