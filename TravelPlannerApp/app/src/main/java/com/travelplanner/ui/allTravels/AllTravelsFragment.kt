@@ -36,7 +36,9 @@ class AllTravelsFragment : Fragment() {
         recyclerView = root.findViewById(R.id.all_travels_recycler)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
-
+        allTravelsViewModel.travelsList.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+        })
         return root
     }
 }

@@ -8,20 +8,19 @@
     android:backgroundTintMode="src_atop"
     android:padding="5dp">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/item_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/itinerary_image"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="1dp"
+        android:layout_marginBottom="5dp"
+        app:strokeColor="@color/stroke_color"
+        app:cardElevation="0dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,39 +29,54 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/itinerary_image"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/itinerary_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="afternoon plan"
-                android:textAppearance="?attr/textAppearanceHeadline5"/>
-            <TextView
-                android:id="@+id/itinerary_poi_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Taberna da Rua das Flores"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="?android:attr/textColorSecondary"/>
-            <TextView
-                android:id="@+id/itinerary_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="There are quite some interesting things to see. Castelo de São Jorge is a good starting point. Up the hill, with a great view over the city and the river."
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:textColor="?android:attr/textColorSecondary"/>
+                <TextView
+                    android:id="@+id/itinerary_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="afternoon plan"
+                    android:textAppearance="?attr/textAppearanceHeadline5"/>
+                <TextView
+                    android:id="@+id/itinerary_poi_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Taberna da Rua das Flores"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="?android:attr/textColorSecondary"/>
+                <TextView
+                    android:id="@+id/itinerary_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="There are quite some interesting things to see. Castelo de São Jorge is a good starting point. Up the hill, with a great view over the city and the river."
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="?android:attr/textColorSecondary"/>
 
-            <TextView
-                android:id="@+id/day_plan_itinerary_see_poi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="See Point of Interest"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="@color/bottle_blue"/>
+                <TextView
+                    android:id="@+id/day_plan_itinerary_see_poi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="See Point of Interest"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/bottle_blue"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

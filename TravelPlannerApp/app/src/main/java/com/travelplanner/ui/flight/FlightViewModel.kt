@@ -13,7 +13,7 @@ class FlightViewModel : ViewModel() {
     private val _toFlight = MutableLiveData<Flight>()
     private val _fromFlight = MutableLiveData<Flight>()
     val toFlight: LiveData<Flight> = _toFlight
-    val fromFlight: LiveData<Flight> = _toFlight
+    val fromFlight: LiveData<Flight> = _fromFlight
 
     fun setTravelId(travelId: String) {
         travelApiService.getFlight("to", travelId)

@@ -1,5 +1,6 @@
 package com.travelplanner.ui.hotel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,8 +19,10 @@ class HotelViewModel : ViewModel() {
     fun setTravelId(travelId: String){
         travelApiService.getHotel(travelId)
                 .applySchedulers()
-                .subscribe { t ->
+                .subscribe({ t ->
                     _hotel.value = t
-                }
+                }, {
+                    Log.e("HotelViewModel",it.message.toString())
+                })
     }
 }

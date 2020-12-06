@@ -56,6 +56,10 @@
             android:name=".ui.tour.TourActivity"
             android:label="@string/app_name">
         </activity>
+        <activity
+            android:name=".ui.weatherForecast.WeatherForecastActivity"
+            android:label="@string/app_name">
+        </activity>
     </application>
 
 </manifest>

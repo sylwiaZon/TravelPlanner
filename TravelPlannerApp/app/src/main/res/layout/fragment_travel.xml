@@ -27,12 +27,21 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/travel_destination"
+            android:id="@+id/travel_destination_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="ROME"
+            android:textColor="@color/baby_blue"
             android:textAppearance="?attr/textAppearanceHeadline3" />
+
+        <TextView
+            android:id="@+id/travel_destination_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ITALY"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@color/bottle_blue" />
 
         <TextView
             android:id="@+id/travel_date"

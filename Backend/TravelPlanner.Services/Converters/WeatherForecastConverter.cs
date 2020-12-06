@@ -14,7 +14,7 @@ namespace TravelPlanner.Services.Converters
             return weatherForecast.List.Select(el =>
                 new WeatherForecast
                 {
-                    Date = new DateTime(el.Date),
+                    Date = DateTime.Parse(el.DateText),
                     WindSpeed = el.Wind.Speed,
                     WindDirection = el.Wind.Deg,
                     Visibility = el.Visibility,
@@ -29,7 +29,7 @@ namespace TravelPlanner.Services.Converters
                         new WeatherProperties 
                         { 
                             WeatherDescription = w.Description, 
-                            WeatherIcon = "openweathermap.org/img/w/" + w.Icon + "n.png",
+                            WeatherIcon = "openweathermap.org/img/w/" + w.Icon + ".png",
                             WeatherName = w.Main
                             }).ToList()
                 });

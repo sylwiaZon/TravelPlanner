@@ -39,14 +39,17 @@ class LocalHighlightsAdapter() : RecyclerView.Adapter<LocalHighlightsAdapter.Vie
         val priceRow = holderView.findViewById<LinearLayout>(R.id.poi_booking_info_price)
         val vendor = holderView.findViewById<TextView>(R.id.poi_vendor)
         val vendorRow = holderView.findViewById<LinearLayout>(R.id.poi_booking_info_vendor)
-        if(poisList[position].price == "")
+        val booking = holderView.findViewById<LinearLayout>(R.id.poi_booking_info)
+        if(poisList[position].price == "" || poisList[position].price == null)
             priceRow.visibility = View.GONE
         else
             price.text = poisList[position].price
-        if(poisList[position].vendorUrl == "")
+        if(poisList[position].vendorUrl == "" || poisList[position].vendorUrl == null)
             vendorRow.visibility = View.GONE
         else
             vendor.text = poisList[position].vendorUrl
+        if((poisList[position].price == "" || poisList[position].price == null) && (poisList[position].vendorUrl == "" || poisList[position].vendorUrl == null))
+            booking.visibility = View.GONE
         val recycler = holderView.findViewById<RecyclerView>(R.id.poi_recycler)
         val adapter = PoiAdaper()
         recycler.adapter = adapter

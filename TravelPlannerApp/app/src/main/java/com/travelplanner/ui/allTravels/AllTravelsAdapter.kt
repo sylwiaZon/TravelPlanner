@@ -47,7 +47,9 @@ class AllTravelsAdapter(val callback: (t: Travel) -> Unit) : RecyclerView.Adapte
     }
 
     public fun setData(data: List<Travel>){
-        travelsList = data
+        travelsList = data.sortedBy {
+            it.arrivalDate
+        }
         notifyDataSetChanged()
     }
 }

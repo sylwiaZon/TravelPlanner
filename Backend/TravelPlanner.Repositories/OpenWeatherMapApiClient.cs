@@ -18,7 +18,8 @@ namespace TravelPlanner.Repositories
 
         public async Task<WeatherForecastApi> GetWeatherForecast(string cityName)
         {
-            var responseMessage = await Client.GetAsync(Path + "forecast?q=" + cityName + "& appid=" + Token);
+            var path = Path + "forecast?q=" + cityName + "&units=metric&appid=" + Token;
+            var responseMessage = await Client.GetAsync(path);
             if (responseMessage.IsSuccessStatusCode)
             {
                 Console.WriteLine(responseMessage.Content);

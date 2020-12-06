@@ -4,97 +4,110 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+    android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/flight_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/poi_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:id="@+id/poi_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="La Degustation"
-            android:textAppearance="?attr/textAppearanceHeadline6"/>
-
-        <TextView
-            android:id="@+id/poi_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="Often voted as the best Czech restaurant, with price matching the quality."
-            android:textAppearance="?attr/textAppearanceBody1"/>
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/stroke_color"
+        android:layout_marginBottom="10dp"
+        app:strokeWidth="1dp">
         <LinearLayout
-            android:id="@+id/poi_booking_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="5dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/poi_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
             <TextView
+                android:id="@+id/poi_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:text="Booking Information"
-                android:textAppearance="?attr/textAppearanceBody1"/>
-            <LinearLayout
-                android:id="@+id/poi_booking_info_price"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Price"
-                    android:paddingRight="5dp"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-                <TextView
-                    android:id="@+id/poi_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="16EUR"
-                    android:paddingRight="5dp"
-                    android:textAppearance="?attr/textAppearanceBody2" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/poi_booking_info_vendor"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vendor"
-                    android:paddingRight="5dp"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-                <TextView
-                    android:id="@+id/poi_vendor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="link"
-                    android:paddingRight="5dp"
-                    android:textAppearance="?attr/textAppearanceBody2" />
-            </LinearLayout>
-        </LinearLayout>
+                android:padding="5dp"
+                android:text="La Degustation"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/poi_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/poi_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Often voted as the best Czech restaurant, with price matching the quality."
+                android:textAppearance="?attr/textAppearanceBody1"/>
+
+            <LinearLayout
+                android:id="@+id/poi_booking_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="Booking Information"
+                    android:textAppearance="?attr/textAppearanceBody1"/>
+                <LinearLayout
+                    android:id="@+id/poi_booking_info_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price"
+                        android:paddingRight="5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary" />
+                    <TextView
+                        android:id="@+id/poi_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="16EUR"
+                        android:paddingRight="5dp"
+                        android:textAppearance="?attr/textAppearanceBody2" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/poi_booking_info_vendor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vendor"
+                        android:paddingRight="5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary" />
+                    <TextView
+                        android:id="@+id/poi_vendor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="link"
+                        android:paddingRight="5dp"
+                        android:textAppearance="?attr/textAppearanceBody2" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/poi_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,5 +14,5 @@ object DIContainer{
     val hotelsApiService = retrofit.create(HotelsApiService::class.java)
     val locationInfoApiService = retrofit.create(LocationInfoApiService::class.java)
     val tourInformationApiService = retrofit.create(TourInformationApiService::class.java)
-    val weatherForecatsApiService = retrofit.create(WeatherForecatsApiService::class.java)
+    val weatherForecastApiService = retrofit.create(WeatherForecastApiService::class.java)
 }
