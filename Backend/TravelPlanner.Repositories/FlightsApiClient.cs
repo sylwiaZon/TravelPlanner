@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
@@ -20,8 +21,8 @@ namespace TravelPlanner.Repositories
         {
             Client = new HttpClient();
             
-            ClientId = "9bbq797tukty2frksxzezyx7";
-            ClientSecret = "z97YYAQambt5FPs3tZws";
+            ClientId = Environment.GetEnvironmentVariable("LUFTHANSA_ID");
+            ClientSecret = Environment.GetEnvironmentVariable("LUFTHANSA_SECRET");
         }
 
         public async Task<Token> GetToken()
