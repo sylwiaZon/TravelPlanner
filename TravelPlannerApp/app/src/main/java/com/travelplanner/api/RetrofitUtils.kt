@@ -36,7 +36,7 @@ internal fun createRetrofit(): Retrofit {
             RxJava2CallAdapterFactory.create())
         .addConverterFactory(
             GsonConverterFactory.create(gson))
-        .baseUrl("http://40.69.36.20:5000/")
+        .baseUrl("http://51.141.39.217:5000/")
         .client(client)
         .build()
 }

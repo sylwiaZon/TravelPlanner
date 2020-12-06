@@ -49,7 +49,7 @@ class WayPointAdapter : RecyclerView.Adapter<WayPointAdapter.ViewHolder>(){
                 .with(holderView.context)
                 .load(wayPointsList[position].poi.photoUrl)
                 .into(image)
-        val seePoi = holderView.findViewById<TextView>(R.id.day_plan_itinerary_see_poi)
+        val seePoi = holderView.findViewById<TextView>(R.id.way_point_see_poi)
         seePoi.setOnClickListener {
             val intent = Intent(holderView.context, PoiActivity::class.java)
             intent.putExtra(PoiFragment.EXTRA_POI, wayPointsList[position].poi)

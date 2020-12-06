@@ -1,4 +1,4 @@
-package com.travelplanner.ui.localHighlights
+package com.travelplanner.ui.tour
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,19 +7,20 @@ import androidx.lifecycle.ViewModel
 import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Poi
+import com.travelplanner.models.Tour
 
-class LocalHighlightsViewModel : ViewModel() {
+class TourViewModel : ViewModel() {
     private val travelApiService = DIContainer.travelApiService
-    private val _localHighlights = MutableLiveData<List<Poi>>()
-    val localHighlights: LiveData<List<Poi>> = _localHighlights
+    private val _tours = MutableLiveData<List<Tour>>()
+    val tours: LiveData<List<Tour>> = _tours
 
     fun setTravelId(travelId: String){
-        travelApiService.getPois(travelId)
+        travelApiService.getTour(travelId)
                 .applySchedulers()
                 .subscribe ({ t ->
-                    _localHighlights.value = t
+                    _tours.value = t
                 },{
-                    Log.e("LocalHighlightsViewModel", it.message.toString())
+                    Log.e("TourViewModel", it.message.toString())
                 })
     }
 }

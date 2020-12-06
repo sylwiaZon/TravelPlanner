@@ -10,11 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.travelplanner.R
-import com.travelplanner.models.HotelTransport
 import com.travelplanner.models.Poi
-import com.travelplanner.ui.hotel.TransportLocationsAdapter
 import com.travelplanner.ui.poi.PoiAdaper
-import com.travelplanner.ui.poi.PoiFragment
 
 class LocalHighlightsAdapter() : RecyclerView.Adapter<LocalHighlightsAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
