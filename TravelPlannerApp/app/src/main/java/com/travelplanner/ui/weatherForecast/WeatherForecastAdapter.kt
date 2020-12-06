@@ -20,7 +20,7 @@ class WeatherForecastAdapter() : RecyclerView.Adapter<WeatherForecastAdapter.Vie
     private var weatherList: List<WeatherForecast> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.item_tour, parent, false)
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.item_day_weather_forecast, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -30,17 +30,17 @@ class WeatherForecastAdapter() : RecyclerView.Adapter<WeatherForecastAdapter.Vie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val holderView = holder.itemView
-        val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
+        val formatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm")
         val date = holderView.findViewById<TextView>(R.id.weather_date)
         date.text = weatherList[position].date.format(formatter)
         val description = holderView.findViewById<TextView>(R.id.weather_description)
         description.text = weatherList[position].weather[0].weatherDescription
         val degrees = holderView.findViewById<TextView>(R.id.weather_degrees)
-        degrees.text = weatherList[position].temperature.toString() + " \u2109"
+        degrees.text = weatherList[position].temperature.toString() + " \u2103"
         val icon = holderView.findViewById<ImageView>(R.id.weather_icon)
         Glide
                 .with(holderView.context)
-                .load(weatherList[position]?.weather[0]?.weatherIcon)
+                .load("http://" + weatherList[position]?.weather[0]?.weatherIcon)
                 .into(icon)
     }
 
