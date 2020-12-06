@@ -21,12 +21,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:name="com.travelplanner.ui.flight.SingleFlightFragment"
+            android:tag="toFlightFragment"
             android:id="@+id/to_flight"/>
 
         <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:name="com.travelplanner.ui.flight.SingleFlightFragment"
+            android:tag="fromFlightFragment"
             android:id="@+id/from_flight"/>
 
     </LinearLayout>

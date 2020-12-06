@@ -23,13 +23,11 @@ class FlightFragment : Fragment() {
         activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)?.let {
             viewModel.setTravelId(it)
         }
-        val toContainer = v.findViewById<FragmentContainerView>(R.id.to_flight);
-        val fromContainer = v.findViewById<FragmentContainerView>(R.id.from_flight);
         viewModel.toFlight.observe(viewLifecycleOwner){
-            toContainer.findFragment<SingleFlightFragment>().setFlight(it)
+            (childFragmentManager.findFragmentByTag("toFlightFragment") as SingleFlightFragment).setFlight(it)
         }
         viewModel.fromFlight.observe(viewLifecycleOwner){
-            fromContainer.findFragment<SingleFlightFragment>().setFlight(it)
+            (childFragmentManager.findFragmentByTag("fromFlightFragment") as SingleFlightFragment).setFlight(it)
         }
         return v
     }
