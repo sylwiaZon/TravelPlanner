@@ -27,6 +27,8 @@ import com.travelplanner.ui.hotel.HotelFragment
 import com.travelplanner.ui.localHighlights.LocalHighlightsActivity
 import com.travelplanner.ui.localHighlights.LocalHighlightsAdapter
 import com.travelplanner.ui.localHighlights.LocalHighlightsFragment
+import com.travelplanner.ui.toSeeList.ToSeeListActivity
+import com.travelplanner.ui.toSeeList.ToSeeListFragment
 import com.travelplanner.ui.tour.TourActivity
 import com.travelplanner.ui.tour.TourFragment
 import com.travelplanner.ui.weatherForecast.WeatherForecastActivity
@@ -62,6 +64,7 @@ abstract class TravelFragmentBase : Fragment() {
         val localHighlightsButton = root.findViewById<Chip>(R.id.local_highlights_chip)
         val toursButton = root.findViewById<Chip>(R.id.tours_chip)
         val weatherButton = root.findViewById<Chip>(R.id.weather_forecast_chip)
+        val toSeeListButton = root.findViewById<Chip>(R.id.to_see_chip)
         travelViewModel.travel.observe(viewLifecycleOwner, Observer{t ->
             destinationCity?.text = t?.travelDestination?.city
             destinationCountry?.text = t?.travelDestination?.country
@@ -107,6 +110,11 @@ abstract class TravelFragmentBase : Fragment() {
             weatherButton.setOnClickListener{
                 val intent = Intent(activity, WeatherForecastActivity::class.java)
                 intent.putExtra(WeatherForecastFragment.EXTRA_TRAVEL_DESTINATION, t?.travelDestination?.city)
+                activity?.startActivity(intent)
+            }
+            toSeeListButton.setOnClickListener{
+                val intent = Intent(activity, ToSeeListActivity::class.java)
+                intent.putExtra(ToSeeListFragment.EXTRA_TRAVEL_ID, t?.travelId)
                 activity?.startActivity(intent)
             }
         })

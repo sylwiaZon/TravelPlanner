@@ -84,7 +84,7 @@ namespace TravelPlanner.Repositories
             if (resp.Any())
                 return resp;
             else
-                throw new TravelPlannerException(404, "ToDoItems not found");
+                return new List<ToDoItem>();
         }
 
         public async Task<ToSeeItem> AddToSeeItem(ToSeeItem newItem, string poiId, string travelIdentity)
@@ -134,7 +134,7 @@ namespace TravelPlanner.Repositories
             if (resp.Any())
                 return resp.First();
             else
-                throw new TravelPlannerException(404, "ToDoItem not found");
+                throw new TravelPlannerException(404, "ToSeeItem not found");
         }
 
         public async Task<IEnumerable<ToSeeItem>> GetToSeeItems(string travelIdentity)
@@ -150,7 +150,7 @@ namespace TravelPlanner.Repositories
             if (resp.Any())
                 return resp;
             else
-                throw new TravelPlannerException(404, "ToDoItems not found");
+                return new List<ToSeeItem>();
         }
 
         public async Task<Poi> GetToSeeItemPoi(string itemId)
@@ -166,7 +166,7 @@ namespace TravelPlanner.Repositories
             if (resp.Any())
                 return resp.First();
             else
-                throw new TravelPlannerException(404, "ToDoItems not found");
+                throw new TravelPlannerException(404, "ToSee Pois' not found");
         }
     }
 }
