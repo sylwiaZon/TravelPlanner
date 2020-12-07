@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.travelplanner.R
 import com.travelplanner.ui.localHighlights.LocalHighlightsActivity
 import com.travelplanner.ui.localHighlights.LocalHighlightsAdapter
@@ -30,7 +31,7 @@ class ToSeeListFragment : Fragment() {
             viewModel.setTravelId(it)
         }
         val noData = v.findViewById<LinearLayout>(R.id.no_saved_to_see)
-        val button = v.findViewById<LinearLayout>(R.id.to_see_button)
+        val button = v.findViewById<MaterialButton>(R.id.to_see_button)
         val recycler = v.findViewById<RecyclerView>(R.id.to_see_list_recycler)
         val adapter = ToSeeListAdapter()
         recycler.adapter = adapter

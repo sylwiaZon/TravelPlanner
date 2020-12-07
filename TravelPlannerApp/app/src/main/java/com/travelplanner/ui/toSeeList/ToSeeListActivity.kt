@@ -7,6 +7,6 @@ import com.travelplanner.R
 class ToSeeListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tour)
+        setContentView(R.layout.activity_to_see_list)
     }
 }

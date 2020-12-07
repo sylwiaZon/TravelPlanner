@@ -156,9 +156,9 @@ namespace TravelPlanner.App.Controllers
         [Authorize]
         [HttpPost]
         [Route("tosee")]
-        public Task<ToSeeItem> AddToSeeItem([FromBody] ToSeeItem item, string poiId, string travelIdentity)
+        public Task<ToSeeItem> AddToSeeItem(string poiId, string travelIdentity)
         {
-            return _travelService.AddToSeeItem(item, poiId, travelIdentity);
+            return _travelService.AddToSeeItem(poiId, travelIdentity);
         }
 
         [Authorize]

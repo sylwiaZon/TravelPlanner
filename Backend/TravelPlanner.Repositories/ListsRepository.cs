@@ -87,7 +87,7 @@ namespace TravelPlanner.Repositories
                 return new List<ToDoItem>();
         }
 
-        public async Task<ToSeeItem> AddToSeeItem(ToSeeItem newItem, string poiId, string travelIdentity)
+        public async Task<ToSeeItem> AddToSeeItem(ToSeeItem newItem, string travelIdentity)
         {
             await GraphClient.ConnectAsync();
 
@@ -96,7 +96,7 @@ namespace TravelPlanner.Repositories
                 var resp = await GraphClient.Cypher
                     .Match("(travel:Travel)", "(poi:Poi)")
                     .Where((Travel travel) => travel.TravelId == travelIdentity)
-                    .AndWhere((Poi poi) => poi.Id == poiId)
+                    .AndWhere((Poi poi) => poi.Id == newItem.Name)
                     .Create("(item:ToSeeItem $newItem)")
                     .WithParam("newItem", newItem)
                     .Create("(travel)-[r:HasToSeeItem]->(item)")

@@ -47,6 +47,12 @@ class PoiFragment : Fragment(){
                 .with(v.context)
                 .load(poi?.photoUrl)
                 .into(image)
+        val favouriteBlank =  v.findViewById<LinearLayout>(R.id.poi_blank_liked_icon)
+        val favouriteFilled =  v.findViewById<LinearLayout>(R.id.poi_liked_icon)
+        favouriteBlank.setOnClickListener {
+
+        }
+
         return v
     }
 

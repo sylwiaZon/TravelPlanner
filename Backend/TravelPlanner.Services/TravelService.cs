@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using TravelPlanner.Core.DomainModels;
 using DomainLocation = TravelPlanner.Core.DomainModels.Location;
 using DbHotelTransport = TravelPlanner.Core.DataBaseModels.HotelTransport;
+using DbToSeeItem = TravelPlanner.Core.DataBaseModels.ToSeeItem;
 using TravelPlanner.Repositories;
 using TravelPlanner.Services.Converters;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace TravelPlanner.Services
         Task<ToDoItem> AddToDoItem(ToDoItem newItem, string travelIdentity);
         Task<ToDoItem[]> GetToDoItems(string travelIdentity);
         Task<ToDoItem> UpdateToDoItem(ToDoItem newItem);
-        Task<ToSeeItem> AddToSeeItem(ToSeeItem newItem, string poiId, string travelIdentity);
+        Task<ToSeeItem> AddToSeeItem(string poiId, string travelIdentity);
         Task<ToSeeItem[]> GetToSeeItem(string travelIdentity);
         Task<ToSeeItem> UpdateToSeeItem(ToSeeItem newItem);
         Task<Poi[]> GetPoisForTravel(string travelId);
@@ -299,14 +300,15 @@ namespace TravelPlanner.Services
             return ToDoItemConverter.ToDomainToDoItem(resp);
         }
 
-        public async Task<ToSeeItem> AddToSeeItem(ToSeeItem newItem, string poiId, string travelIdentity)
+        public async Task<ToSeeItem> AddToSeeItem(string poiId, string travelIdentity)
         {
-            var toDo = ToSeeItemConverter.ToDbToSeeItem(newItem);
-            if (toDo.Id == null)
-            {
-                toDo.Id = Guid.NewGuid().ToString();
-            }
-            var addedItem = await ListsRepository.AddToSeeItem(toDo, poiId, travelIdentity);
+            var toDo = new DbToSeeItem { 
+                Checked = false, 
+                Id = Guid.NewGuid().ToString(), 
+                Name = poiId
+            };
+
+            var addedItem = await ListsRepository.AddToSeeItem(toDo, travelIdentity);
             var poi = await ListsRepository.GetToSeeItemPoi(addedItem.Id);
             var convertedPoi = PoiConverter.ToDomainPoi(poi);
             return ToSeeItemConverter.ToDomainToSeeItem(addedItem, convertedPoi);
