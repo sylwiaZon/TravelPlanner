@@ -113,7 +113,7 @@ namespace TravelPlanner.Repositories
                 if (ce.Message.Contains("already exists", StringComparison.InvariantCultureIgnoreCase))
                 {
                     newItem.Id = new Guid().ToString();
-                    return await AddToSeeItem(newItem, poiId, travelIdentity);
+                    return await AddToSeeItem(newItem, travelIdentity);
                 }
                 else throw ce;
             }

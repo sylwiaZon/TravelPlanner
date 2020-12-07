@@ -12,9 +12,8 @@ import com.travelplanner.models.ToSeeItem
 class PoiViewModel : ViewModel() {
     private val travelApiService = DIContainer.travelApiService
 
-    fun addToFavourites(poi: Poi, travelId: String){
-        val toSeeItem = ToSeeItem()
-        travelApiService.postToSeeItem(poi, travelId)
+    fun addToFavourites(poiId: String, travelId: String){
+        travelApiService.postToSeeItem(poiId, travelId)
             .applySchedulers()
             .subscribe ({ t ->
                 _toSeeList.value = t

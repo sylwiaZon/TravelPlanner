@@ -59,7 +59,7 @@ interface TravelApiService {
     fun getToSeeItem(@Query("travelIdentity") travelIdentity: String): Single<List<ToSeeItem>>
 
     @POST("travel/tosee")
-    fun postToSeeItem(@Body toSeeItem: ToSeeItem, @Query("travelIdentity") travelIdentity: String)
+    fun postToSeeItem(@Query("poiId") poiId: String, @Query("travelIdentity") travelIdentity: String)
 
     @PATCH("travel/tosee")
     fun patchToSeeItem(@Body toSeeItem: ToSeeItem): Single<ToSeeItem>
