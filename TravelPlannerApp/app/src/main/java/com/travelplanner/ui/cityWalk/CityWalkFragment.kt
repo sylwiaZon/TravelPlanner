@@ -21,11 +21,12 @@ class CityWalkFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_city_walk, container, false)
         viewModel =
                 ViewModelProvider(this).get(CityWalkViewModel::class.java)
-        activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)?.let {
-            viewModel.setTravelId(it)
+        val travelId = activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)
+        travelId?.let {
+            viewModel.setTravelId(travelId)
         }
         val recycler = v.findViewById<RecyclerView>(R.id.city_walk_recycler)
-        val adapter = CityWalkAdapter()
+        val adapter = CityWalkAdapter(travelId)
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.cityWalk.observe(viewLifecycleOwner, Observer {

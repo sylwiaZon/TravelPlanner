@@ -18,7 +18,7 @@ import com.travelplanner.ui.poi.PoiFragment
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-class ItineraryAdapter() : RecyclerView.Adapter<ItineraryAdapter.ViewHolder>(){
+class ItineraryAdapter(val travelId: String?) : RecyclerView.Adapter<ItineraryAdapter.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -56,6 +56,7 @@ class ItineraryAdapter() : RecyclerView.Adapter<ItineraryAdapter.ViewHolder>(){
         seePoi.setOnClickListener {
             val intent = Intent(holderView.context, PoiActivity::class.java)
             intent.putExtra(PoiFragment.EXTRA_POI, itineraryItemsList[position].poi)
+            intent.putExtra(PoiFragment.EXTRA_TRAVEL_ID, travelId)
             holderView.context.startActivity(intent)
         }
     }

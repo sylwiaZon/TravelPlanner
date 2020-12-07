@@ -14,7 +14,7 @@ import com.travelplanner.models.WayPoint
 import com.travelplanner.ui.poi.PoiActivity
 import com.travelplanner.ui.poi.PoiFragment
 
-class WayPointAdapter : RecyclerView.Adapter<WayPointAdapter.ViewHolder>(){
+class WayPointAdapter(val travelId: String?) : RecyclerView.Adapter<WayPointAdapter.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -53,6 +53,7 @@ class WayPointAdapter : RecyclerView.Adapter<WayPointAdapter.ViewHolder>(){
         seePoi.setOnClickListener {
             val intent = Intent(holderView.context, PoiActivity::class.java)
             intent.putExtra(PoiFragment.EXTRA_POI, wayPointsList[position].poi)
+            intent.putExtra(PoiFragment.EXTRA_TRAVEL_ID, travelId)
             holderView.context.startActivity(intent)
         }
     }

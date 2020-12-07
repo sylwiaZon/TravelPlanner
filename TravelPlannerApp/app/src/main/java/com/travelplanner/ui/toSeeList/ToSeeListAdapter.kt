@@ -16,7 +16,7 @@ import com.travelplanner.ui.localHighlights.LocalHighlightsAdapter
 import com.travelplanner.ui.poi.PoiActivity
 import com.travelplanner.ui.poi.PoiFragment
 
-class ToSeeListAdapter() : RecyclerView.Adapter<ToSeeListAdapter.ViewHolder>() {
+class ToSeeListAdapter(val travelId: String?) : RecyclerView.Adapter<ToSeeListAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -50,6 +50,7 @@ class ToSeeListAdapter() : RecyclerView.Adapter<ToSeeListAdapter.ViewHolder>() {
         seePoi.setOnClickListener {
             val intent = Intent(holderView.context, PoiActivity::class.java)
             intent.putExtra(PoiFragment.EXTRA_POI, toSeeList[position].poi)
+            intent.putExtra(PoiFragment.EXTRA_TRAVEL_ID, travelId)
             holderView.context.startActivity(intent)
         }
     }

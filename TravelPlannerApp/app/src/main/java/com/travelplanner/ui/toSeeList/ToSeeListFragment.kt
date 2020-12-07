@@ -33,7 +33,7 @@ class ToSeeListFragment : Fragment() {
         val noData = v.findViewById<LinearLayout>(R.id.no_saved_to_see)
         val button = v.findViewById<MaterialButton>(R.id.to_see_button)
         val recycler = v.findViewById<RecyclerView>(R.id.to_see_list_recycler)
-        val adapter = ToSeeListAdapter()
+        val adapter = ToSeeListAdapter(activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID))
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.toSeeList.observe(viewLifecycleOwner, Observer {

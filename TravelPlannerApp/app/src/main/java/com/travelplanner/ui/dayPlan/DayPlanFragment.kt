@@ -19,11 +19,12 @@ class DayPlanFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_day_plan, container, false)
         viewModel =
             ViewModelProvider(this).get(DayPlanViewModel::class.java)
-        activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)?.let {
+        var travelId = activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)
+        travelId?.let {
             viewModel.setTravelId(it)
         }
         val recycler = v.findViewById<RecyclerView>(R.id.day_plan_recycler)
-        val adapter = DayPlanAdapter()
+        val adapter = DayPlanAdapter(travelId)
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.dayPlan.observe(viewLifecycleOwner, Observer {

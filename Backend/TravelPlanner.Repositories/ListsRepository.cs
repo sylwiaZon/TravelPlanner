@@ -100,7 +100,7 @@ namespace TravelPlanner.Repositories
                     .Create("(item:ToSeeItem $newItem)")
                     .WithParam("newItem", newItem)
                     .Create("(travel)-[r:HasToSeeItem]->(item)")
-                    .Create("(item)-[r:HasPoi]->(poi)")
+                    .Create("(item)-[t:HasPoi]->(poi)")
                     .Return(item => item.As<ToSeeItem>())
                     .ResultsAsync;
 

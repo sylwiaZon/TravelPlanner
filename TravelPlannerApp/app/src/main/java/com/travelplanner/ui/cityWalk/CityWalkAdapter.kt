@@ -16,7 +16,7 @@ import com.travelplanner.ui.dayPlan.itinerary.ItineraryAdapter
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-class CityWalkAdapter() : RecyclerView.Adapter<CityWalkAdapter.ViewHolder>() {
+class CityWalkAdapter(val travelId: String?) : RecyclerView.Adapter<CityWalkAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View, var isOpen: Boolean) : RecyclerView.ViewHolder(itemView) {
 
@@ -35,7 +35,7 @@ class CityWalkAdapter() : RecyclerView.Adapter<CityWalkAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val holderView = holder.itemView
         val recycler = holderView.findViewById<RecyclerView>(R.id.way_point_recycler)
-        val adapter = WayPointAdapter()
+        val adapter = WayPointAdapter(travelId)
         cityWalksList[position].wayPoints?.let {
             adapter.setData(it)
         }
