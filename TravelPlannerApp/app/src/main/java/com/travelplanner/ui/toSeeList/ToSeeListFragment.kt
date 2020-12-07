@@ -1,16 +1,22 @@
 package com.travelplanner.ui.toSeeList
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.travelplanner.R
+import com.travelplanner.ui.localHighlights.LocalHighlightsActivity
 import com.travelplanner.ui.localHighlights.LocalHighlightsAdapter
+import com.travelplanner.ui.localHighlights.LocalHighlightsFragment
+import com.travelplanner.ui.poi.PoiActivity
+import com.travelplanner.ui.poi.PoiFragment
 
 class ToSeeListFragment : Fragment() {
 
@@ -23,13 +29,28 @@ class ToSeeListFragment : Fragment() {
         activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)?.let {
             viewModel.setTravelId(it)
         }
+        val noData = v.findViewById<LinearLayout>(R.id.no_saved_to_see)
+        val button = v.findViewById<LinearLayout>(R.id.to_see_button)
         val recycler = v.findViewById<RecyclerView>(R.id.to_see_list_recycler)
         val adapter = ToSeeListAdapter()
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.toSeeList.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
+            if(it.isNotEmpty()){
+                noData.visibility = View.GONE
+                recycler.visibility = View.VISIBLE
+                adapter.setData(it)
+            } else {
+                noData.visibility = View.VISIBLE
+                recycler.visibility = View.GONE
+                button.setOnClickListener {
+                    val intent = Intent(context, LocalHighlightsActivity::class.java)
+                    intent.putExtra(LocalHighlightsFragment.EXTRA_TRAVEL_ID, activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID))
+                    context?.startActivity(intent)
+                }
+            }
         })
+
         return v
     }
 
