@@ -12,8 +12,8 @@ import com.travelplanner.models.CityWalk
 class CityWalkViewModel : ViewModel() {
     private val travelApiService = DIContainer.travelApiService
     private val _cityWalk = MutableLiveData<List<CityWalk>>()
-    private val _liked = MutableLiveData<Boolean>()
     val cityWalk: LiveData<List<CityWalk>> = _cityWalk
+    private val _liked = MutableLiveData<Boolean>()
     val liked: LiveData<Boolean> = _liked
 
     fun setTravelId(travelId: String){

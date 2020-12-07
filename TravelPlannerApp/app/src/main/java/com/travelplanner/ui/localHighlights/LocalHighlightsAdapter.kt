@@ -13,7 +13,7 @@ import com.travelplanner.R
 import com.travelplanner.models.Poi
 import com.travelplanner.ui.poi.PoiAdaper
 
-class LocalHighlightsAdapter() : RecyclerView.Adapter<LocalHighlightsAdapter.ViewHolder>() {
+class LocalHighlightsAdapter(val onFavouriteClicked: (poiId: String) -> Unit) : RecyclerView.Adapter<LocalHighlightsAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -62,6 +62,10 @@ class LocalHighlightsAdapter() : RecyclerView.Adapter<LocalHighlightsAdapter.Vie
                     .with(holderView.context)
                     .load(poisList[position].photoUrl)
                     .into(image)
+        val liked = holderView.findViewById<ImageView>(R.id.poi_liked_icon)
+        liked.setOnClickListener{
+            onFavouriteClicked(poisList[position].poiId)
+        }
     }
 
     public fun setData(data: List<Poi>) {

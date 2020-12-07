@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -33,7 +34,15 @@ class ToSeeListFragment : Fragment() {
         val noData = v.findViewById<LinearLayout>(R.id.no_saved_to_see)
         val button = v.findViewById<MaterialButton>(R.id.to_see_button)
         val recycler = v.findViewById<RecyclerView>(R.id.to_see_list_recycler)
-        val adapter = ToSeeListAdapter(activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID))
+        val adapter = ToSeeListAdapter(activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)){
+            viewModel.checkItem(it)
+        }
+        viewModel.checked.observe(viewLifecycleOwner, Observer {p ->
+            adapter.updateCheckbox(p.first, p.second)
+        })
+        viewModel.toastError.observe(viewLifecycleOwner, Observer {p ->
+            Toast.makeText(context, p, Toast.LENGTH_SHORT).show()
+        })
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.toSeeList.observe(viewLifecycleOwner, Observer {

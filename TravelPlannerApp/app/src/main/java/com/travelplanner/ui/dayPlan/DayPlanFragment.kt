@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +25,12 @@ class DayPlanFragment : Fragment() {
             viewModel.setTravelId(it)
         }
         val recycler = v.findViewById<RecyclerView>(R.id.day_plan_recycler)
-        val adapter = DayPlanAdapter(travelId)
+        val adapter = DayPlanAdapter(travelId){
+            viewModel.addToFavourites(it, travelId)
+        }
+        viewModel.liked.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, "Point added to list", Toast.LENGTH_SHORT).show()
+        })
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.dayPlan.observe(viewLifecycleOwner, Observer {

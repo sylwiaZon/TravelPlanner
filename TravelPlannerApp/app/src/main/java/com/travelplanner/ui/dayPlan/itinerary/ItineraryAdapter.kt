@@ -18,7 +18,7 @@ import com.travelplanner.ui.poi.PoiFragment
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-class ItineraryAdapter(val travelId: String?) : RecyclerView.Adapter<ItineraryAdapter.ViewHolder>(){
+class ItineraryAdapter(val travelId: String?, val onFavouriteClicked: (poiId: String) -> Unit) : RecyclerView.Adapter<ItineraryAdapter.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -58,6 +58,10 @@ class ItineraryAdapter(val travelId: String?) : RecyclerView.Adapter<ItineraryAd
             intent.putExtra(PoiFragment.EXTRA_POI, itineraryItemsList[position].poi)
             intent.putExtra(PoiFragment.EXTRA_TRAVEL_ID, travelId)
             holderView.context.startActivity(intent)
+        }
+        val liked = holderView.findViewById<ImageView>(R.id.itinerary_poi_liked_icon)
+        liked.setOnClickListener{
+            onFavouriteClicked(itineraryItemsList[position].poi.poiId)
         }
     }
 

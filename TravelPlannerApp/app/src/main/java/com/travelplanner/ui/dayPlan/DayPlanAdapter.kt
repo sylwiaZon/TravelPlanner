@@ -16,7 +16,7 @@ import com.travelplanner.ui.dayPlan.itinerary.ItineraryAdapter
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-class DayPlanAdapter(val travelId: String?) : RecyclerView.Adapter<DayPlanAdapter.ViewHolder>() {
+class DayPlanAdapter(val travelId: String?, val onFavouriteClicked: (poiId: String) -> Unit) : RecyclerView.Adapter<DayPlanAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View, var isOpen: Boolean) : RecyclerView.ViewHolder(itemView) {
 
@@ -36,7 +36,7 @@ class DayPlanAdapter(val travelId: String?) : RecyclerView.Adapter<DayPlanAdapte
         val holderView = holder.itemView
         val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
         val recycler = holderView.findViewById<RecyclerView>(R.id.day_plan_itinerary_recycler)
-        val adapter = ItineraryAdapter(travelId)
+        val adapter = ItineraryAdapter(travelId, onFavouriteClicked)
         itinerariesList[position].itineraryItems?.let {
             adapter.setData(it)
         }

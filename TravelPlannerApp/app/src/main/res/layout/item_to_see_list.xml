@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeWidth="1dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         app:strokeColor="@color/stroke_color"
         app:cardElevation="0dp">
 
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <CheckBox
-                android:id="@+id/list_item"
+                android:id="@+id/to_see_item_checbox"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"/>

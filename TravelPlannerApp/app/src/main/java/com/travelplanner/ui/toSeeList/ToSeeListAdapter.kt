@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -16,7 +17,7 @@ import com.travelplanner.ui.localHighlights.LocalHighlightsAdapter
 import com.travelplanner.ui.poi.PoiActivity
 import com.travelplanner.ui.poi.PoiFragment
 
-class ToSeeListAdapter(val travelId: String?) : RecyclerView.Adapter<ToSeeListAdapter.ViewHolder>() {
+class ToSeeListAdapter(val travelId: String?, val onChecked: (poiId: ToSeeItem) -> Unit) : RecyclerView.Adapter<ToSeeListAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -52,6 +53,20 @@ class ToSeeListAdapter(val travelId: String?) : RecyclerView.Adapter<ToSeeListAd
             intent.putExtra(PoiFragment.EXTRA_POI, toSeeList[position].poi)
             intent.putExtra(PoiFragment.EXTRA_TRAVEL_ID, travelId)
             holderView.context.startActivity(intent)
+        }
+        val check = holderView.findViewById<CheckBox>(R.id.to_see_item_checbox)
+        check.isChecked = toSeeList[position].checked
+        check.setOnCheckedChangeListener { _, t ->
+            toSeeList[position].checked = t
+            onChecked(toSeeList[position])
+        }
+    }
+
+    fun updateCheckbox(checkedId: String, checked: Boolean){
+        val itemPosition = toSeeList.indexOfFirst {it.id ==  checkedId}
+        if(itemPosition != -1){
+            toSeeList[itemPosition].checked = checked
+            notifyItemChanged(itemPosition)
         }
     }
 
