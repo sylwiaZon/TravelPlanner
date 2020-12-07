@@ -13,8 +13,9 @@ import com.travelplanner.models.ItineraryItem
 import com.travelplanner.models.WayPoint
 import com.travelplanner.ui.poi.PoiActivity
 import com.travelplanner.ui.poi.PoiFragment
+import javax.security.auth.callback.Callback
 
-class WayPointAdapter(val travelId: String?) : RecyclerView.Adapter<WayPointAdapter.ViewHolder>(){
+class WayPointAdapter(val travelId: String?, val onFavouriteClicked: (poiId: String) -> Unit) : RecyclerView.Adapter<WayPointAdapter.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -36,6 +37,7 @@ class WayPointAdapter(val travelId: String?) : RecyclerView.Adapter<WayPointAdap
         val walkDuration = holderView.findViewById<TextView>(R.id.item_way_point_walk_to_next_duration)
         val walkDistance = holderView.findViewById<TextView>(R.id.item_way_point_walk_to_next_distance)
         val visitTime = holderView.findViewById<TextView>(R.id.item_way_point_visit_time)
+        val liked = holderView.findViewById<ImageView>(R.id.way_point_poi_liked_icon)
         walkDuration.text = wayPointsList[position].walkToNextDuration.toString()
         walkDistance.text = wayPointsList[position].walkToNextDistance.toString()
         visitTime.text = wayPointsList[position].visitTime.toString()
@@ -55,6 +57,9 @@ class WayPointAdapter(val travelId: String?) : RecyclerView.Adapter<WayPointAdap
             intent.putExtra(PoiFragment.EXTRA_POI, wayPointsList[position].poi)
             intent.putExtra(PoiFragment.EXTRA_TRAVEL_ID, travelId)
             holderView.context.startActivity(intent)
+        }
+        liked.setOnClickListener{
+            onFavouriteClicked(wayPointsList[position].poi.poiId)
         }
     }
 

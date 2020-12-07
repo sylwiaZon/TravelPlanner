@@ -96,7 +96,7 @@ namespace TravelPlanner.Repositories
                 var resp = await GraphClient.Cypher
                     .Match("(travel:Travel)", "(poi:Poi)")
                     .Where((Travel travel) => travel.TravelId == travelIdentity)
-                    .AndWhere((Poi poi) => poi.Id == newItem.Name)
+                    .AndWhere((Poi poi) => poi.PoiId == newItem.Name)
                     .Create("(item:ToSeeItem $newItem)")
                     .WithParam("newItem", newItem)
                     .Create("(travel)-[r:HasToSeeItem]->(item)")

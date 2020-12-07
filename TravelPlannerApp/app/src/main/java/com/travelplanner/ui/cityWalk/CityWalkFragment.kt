@@ -26,7 +26,9 @@ class CityWalkFragment : Fragment() {
             viewModel.setTravelId(travelId)
         }
         val recycler = v.findViewById<RecyclerView>(R.id.city_walk_recycler)
-        val adapter = CityWalkAdapter(travelId)
+        val adapter = CityWalkAdapter(travelId){
+            viewModel.addToFavourites(it, travelId)
+        }
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.cityWalk.observe(viewLifecycleOwner, Observer {
