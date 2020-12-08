@@ -4,6 +4,7 @@ using TravelPlanner.Core.DomainModels;
 using DomainLocation = TravelPlanner.Core.DomainModels.Location;
 using DbHotelTransport = TravelPlanner.Core.DataBaseModels.HotelTransport;
 using DbToSeeItem = TravelPlanner.Core.DataBaseModels.ToSeeItem;
+using DbToDoItem = TravelPlanner.Core.DataBaseModels.ToDoItem;
 using TravelPlanner.Repositories;
 using TravelPlanner.Services.Converters;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace TravelPlanner.Services
         Task<DayPlan[]> GetDayPlans(string travelIdentity);
         Task AddTour(Tour newTour, string travelIdentity);
         Task<Tour[]> GetTours(string travelIdentity);
-        Task<ToDoItem> AddToDoItem(ToDoItem newItem, string travelIdentity);
+        Task<ToDoItem> AddToDoItem(string newItem, string travelIdentity);
         Task<ToDoItem[]> GetToDoItems(string travelIdentity);
         Task<ToDoItem> UpdateToDoItem(ToDoItem newItem);
         Task<ToSeeItem> AddToSeeItem(string poiId, string travelIdentity);
@@ -276,14 +277,15 @@ namespace TravelPlanner.Services
             return tours.Select(t => TourConverter.ToDomainTour(t)).ToArray();
         }
 
-        public async Task<ToDoItem> AddToDoItem(ToDoItem newItem, string travelIdentity)
+        public async Task<ToDoItem> AddToDoItem(string newItem, string travelIdentity)
         {
-            var toDo = ToDoItemConverter.ToDbToDoItem(newItem);
-            if(toDo.Id == null)
+            var toDoItem = new DbToDoItem
             {
-                toDo.Id = Guid.NewGuid().ToString();
-            }
-            var addedItem = await ListsRepository.AddToDoItem(toDo, travelIdentity);
+                Id = Guid.NewGuid().ToString(),
+                Name = newItem,
+                Checked = false
+            };
+            var addedItem = await ListsRepository.AddToDoItem(toDoItem, travelIdentity);
             return ToDoItemConverter.ToDomainToDoItem(addedItem);
         }
 

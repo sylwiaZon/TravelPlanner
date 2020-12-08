@@ -132,7 +132,7 @@ namespace TravelPlanner.App.Controllers
         [Authorize]
         [HttpPost]
         [Route("todo")]
-        public Task<ToDoItem> AddToDo([FromBody] ToDoItem item, string travelIdentity)
+        public Task<ToDoItem> AddToDo(string item, string travelIdentity)
         {
             return _travelService.AddToDoItem(item, travelIdentity);
         }

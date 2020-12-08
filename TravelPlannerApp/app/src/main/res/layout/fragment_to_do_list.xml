@@ -18,7 +18,7 @@
         android:visibility="gone"/>
 
     <LinearLayout
-        android:id="@+id/no_saved_to_see"
+        android:id="@+id/no_saved_to_do"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -51,7 +51,7 @@
             android:layout_marginRight="10dp"/>
 
         <Button
-            android:id="@+id/to_see_button"
+            android:id="@+id/add_to_do_item_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add!"

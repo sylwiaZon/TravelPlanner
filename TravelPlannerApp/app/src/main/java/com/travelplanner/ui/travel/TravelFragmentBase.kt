@@ -27,6 +27,7 @@ import com.travelplanner.ui.hotel.HotelFragment
 import com.travelplanner.ui.localHighlights.LocalHighlightsActivity
 import com.travelplanner.ui.localHighlights.LocalHighlightsAdapter
 import com.travelplanner.ui.localHighlights.LocalHighlightsFragment
+import com.travelplanner.ui.toDoList.ToDoListActivity
 import com.travelplanner.ui.toSeeList.ToSeeListActivity
 import com.travelplanner.ui.toSeeList.ToSeeListFragment
 import com.travelplanner.ui.tour.TourActivity
@@ -65,6 +66,7 @@ abstract class TravelFragmentBase : Fragment() {
         val toursButton = root.findViewById<Chip>(R.id.tours_chip)
         val weatherButton = root.findViewById<Chip>(R.id.weather_forecast_chip)
         val toSeeListButton = root.findViewById<Chip>(R.id.to_see_chip)
+        val toDoListButton = root.findViewById<Chip>(R.id.to_do_chip)
         travelViewModel.travel.observe(viewLifecycleOwner, Observer{t ->
             destinationCity?.text = t?.travelDestination?.city
             destinationCountry?.text = t?.travelDestination?.country
@@ -114,6 +116,11 @@ abstract class TravelFragmentBase : Fragment() {
             }
             toSeeListButton.setOnClickListener{
                 val intent = Intent(activity, ToSeeListActivity::class.java)
+                intent.putExtra(ToSeeListFragment.EXTRA_TRAVEL_ID, t?.travelId)
+                activity?.startActivity(intent)
+            }
+            toDoListButton.setOnClickListener{
+                val intent = Intent(activity, ToDoListActivity::class.java)
                 intent.putExtra(ToSeeListFragment.EXTRA_TRAVEL_ID, t?.travelId)
                 activity?.startActivity(intent)
             }
