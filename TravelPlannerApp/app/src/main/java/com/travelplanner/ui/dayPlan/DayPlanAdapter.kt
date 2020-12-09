@@ -67,7 +67,8 @@ class DayPlanAdapter(val travelId: String?, val onFavouriteClicked: (poiId: Stri
             }
         }
         val date = itinerariesList[position].date.format(formatter)
-        holderView.findViewById<TextView>(R.id.day_plan_date).text = date
+        val holderDate = holderView.findViewById<TextView>(R.id.day_plan_date)
+        holderDate.text = date
     }
 
     public fun setData(data: List<Itinerary>){

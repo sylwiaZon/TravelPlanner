@@ -1,6 +1,6 @@
 ﻿using System.Dynamic;
 using System.Threading.Tasks;
-using DomainLocations = TravelPlanner.Core.DomainModels.Location;
+using DomainLocation = TravelPlanner.Core.DomainModels.Location;
 using DomainDayPlan= TravelPlanner.Core.DomainModels.DayPlan;
 using DomainCityWalk = TravelPlanner.Core.DomainModels.CityWalk;
 using DomainTour = TravelPlanner.Core.DomainModels.Tour;
@@ -14,7 +14,7 @@ namespace TravelPlanner.Services
 {
     public interface ITravelInfoService
     {
-        Task<DomainLocations> GetLocationInfoAsync(string cityName);
+        Task<DomainLocation[]> GetLocationInfoAsync(string cityName);
         Task<Tag[]> GetAvailableTagsAsync(string cityName);
         Task<Article[]> GetArticlesAsync(string cityName, string tag);
         Task<CommonTagLabel[]> GetAvailableTagsAsync();
@@ -33,10 +33,10 @@ namespace TravelPlanner.Services
             TriposoApiClient = new TriposoApiClient();
         }
 
-        async public Task<DomainLocations> GetLocationInfoAsync(string cityName)
+        async public Task<DomainLocation[]> GetLocationInfoAsync(string cityName)
         {
             var result = await TriposoApiClient.GetLocationInfo(cityName);
-            return LocationConverter.ToDomainLocation(result);
+            return result.Select(r => LocationConverter.ToDomainLocation(r)).ToArray();
         }
 
         async public Task<Tag[]> GetAvailableTagsAsync(string cityName)

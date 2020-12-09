@@ -23,7 +23,7 @@ class ToDoListAdapter(val travelId: String?, val onChecked: (poiId: ToDoItem) ->
     private var toDoList: List<ToDoItem> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.item_to_see_list, parent, false)
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.item_to_do_list, parent, false)
         return ViewHolder(itemView)
     }
 

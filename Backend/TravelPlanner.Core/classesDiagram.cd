@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TravelPlanner.Core.DomainModels.Airport">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAAAEAAAAAEAAAIAAgAACAAAAgABAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\Airport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.AirportFlightStatus" Collapsed="true">
+    <Position X="8.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\AirportFlightStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.AirportName" Collapsed="true">
+    <Position X="10.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>DomainModels\AirportName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.Attribution" Collapsed="true">
+    <Position X="12.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\Attribution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.AuthenticateRequest" Collapsed="true">
+    <Position X="14" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAQAAAAA=</HashCode>
+      <FileName>DomainModels\AuthenticateRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.AuthenticateResponse" Collapsed="true">
+    <Position X="15.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>DomainModels\AuthenticateResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.CityWalk">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAEAAAAAAAAIAAIAAAAABAAABAAA=</HashCode>
+      <FileName>DomainModels\CityWalk.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.DayPlan" Collapsed="true">
+    <Position X="8.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\DayPlan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.Flight" Collapsed="true">
+    <Position X="10.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAIAAAAgAAAAAECBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\Flight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.FlightDuration" Collapsed="true">
+    <Position X="12.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\FlightDuration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.Hotel" Collapsed="true">
+    <Position X="14" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAEAAAAAAABAIAAQAAAAAAABACQQAAAIAAAA=</HashCode>
+      <FileName>DomainModels\Hotel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.HotelTransport" Collapsed="true">
+    <Position X="15.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>DomainModels\HotelTransport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.HotelWithDetails">
+    <Position X="4.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\HotelWithDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.Itinerary" Collapsed="true">
+    <Position X="13.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAABAAAQAAAAAAA=</HashCode>
+      <FileName>DomainModels\Itinerary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.Location" Collapsed="true">
+    <Position X="12.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIgAAAAEAAAAgAgAAIAAQAAAAQAAAIAwEAAgAAAAA=</HashCode>
+      <FileName>DomainModels\Location.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.NewTravel" Collapsed="true">
+    <Position X="14" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAIAAAAAEAAAAAAAAAAAAAAAACgAAAAAAAA=</HashCode>
+      <FileName>DomainModels\NewTravel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.Poi">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAKAAAAQUAAAAgAgAAIAAQACAAAAABAAAAAAgAAAAA=</HashCode>
+      <FileName>DomainModels\Poi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.ToDoItem">
+    <Position X="6.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAACAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ToDoItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.ToSeeItem">
+    <Position X="6.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAACAAAAAAAQAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ToSeeItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.Tour" Collapsed="true">
+    <Position X="10.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEACAAAAAQAAAAAAAAAAAAQAAAAAAABAAAAAAABAAQg=</HashCode>
+      <FileName>DomainModels\Tour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.TransportLocation" Collapsed="true">
+    <Position X="12.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAABAAAA=</HashCode>
+      <FileName>DomainModels\TransportLocation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.Travel" Collapsed="true">
+    <Position X="14" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAEgCAAIAAAAAAAAAAACAAAAAAIACAGgAAAEAgAQ=</HashCode>
+      <FileName>DomainModels\Travel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.TravelDestination" Collapsed="true">
+    <Position X="15.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\TravelDestination.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.TravelParticipants">
+    <Position X="4.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAEACAAAAAAA=</HashCode>
+      <FileName>DomainModels\TravelParticipants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.TravelsResponse" Collapsed="true">
+    <Position X="11" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAIAAAAAkAAAAAAAAAAAAAAAACgAAAAAAAA=</HashCode>
+      <FileName>DomainModels\TravelsResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DomainModels.WayPoint" Collapsed="true">
+    <Position X="12.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAGAAAAAAEAAIAAAAAACAAAAAAAAIAAAAABA=</HashCode>
+      <FileName>DomainModels\WayPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.DataBaseModels.ItineraryItem" Collapsed="true">
+    <Position X="10.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ItineraryItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Core.User" Collapsed="true">
+    <Position X="10.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAQAAAAA=</HashCode>
+      <FileName>DomainModels\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.DomainModels.WeatherForecast" Collapsed="true">
+    <Position X="14" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAIIAAAAAACAAAGAAAAAAAAAAARAAAAAgAEACA=</HashCode>
+      <FileName>DomainModels\WeatherForecast.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

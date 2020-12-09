@@ -50,7 +50,7 @@ interface TravelApiService {
     fun getToDoItem(@Query("travelIdentity") travelIdentity: String): Single<List<ToDoItem>>
 
     @POST("travel/todo")
-    fun postToDoItem(@Body toDoItem: ToDoItem, @Query("travelIdentity") travelIdentity: String)
+    fun postToDoItem(@Query("item") toDoItem: String, @Query("travelIdentity") travelIdentity: String) : Single<ToDoItem>
 
     @PATCH("travel/todo")
     fun patchToDoItem(@Body toDoItem: ToDoItem): Single<ToDoItem>

@@ -5,61 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/to_do_list_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
-
-    <LinearLayout
-        android:id="@+id/no_saved_to_do"
+    <RelativeLayout
+        android:id="@+id/saved_to_do"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="0.6"
         android:orientation="vertical"
+        android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="What do you want to do?"
-            android:layout_marginBottom="20dp"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="@color/teal_700"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent">
-        <EditText
-            android:id="@+id/new_item"
-            android:layout_width="188dp"
-            android:layout_height="52dp"
-            android:hint="I want to..."
-            android:layout_marginRight="10dp"/>
 
-        <Button
-            android:id="@+id/add_to_do_item_button"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/to_do_list_recycler"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add!"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_to_do_item_floating_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
+            android:src="@drawable/ic_baseline_add_24"/>
+    </RelativeLayout>
+    <include
+        android:id="@+id/no_saved_to_do"
+        layout="@layout/add_new_to_do_item"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

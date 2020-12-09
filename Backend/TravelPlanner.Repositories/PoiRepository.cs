@@ -85,9 +85,9 @@ namespace TravelPlanner.Repositories
                 await GraphClient.Cypher
                     .Match("(poi:Poi)")
                     .Where((Poi poi) => poi.PoiId == poiId)
-                    .Create("(attribution:Attribution $newAttribution)")
-                    .WithParam("newAttribution", attr)
-                    .Create("(poi)-[r:HasAttribution]->(attr)")
+                    .Create("(attribution:Attribution $attr)")
+                    .WithParam("attr", attr)
+                    .Create("(poi)-[r:HasAttribution]->(attribution)")
                     .Return(attribution => attribution.As<Attribution>())
                     .ResultsAsync;
             }

@@ -17,6 +17,10 @@ class ToDoListViewModel : ViewModel() {
     val checked: LiveData<Pair<String, Boolean>> = _checked
     private val _toastError = MutableLiveData<String>()
     val toastError: LiveData<String> = _toastError
+    private val _addItemToastError = MutableLiveData<String>()
+    val addItemToastError: LiveData<String> = _addItemToastError
+    private val _added = MutableLiveData<Boolean>()
+    val added: LiveData<Boolean> = _added
 
     fun setTravelId(travelId: String){
         travelApiService.getToDoItem(travelId)
@@ -40,7 +44,17 @@ class ToDoListViewModel : ViewModel() {
             })
     }
 
-    fun postItem(toDo: String){
-        val toDoItem = ToDoItem(toDo)
+    fun addToFavourites(toDo: String?, travelId: String?){
+        if(toDo == null || travelId == null ) return
+        DIContainer.travelApiService.postToDoItem(toDo, travelId)
+            .applySchedulers()
+            .flatMap { travelApiService.getToDoItem(travelId)  }
+            .subscribe ({
+                _added.value = true
+                _toDoList.value = it
+            },{
+                _addItemToastError.value = "Item not changed. Try again later"
+                Log.e("ToDoListViewModel", it.message.toString())
+            })
     }
 }

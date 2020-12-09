@@ -19,61 +19,44 @@
         app:strokeWidth="1dp"
         android:layout_marginBottom="5dp"
         app:strokeColor="@color/stroke_color"
-            app:cardElevation="0dp">
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/weather_icon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="fitCenter"
-                android:layout_gravity="center"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="5dp">
-
-                <TextView
-                    android:id="@+id/weather_degrees"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="27 C"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"/>
-
-                <TextView
-                    android:id="@+id/weather_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="heavy intensity rain"
-                    android:textAppearance="?attr/textAppearanceBody2" />
-
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
                 <TextView
                     android:id="@+id/weather_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="27.05.2020"
-                    android:textAppearance="?attr/textAppearanceBody1" />
+                    android:text="23 maj 2020"
+                    android:textAppearance="?attr/textAppearanceHeadline5"/>
+                <ImageView
+                    android:id="@+id/weather_arrow_down"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
+                <ImageView
+                    android:id="@+id/weather_arrow_up"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24" />
             </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/day_weather_forecast_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

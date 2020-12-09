@@ -18,7 +18,8 @@
             android:id="@+id/list_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="To Do"/>
+            android:text="To Do"
+            android:textAppearance="?attr/textAppearanceBody1"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

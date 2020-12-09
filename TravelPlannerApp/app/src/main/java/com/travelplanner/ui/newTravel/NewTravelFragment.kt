@@ -22,9 +22,7 @@ class NewTravelFragment : Fragment() {
         newTravelViewModel =
                 ViewModelProvider(this).get(NewTravelViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_new_travel, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
         newTravelViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
         })
         return root
     }

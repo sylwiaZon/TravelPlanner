@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TravelPlanner.Services.Converters.CityWalkConverter" Collapsed="true">
+    <Position X="14" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Converters\CityWalkConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.DayPlanConverter" Collapsed="true">
+    <Position X="11.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAEAAAAAAAAgAAIAAIAAAABAAAAAA=</HashCode>
+      <FileName>Converters\DayPlanConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.FlightConverter" Collapsed="true">
+    <Position X="13" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAABAAAAAAAAAAAAAAAgAABAAACAAgAA=</HashCode>
+      <FileName>Converters\FlightConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.HotelConverter" Collapsed="true">
+    <Position X="14.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAgAAAAAIAAAAAAAAAAAAACAAQAAAAAAAA=</HashCode>
+      <FileName>Converters\HotelConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.LocationConverter" Collapsed="true">
+    <Position X="9.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIgAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\LocationConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.PoiConverter" Collapsed="true">
+    <Position X="11.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEAAAAAAAAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Converters\PoiConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.ToDoItemConverter" Collapsed="true">
+    <Position X="13" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAI=</HashCode>
+      <FileName>Converters\ToDoItemConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.ToSeeItemConverter" Collapsed="true">
+    <Position X="14.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\ToSeeItemConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.TourConverter" Collapsed="true">
+    <Position X="9.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\TourConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.TravelConverter" Collapsed="true">
+    <Position X="11.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\TravelConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.Converters.WeatherForecastConverter" Collapsed="true">
+    <Position X="13" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\WeatherForecastConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TravelPlanner.Services.TravelService">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACHAQAAAsAIEAwEAogEAMEECABAEBIAAA0BAA=</HashCode>
+      <FileName>TravelService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="TravelPlanner.Services.ITravelService">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACGAQAAAEAAAAQAAogAAIEACABAEAIAAA0BAA=</HashCode>
+      <FileName>TravelService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

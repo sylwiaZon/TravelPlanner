@@ -28,6 +28,7 @@ import com.travelplanner.ui.localHighlights.LocalHighlightsActivity
 import com.travelplanner.ui.localHighlights.LocalHighlightsAdapter
 import com.travelplanner.ui.localHighlights.LocalHighlightsFragment
 import com.travelplanner.ui.toDoList.ToDoListActivity
+import com.travelplanner.ui.toDoList.ToDoListFragment
 import com.travelplanner.ui.toSeeList.ToSeeListActivity
 import com.travelplanner.ui.toSeeList.ToSeeListFragment
 import com.travelplanner.ui.tour.TourActivity
@@ -121,7 +122,7 @@ abstract class TravelFragmentBase : Fragment() {
             }
             toDoListButton.setOnClickListener{
                 val intent = Intent(activity, ToDoListActivity::class.java)
-                intent.putExtra(ToSeeListFragment.EXTRA_TRAVEL_ID, t?.travelId)
+                intent.putExtra(ToDoListFragment.EXTRA_TRAVEL_ID, t?.travelId)
                 activity?.startActivity(intent)
             }
         })

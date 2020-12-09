@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,13 +20,13 @@ namespace TravelPlanner.Repositories
             Token = Environment.GetEnvironmentVariable("TRIPOSO_TOKEN");
         }
 
-        public async Task<Location> GetLocationInfo(string cityName)
+        public async Task<IEnumerable<Location>> GetLocationInfo(string cityName)
         {
             var responseMessage = await Client.GetAsync(ApiPath + "location.json?tag_labels=city&annotate=trigram:" + cityName + "&trigram=>=0.7&account=" + AccountId+"&token="+Token);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var response = await responseMessage.Content.ReadAsAsync<ResponseObject<Location>>();
-                return response.Results.FirstOrDefault();
+                return response.Results;
             }
             return null;
         }
