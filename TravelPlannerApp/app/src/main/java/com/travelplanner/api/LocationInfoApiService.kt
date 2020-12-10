@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface LocationInfoApiService {
     @GET("locationinfo")
-    fun getLocation(@Query("cityName") cityName: String): List<Location>
+    fun getLocation(@Query("cityName") cityName: String): Single<List<Location>>
 }
