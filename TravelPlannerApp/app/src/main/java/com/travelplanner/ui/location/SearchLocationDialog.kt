@@ -19,17 +19,16 @@ fun Context.showLocationDialog(cityName: String, onLocationChosen: (Location) ->
     val adapter = SearchLocationAdapter(){
         onLocationChosen(it)
     }
-    recycler.adapter = adapter
-            recycler.layoutManager = LinearLayoutManager(this)
 
     getLocations(cityName){
         adapter.setData(it)
-    }
-
-    AlertDialog.Builder(this).apply{
-        setView(v)
-        setNegativeButton("Cancel") { _, _ -> }
-        show()
+        recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(this)
+        AlertDialog.Builder(this).apply{
+            setView(v)
+            setNegativeButton("Cancel") { _, _ -> }
+            show()
+        }
     }
 }
 
@@ -41,7 +40,7 @@ private fun getLocations(cityName: String, onLocationsLoaded: (List<Location>) -
             .subscribe({
                 onLocationsLoaded(it)
             },
-                    {
-                        Log.e("FlightViewModel", it.message.toString())
-                    })
+            {
+                Log.e("FlightViewModel", it.message.toString())
+            })
 }

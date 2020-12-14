@@ -24,10 +24,18 @@ class FlightFragment : Fragment() {
             viewModel.setTravelId(it)
         }
         viewModel.toFlight.observe(viewLifecycleOwner){
-            (childFragmentManager.findFragmentByTag("toFlightFragment") as SingleFlightFragment).setFlight(it)
+            it?.let { it1 ->
+                (childFragmentManager.findFragmentByTag("toFlightFragment") as SingleFlightFragment).setFlight(
+                    it1
+                )
+            }
         }
         viewModel.fromFlight.observe(viewLifecycleOwner){
-            (childFragmentManager.findFragmentByTag("fromFlightFragment") as SingleFlightFragment).setFlight(it)
+            it?.let { it1 ->
+                (childFragmentManager.findFragmentByTag("fromFlightFragment") as SingleFlightFragment).setFlight(
+                    it1
+                )
+            }
         }
         return v
     }
