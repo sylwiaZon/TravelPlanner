@@ -16,19 +16,20 @@ import io.reactivex.Single
 fun Context.showLocationDialog(cityName: String, onLocationChosen: (Location) -> Unit){
     val v = LayoutInflater.from(this).inflate(R.layout.location_search_view, null, false)
     val recycler = v.findViewById<RecyclerView>(R.id.search_locations_recycler)
+    val dialog = AlertDialog.Builder(this).run{
+        setView(v)
+        setNegativeButton("Cancel") { _, _ -> }
+        show()
+    }
     val adapter = SearchLocationAdapter(){
         onLocationChosen(it)
+        dialog.dismiss()
     }
 
+    recycler.adapter = adapter
+    recycler.layoutManager = LinearLayoutManager(this)
     getLocations(cityName){
         adapter.setData(it)
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(this)
-        AlertDialog.Builder(this).apply{
-            setView(v)
-            setNegativeButton("Cancel") { _, _ -> }
-            show()
-        }
     }
 }
 
@@ -41,6 +42,6 @@ private fun getLocations(cityName: String, onLocationsLoaded: (List<Location>) -
                 onLocationsLoaded(it)
             },
             {
-                Log.e("FlightViewModel", it.message.toString())
+                Log.e("showLocationDialog", it.message.toString())
             })
 }

@@ -11,8 +11,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.card.MaterialCardView
 import com.travelplanner.R
+import com.travelplanner.models.Airport
 import com.travelplanner.models.Flight
 import com.travelplanner.models.Location
+import com.travelplanner.ui.flight.search.airport.showAirportDialog
 import com.travelplanner.ui.location.showLocationDialog
 import io.reactivex.subjects.BehaviorSubject
 import java.time.format.DateTimeFormatter
@@ -40,15 +42,23 @@ class SearchFlightFragment : Fragment() {
 
         var fromLocation: Location? = null
         var toLocation: Location? = null
+        var fromAirport: Airport? = null
+        var toAirport: Airport? = null
         fromFlightButton.setOnClickListener {
             context?.showLocationDialog(fromFlightInput.text.toString()){
                 fromLocation = it
+                context?.showAirportDialog(fromLocation?.latitude!!, fromLocation?.longitude!!){
+                    fromAirport = it
+                }
             }
         }
 
         toFlightButton.setOnClickListener {
             context?.showLocationDialog(toFlightInput.text.toString()){
                 toLocation = it
+                context?.showAirportDialog(toLocation?.latitude!!, toLocation?.longitude!!){
+                    toAirport = it
+                }
             }
         }
         return v
