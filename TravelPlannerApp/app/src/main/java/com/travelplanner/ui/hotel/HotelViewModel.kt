@@ -13,8 +13,8 @@ import com.travelplanner.models.Itinerary
 
 class HotelViewModel : ViewModel() {
     private val travelApiService = DIContainer.travelApiService
-    private val _hotel = MutableLiveData<HotelWithDetails>()
-    val hotel: LiveData<HotelWithDetails> = _hotel
+    private val _hotel = MutableLiveData<HotelWithDetails?>()
+    val hotel: LiveData<HotelWithDetails?> = _hotel
 
     fun setTravelId(travelId: String){
         travelApiService.getHotel(travelId)
@@ -24,5 +24,9 @@ class HotelViewModel : ViewModel() {
                 }, {
                     Log.e("HotelViewModel",it.message.toString())
                 })
+    }
+
+    fun addHotel(hotel: Hotel, travelId: String){
+        travelApiService.postHotel(hotel, travelId)
     }
 }

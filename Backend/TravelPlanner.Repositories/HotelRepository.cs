@@ -84,7 +84,7 @@ namespace TravelPlanner.Repositories
             if (resp.Any())
                 return resp.First();
             else
-                throw new TravelPlannerException(404, "Hotel not found");
+                return null;
         }
 
         async public Task AddHotelTransport(string hotelId, HotelTransport transportCategory, IEnumerable<TransportLocation> transports)

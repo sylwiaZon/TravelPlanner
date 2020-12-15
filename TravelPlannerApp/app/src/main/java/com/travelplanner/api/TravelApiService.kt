@@ -1,6 +1,5 @@
 package com.travelplanner.api
 
-import android.location.Location
 import com.travelplanner.models.*
 import io.reactivex.Single
 import retrofit2.http.*
@@ -11,7 +10,7 @@ interface TravelApiService {
     fun getTravels(): Single<List<Travel>>
 
     @POST("travel")
-    fun postTravel(@Body travel: Travel)
+    fun postTravel(@Body travel: Travel): Single<Travel>
 
     @GET("travel/location")
     fun getLocation(@Query("travelIdentity") travelIdentity: String): Single<Location>

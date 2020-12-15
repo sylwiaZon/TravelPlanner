@@ -129,6 +129,7 @@ namespace TravelPlanner.Services
         public async Task<HotelWithDetails> GetHotel(string travelIdentity)
         {
             var hotel = await HotelRepository.GetHotel(travelIdentity);
+            if (hotel == null) return null;
             var transportCategories = await HotelRepository.GetTransportCategories(hotel.HotelId);
             var transports = new List<HotelTransport>();
             foreach(var category in transportCategories)

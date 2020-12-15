@@ -8,6 +8,7 @@ import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Travel
 import io.reactivex.Observable
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
@@ -16,7 +17,7 @@ class IncomingTravelViewModel : TravelViewModelBase() {
     private val travelStream = DIContainer.travelApiService.getTravels()
         .applySchedulers()
         .map {
-            Optional.ofNullable(it.filter { t -> t.arrivalDate > LocalDateTime.now() }
+            Optional.ofNullable(it.filter { t -> t.arrivalDate > LocalDate.now() }
                 .minBy { t -> t.arrivalDate })
         }
 

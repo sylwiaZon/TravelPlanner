@@ -6,6 +6,8 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/hotel_added"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -44,5 +46,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/no_saved_hotel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Where do you want to stay?"
+        android:layout_marginBottom="20dp"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="@color/teal_700"/>
+
+    <Button
+        android:id="@+id/to_see_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search for new hotel!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
