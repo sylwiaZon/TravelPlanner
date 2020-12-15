@@ -29,6 +29,7 @@ namespace TravelPlanner.Services
         public async Task<IEnumerable<Flight>> GetSchedule(string origin, string destination, string date)
         {
             var flightResponse = await FlightsApiClient.GetSchedule(origin, destination, date);
+            if (flightResponse == null) return new List<Flight>();
             return FlightConverter.ToDomainFlights(flightResponse);
         }
 
@@ -41,7 +42,7 @@ namespace TravelPlanner.Services
         public async Task<Airport[]> GetNearestAirport(float latitude, float longitude)
         {
             var response = await FlightsApiClient.GetNearestAirports(latitude, longitude);
-            return FlightConverter.ToDomainAirport(response).ToArray();
+             return FlightConverter.ToDomainAirport(response).ToArray();
         }
     }
 }

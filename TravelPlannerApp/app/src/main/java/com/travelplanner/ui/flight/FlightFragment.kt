@@ -26,14 +26,14 @@ class FlightFragment : Fragment() {
         viewModel.toFlight.observe(viewLifecycleOwner){
             it?.let { it1 ->
                 (childFragmentManager.findFragmentByTag("toFlightFragment") as SingleFlightFragment).setFlight(
-                    it1
+                    it1, "to"
                 )
             }
         }
         viewModel.fromFlight.observe(viewLifecycleOwner){
             it?.let { it1 ->
                 (childFragmentManager.findFragmentByTag("fromFlightFragment") as SingleFlightFragment).setFlight(
-                    it1
+                    it1, "from"
                 )
             }
         }

@@ -12,28 +12,31 @@ import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Airport
 import com.travelplanner.models.Location
+import com.travelplanner.ui.location.SearchLocationAdapter
+import com.travelplanner.ui.location.showLocationDialog
 
 fun Context.showAirportDialog(latitude: String, longitude: String, onAirportChosen: (Airport) -> Unit){
     val v = LayoutInflater.from(this).inflate(R.layout.airport_search_view, null, false)
     val recycler = v.findViewById<RecyclerView>(R.id.search_airports_recycler)
+    val dialog = AlertDialog.Builder(this).run{
+        setView(v)
+        setNegativeButton("Cancel") { _, _ -> }
+        show()
+    }
     val adapter = SearchAirportAdapter(){
         onAirportChosen(it)
+        dialog.dismiss()
     }
 
-    getLocations(latitude, longitude){
+    recycler.adapter = adapter
+    recycler.layoutManager = LinearLayoutManager(this)
+    getAirports(latitude, longitude) {
         adapter.setData(it)
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(this)
-        AlertDialog.Builder(this).apply{
-            setView(v)
-            setNegativeButton("Cancel") { _, _ -> }
-            show()
-        }
     }
 }
 
 @SuppressLint("CheckResult")
-private fun getLocations(latitude: String, longitude: String, onLocationsLoaded: (List<Airport>) -> Unit ){
+private fun getAirports(latitude: String, longitude: String, onLocationsLoaded: (List<Airport>) -> Unit ){
     val flightApiService = DIContainer.flightsApiService
     flightApiService.getNearestAirports(latitude, longitude)
             .applySchedulers()
