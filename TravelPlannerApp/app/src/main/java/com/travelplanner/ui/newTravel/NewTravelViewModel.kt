@@ -18,6 +18,9 @@ class NewTravelViewModel : ViewModel() {
     private val _travel = MutableLiveData<Travel>()
     val travel: LiveData<Travel> = _travel
 
+    private val _location = MutableLiveData<String>()
+    val location: LiveData<String> = _location
+
     fun postTravel(travel: Travel){
         travelApiService.postTravel(travel)
                 .applySchedulers()
@@ -30,5 +33,11 @@ class NewTravelViewModel : ViewModel() {
 
     fun postLocation(location: Location, travelId: String){
         travelApiService.postLocation(location, travelId)
+            .applySchedulers()
+            .subscribe ({
+                _location.value = ""
+            },{
+                Log.e("NewTravelViewModel", it.message.toString())
+            })
     }
 }

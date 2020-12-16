@@ -5,11 +5,11 @@ import android.os.Parcelable
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-class Travel(val travelId: String?, val arrivalDate: LocalDate, val departureDate: LocalDate, val participants: TravelParticipants, val travelDestination: TravelDestination, val photoUrl: String?) : Parcelable {
+class Travel(val travelId: String?, val arrivalDate: LocalDateTime, val departureDate: LocalDateTime, val participants: TravelParticipants, val travelDestination: TravelDestination, val photoUrl: String?) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString()?: "",
-            LocalDate.parse(parcel.readString()?:""),
-            LocalDate.parse(parcel.readString()?:""),
+            LocalDateTime.parse(parcel.readString()?:""),
+            LocalDateTime.parse(parcel.readString()?:""),
             parcel.readParcelable<TravelParticipants>(TravelParticipants::class.java.classLoader)?: TravelParticipants(0, emptyList(),0),
             parcel.readParcelable<TravelDestination>(TravelDestination::class.java.classLoader)?: TravelDestination("", ""),
             parcel.readString()?:"") {

@@ -93,6 +93,7 @@ abstract class TravelFragmentBase : Fragment() {
             hotelButton.setOnClickListener{
                 val intent = Intent(activity, HotelActivity::class.java)
                 intent.putExtra(HotelFragment.EXTRA_TRAVEL_ID, t?.travelId)
+                intent.putExtra(HotelFragment.EXTRA_CITY_NAME, t?.travelDestination?.city)
                 activity?.startActivity(intent)
             }
             flightsButton.setOnClickListener{

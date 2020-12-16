@@ -17,7 +17,7 @@ class  SearchHotelAdapter(val onHotelChosen: (Hotel) -> Unit): RecyclerView.Adap
     private var hotelsList: List<Hotel> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.item_search_flight, parent, false)
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.item_hotel_search, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -28,7 +28,7 @@ class  SearchHotelAdapter(val onHotelChosen: (Hotel) -> Unit): RecyclerView.Adap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val v = holder.itemView
         val hotelName = v.findViewById<TextView>(R.id.search_hotel_name)
-        val hotelCard = v.findViewById<TextView>(R.id.search_hotel_card)
+        val hotelCard = v.findViewById<MaterialCardView>(R.id.search_hotel_card)
         hotelName.text = hotelsList[position].name
         hotelCard.setOnClickListener{
             onHotelChosen(hotelsList[position])

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,22 +19,26 @@ class  HotelFragment : Fragment() {
 
     lateinit var viewModel: HotelViewModel
 
+    override fun onStart() {
+        super.onStart()
+
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_hotel, container, false)
         viewModel =
                 ViewModelProvider(this).get(HotelViewModel::class.java)
         val travelId = activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)
         viewModel.setTravelId(travelId!!)
-        val cityName = activity?.intent?.getStringExtra(EXTRA_TRAVEL_ID)
+        val cityName = activity?.intent?.getStringExtra(EXTRA_CITY_NAME)
         val recycler = v.findViewById<RecyclerView>(R.id.hotel_recycler)
         val name = v.findViewById<TextView>(R.id.hotel_name)
         val adapter = HotelAdapter()
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
 
-        val noHotel = v.findViewById<RecyclerView>(R.id.no_saved_hotel)
-        val hotelAdded = v.findViewById<RecyclerView>(R.id.hotel_added)
-        val hotelSearchButton = v.findViewById<RecyclerView>(R.id.to_see_button)
+        val noHotel = v.findViewById<LinearLayout>(R.id.no_saved_hotel)
+        val hotelAdded = v.findViewById<LinearLayout>(R.id.hotel_added)
+        val hotelSearchButton = v.findViewById<Button>(R.id.to_see_button)
         hotelSearchButton.setOnClickListener {
              context?.showSearchHotelDialog(cityName!!){
                 viewModel.addHotel(it, travelId)

@@ -23,7 +23,7 @@ namespace TravelPlanner.Repositories
             GraphClient = new BoltGraphClient(new Uri(dbSettings.DbConnectionString), Login, Password);
         }
 
-        async public Task AddLocation(Location newLocation, string travelIdentity)
+        async public Task<Location> AddLocation(Location newLocation, string travelIdentity)
         {
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
@@ -47,13 +47,18 @@ namespace TravelPlanner.Repositories
                     throw ce;
             }
 
-            await GraphClient.Cypher
+            var response = await GraphClient.Cypher
                 .Match("(location:Location)", "(travel:Travel)")
                 .Where((Travel travel) => travel.TravelId == travelIdentity)
                 .AndWhere((Location location) => location.LocationId == newLocation.LocationId)
                 .Merge("(travel)-[r:HasLocation]->(location)")
                 .Return(location => location.As<Location>())
                 .ResultsAsync;
+            if (response.Any())
+            {
+                return response.First();
+            }
+            return null;
         }
 
         async public Task<Location> GetLocation(string travelIdentity)

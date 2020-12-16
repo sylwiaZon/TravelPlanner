@@ -11,5 +11,5 @@ interface FlightsApiService {
     fun getFlights(@Query("origin") origin: String, @Query("destination") destination: String, @Query("date") date: String): Single<List<Flight>>
 
     @GET("flights/airports")
-    fun getNearestAirports(@Query("latitude") latitude: String, @Query("longitude") longitude: String): Single<List<Airport>>
+    fun getNearestAirports(@Query("latitude") latitude: Float, @Query("longitude") longitude: Float): Single<List<Airport>>
 }

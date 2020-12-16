@@ -1,7 +1,6 @@
 package com.travelplanner.api
 
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonDeserializer
+import com.google.gson.*
 import com.travelplanner.api.interceptors.DefaultHeadersInterceptor
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 internal fun createRetrofit(): Retrofit {
@@ -21,6 +21,8 @@ internal fun createRetrofit(): Retrofit {
             .addInterceptor(DefaultHeadersInterceptor())
             .build()
 
+    val formatterDateTime = DateTimeFormatter.ISO_DATE_TIME
+    val formatterDate = DateTimeFormatter.ISO_DATE
 
     val gson = GsonBuilder()
             .registerTypeAdapter(LocalDate::class.java, JsonDeserializer<LocalDate> {  json, _, _ ->
@@ -28,6 +30,12 @@ internal fun createRetrofit(): Retrofit {
             })
             .registerTypeAdapter(LocalDateTime::class.java, JsonDeserializer<LocalDateTime> { json, _, _ ->
                 LocalDateTime.parse(json.asString)
+            })
+            .registerTypeAdapter(LocalDateTime::class.java, JsonSerializer<LocalDateTime> { dateTime, _, _ ->
+                JsonPrimitive(dateTime.format(formatterDateTime))
+            })
+            .registerTypeAdapter(LocalDate::class.java, JsonSerializer<LocalDate> { date, _, _ ->
+                JsonPrimitive(date.format(formatterDate))
             })
             .create()
 

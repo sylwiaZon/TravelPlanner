@@ -190,9 +190,10 @@ namespace TravelPlanner.Services
             }
         }
         
-        public async Task<CityWalk[]> GetCityWalks(string travelIdentity)
+        public async Task<IEnumerable<CityWalk>> GetCityWalks(string travelIdentity)
         {
             var dbWalks = await CityWalkRepository.GetCityWalks(travelIdentity);
+            if (!dbWalks.Any()) return new List<CityWalk>();
             var domainWalks = new List<CityWalk>();
             foreach (var walk in dbWalks)
             {
@@ -235,9 +236,10 @@ namespace TravelPlanner.Services
             }
         }
 
-        public async Task<DayPlan[]> GetDayPlans(string travelIdentity) 
+        public async Task<IEnumerable<DayPlan>> GetDayPlans(string travelIdentity) 
         {
             var dbPlans = await DayPlanRepository.GetDayPlans(travelIdentity);
+            if (!dbPlans.Any()) return new List<DayPlan>();
             var domainDayPlans = new List<DayPlan>();
             foreach (var plan in dbPlans)
             {

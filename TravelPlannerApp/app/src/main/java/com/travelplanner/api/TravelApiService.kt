@@ -2,6 +2,7 @@ package com.travelplanner.api
 
 import com.travelplanner.models.*
 import io.reactivex.Single
+import retrofit2.Response
 import retrofit2.http.*
 
 interface TravelApiService {
@@ -16,7 +17,7 @@ interface TravelApiService {
     fun getLocation(@Query("travelIdentity") travelIdentity: String): Single<Location>
 
     @POST("travel/location")
-    fun postLocation(@Body location: Location, @Query("travelIdentity") travelIdentity: String)
+    fun postLocation(@Body location: Location, @Query("travelIdentity") travelIdentity: String): Single<Response<String>>
 
     @GET("travel/poi")
     fun getPois(@Query("travelIdentity") travelIdentity: String): Single<List<Poi>>
@@ -25,7 +26,7 @@ interface TravelApiService {
     fun getHotel(@Query("travelIdentity") travelIdentity: String): Single<HotelWithDetails>
 
     @POST("travel/hotel")
-    fun postHotel(@Body hotel: Hotel, @Query("travelIdentity") travelIdentity: String)
+    fun postHotel(@Body hotel: Hotel, @Query("travelIdentity") travelIdentity: String): Single<Response<String>>
 
     @GET("travel/citywalk")
     fun getCityWalk(@Query("travelIdentity") travelIdentity: String): Single<List<CityWalk>>

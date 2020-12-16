@@ -53,6 +53,7 @@ class NewTravelFragment : Fragment() {
         var location: Location? = null
         var startDateValue: LocalDate? = null
         var endDateValue: LocalDate? = null
+        var travel: Travel? = null
         searchLocationButton.setOnClickListener{
             context?.showLocationDialog(locationInput.text.toString()){
                 location = it
@@ -79,7 +80,7 @@ class NewTravelFragment : Fragment() {
             val adults = adultsNumber.text.toString().toInt()
             val travelDestination = TravelDestination(location?.name!!, location?.countryId!!)
             val participants = TravelParticipants(children, null, adults)
-            val travel = Travel(null, startDateValue!!, endDateValue!!, participants, travelDestination, null)
+            val travel = Travel(null, startDateValue?.atStartOfDay()!!, endDateValue?.atStartOfDay()!!, participants, travelDestination, null)
             newTravelViewModel.postTravel(travel)
         }
 
@@ -89,8 +90,11 @@ class NewTravelFragment : Fragment() {
 
         newTravelViewModel.travel.observe(viewLifecycleOwner, Observer {p ->
             newTravelViewModel.postLocation(location!!, p?.travelId!!)
+            travel = p
+        })
+        newTravelViewModel.location.observe(viewLifecycleOwner, Observer {p ->
             val intent = Intent(activity, TravelDetailsActivity::class.java)
-            intent.putExtra(TravelFragment.EXTRA_TRAVEL, p)
+            intent.putExtra(TravelFragment.EXTRA_TRAVEL, travel)
             activity?.startActivity(intent)
         })
         return root

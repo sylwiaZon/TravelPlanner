@@ -17,7 +17,7 @@ class IncomingTravelViewModel : TravelViewModelBase() {
     private val travelStream = DIContainer.travelApiService.getTravels()
         .applySchedulers()
         .map {
-            Optional.ofNullable(it.filter { t -> t.arrivalDate > LocalDate.now() }
+            Optional.ofNullable(it.filter { t -> t.arrivalDate > LocalDateTime.now() }
                 .minBy { t -> t.arrivalDate })
         }
 

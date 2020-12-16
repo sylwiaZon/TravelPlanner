@@ -22,11 +22,15 @@ class HotelViewModel : ViewModel() {
                 .subscribe({ t ->
                     _hotel.value = t
                 }, {
-                    Log.e("HotelViewModel",it.message.toString())
+                    _hotel.value = null
                 })
     }
 
     fun addHotel(hotel: Hotel, travelId: String){
         travelApiService.postHotel(hotel, travelId)
+                .applySchedulers()
+                .subscribe({
+                    setTravelId(travelId)
+                },{})
     }
 }

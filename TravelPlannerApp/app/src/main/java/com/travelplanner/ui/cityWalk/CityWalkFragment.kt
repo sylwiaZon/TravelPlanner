@@ -36,7 +36,8 @@ class CityWalkFragment : Fragment() {
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.cityWalk.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
+            if(it.isNotEmpty())
+                adapter.setData(it)
         })
         return v
     }

@@ -1,6 +1,8 @@
 ﻿using Neo4j.Driver;
 using Neo4jClient;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelPlanner.Core;
@@ -84,7 +86,7 @@ namespace TravelPlanner.Repositories
             }
         }
 
-        async public Task<CityWalk[]> GetCityWalks(string travelIdentity)
+        async public Task<IEnumerable<CityWalk>> GetCityWalks(string travelIdentity)
         {
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
@@ -93,9 +95,9 @@ namespace TravelPlanner.Repositories
                 .Return(cityWalk => cityWalk.As<CityWalk>())
                 .ResultsAsync;
             if (resp.Any())
-                return resp.ToArray();
+                return resp;
             else
-                throw new TravelPlannerException(404, "CityWalk not found");
+                return new List<CityWalk>();
         }
 
         async public Task<WayPoint[]> GetWayPoints(string cityWalkId)

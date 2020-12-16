@@ -1,6 +1,7 @@
 ﻿using Neo4j.Driver;
 using Neo4jClient;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelPlanner.Core;
@@ -114,7 +115,7 @@ namespace TravelPlanner.Repositories
             }
         }
 
-        public async Task<DayPlan[]> GetDayPlans(string travelIdentity)
+        public async Task<IEnumerable<DayPlan>> GetDayPlans(string travelIdentity)
         {
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher
@@ -125,7 +126,7 @@ namespace TravelPlanner.Repositories
             if (resp.Any())
                 return resp.ToArray();
             else
-                throw new TravelPlannerException(404, "DayPlan not found");
+                return new List<DayPlan>();
         }
 
         public async Task<Itinerary[]> GetItineraries(string dayPlanId)
