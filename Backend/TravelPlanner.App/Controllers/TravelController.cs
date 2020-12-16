@@ -85,7 +85,7 @@ namespace TravelPlanner.App.Controllers
         [Authorize]
         [HttpGet]
         [Route("citywalk")]
-        public Task<CityWalk[]> GetCityWalks(string travelIdentity)
+        public Task<IEnumerable<CityWalk>> GetCityWalks(string travelIdentity)
         {
             return _travelService.GetCityWalks(travelIdentity);
         }
@@ -101,7 +101,7 @@ namespace TravelPlanner.App.Controllers
         [Authorize]
         [HttpGet]
         [Route("dayplan")]
-        public Task<DayPlan[]> GetDayPlans(string travelIdentity)
+        public Task<IEnumerable<DayPlan>> GetDayPlans(string travelIdentity)
         {
             return _travelService.GetDayPlans(travelIdentity);
         }

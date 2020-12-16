@@ -26,9 +26,9 @@ namespace TravelPlanner.Services
         Task AddHotel(Hotel newHotel, string travelIdentity);
         Task<HotelWithDetails> GetHotel(string travelIdentity);
         Task AddCityWalk(CityWalk newHotel, string travelIdentity);
-        Task<CityWalk[]> GetCityWalks(string travelIdentity);
+        Task<IEnumerable<CityWalk>> GetCityWalks(string travelIdentity);
         Task AddDayPlan(DayPlan newDayPlan, string travelIdentity);
-        Task<DayPlan[]> GetDayPlans(string travelIdentity);
+        Task<IEnumerable<DayPlan>> GetDayPlans(string travelIdentity);
         Task AddTour(Tour newTour, string travelIdentity);
         Task<Tour[]> GetTours(string travelIdentity);
         Task<ToDoItem> AddToDoItem(string newItem, string travelIdentity);

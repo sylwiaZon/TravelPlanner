@@ -30,6 +30,7 @@ class CityWalkFragment : Fragment() {
         val adapter = CityWalkAdapter(travelId){
             viewModel.addToFavourites(it, travelId)
         }
+        val
         viewModel.liked.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, "Point added to list", Toast.LENGTH_SHORT).show()
         })
