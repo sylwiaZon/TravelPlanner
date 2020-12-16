@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.travelplanner.R
 
-class DayPlanFragment : Fragment() {
+class  DayPlanFragment : Fragment() {
 
     lateinit var viewModel: DayPlanViewModel
 
@@ -24,7 +25,12 @@ class DayPlanFragment : Fragment() {
         travelId?.let {
             viewModel.setTravelId(it)
         }
+
+        val noSavedPlan = v.findViewById<LinearLayout>(R.id.no_saved_day_plan)
+        val
+
         val recycler = v.findViewById<RecyclerView>(R.id.day_plan_recycler)
+        recycler.visibility = View.GONE
         val adapter = DayPlanAdapter(travelId){
             viewModel.addToFavourites(it, travelId)
         }
@@ -34,7 +40,11 @@ class DayPlanFragment : Fragment() {
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.dayPlan.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
+            if(it.isNotEmpty()){
+                adapter.setData(it.first().days)
+                noSavedPlan.visibility = View.GONE
+                recycler.visibility = View.VISIBLE
+            }
         })
         return v
     }

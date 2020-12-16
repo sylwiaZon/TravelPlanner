@@ -22,9 +22,11 @@ class CityWalkViewModel : ViewModel() {
     fun setTravelId(travelId: String){
         travelApiService.getCityWalk(travelId)
                 .applySchedulers()
-                .subscribe { t ->
+                .subscribe ({ t ->
                     _cityWalk.value = t
-                }
+                }, {
+                    Log.e("ToSeeListViewModel", it.message.toString())
+                })
     }
 
     fun addToFavourites(poiId: String?, travelId: String?){

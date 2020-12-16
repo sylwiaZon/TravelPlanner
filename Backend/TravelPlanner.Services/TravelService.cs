@@ -5,6 +5,7 @@ using DomainLocation = TravelPlanner.Core.DomainModels.Location;
 using DbHotelTransport = TravelPlanner.Core.DataBaseModels.HotelTransport;
 using DbToSeeItem = TravelPlanner.Core.DataBaseModels.ToSeeItem;
 using DbToDoItem = TravelPlanner.Core.DataBaseModels.ToDoItem;
+using DbAttribution = TravelPlanner.Core.DataBaseModels.Attribution;
 using TravelPlanner.Repositories;
 using TravelPlanner.Services.Converters;
 using System.Linq;
@@ -184,7 +185,9 @@ namespace TravelPlanner.Services
                 var dbPoint = CityWalkConverter.ToDbWayPoint(domainPoint);
                 var point = await CityWalkRepository.AddWayPoint(dbPoint, walk.CityWalkId);
                 var poi = PoiConverter.ToDbPoi(domainPoint.Poi);
-                var attributions = domainPoint.Poi.Attribution.Select(a => PoiConverter.ToDbAttribution(a));
+                var attributions = new List<DbAttribution>();
+                if (domainPoint.Poi.Attribution != null)
+                    attributions = domainPoint.Poi.Attribution.Select(a => PoiConverter.ToDbAttribution(a)).ToList();
                 await PoiRepository.AddPoiToWayPoint(poi, attributions, point.WayPointId, location.LocationId);
                 await PoiRepository.AddAttributionToPoi(poi.PoiId, attributions);
             }

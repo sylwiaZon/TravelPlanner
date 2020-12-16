@@ -88,6 +88,7 @@ abstract class TravelFragmentBase : Fragment() {
             cityWalkButton.setOnClickListener{
                 val intent = Intent(activity, CityWalkActivity::class.java)
                 intent.putExtra(CityWalkFragment.EXTRA_TRAVEL_ID, t?.travelId)
+                intent.putExtra(CityWalkFragment.EXTRA_CITY_NAME, t?.travelDestination?.city)
                 activity?.startActivity(intent)
             }
             hotelButton.setOnClickListener{
