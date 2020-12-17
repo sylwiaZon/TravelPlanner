@@ -38,7 +38,7 @@ interface TravelApiService {
     fun getDayPlan(@Query("travelIdentity") travelIdentity: String): Single<List<DayPlan>>
 
     @POST("travel/dayplan")
-    fun postDayPlan(@Body dayPlan: DayPlan, @Query("travelIdentity") travelIdentity: String)
+    fun postDayPlan(@Body dayPlan: DayPlan, @Query("travelIdentity") travelIdentity: String): Single<Response<String>>
 
     @GET("travel/tour")
     fun getTour(@Query("travelIdentity") travelIdentity: String): Single<List<Tour>>

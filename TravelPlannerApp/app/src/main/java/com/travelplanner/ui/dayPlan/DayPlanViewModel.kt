@@ -11,6 +11,7 @@ import com.travelplanner.models.Itinerary
 
 class DayPlanViewModel : ViewModel() {
     private val travelApiService = DIContainer.travelApiService
+    private val dayPlanApiService = DIContainer.dayPlannerApiService
     private val _dayPlan = MutableLiveData<List<DayPlan>>()
     val dayPlan: LiveData<List<DayPlan>> = _dayPlan
     private val _liked = MutableLiveData<Boolean>()
@@ -19,9 +20,11 @@ class DayPlanViewModel : ViewModel() {
     fun setTravelId(travelId: String){
         travelApiService.getDayPlan(travelId)
             .applySchedulers()
-            .subscribe { t ->
+            .subscribe ({ t ->
                 _dayPlan.value = t
-            }
+            },{
+                Log.e("DayPlanViewModel", it.message.toString())
+            })
     }
 
     fun addToFavourites(poiId: String?, travelId: String?){
@@ -31,7 +34,27 @@ class DayPlanViewModel : ViewModel() {
             .subscribe ({
                 _liked.value = true
             },{
-                Log.e("ToSeeListViewModel", it.message.toString())
+                Log.e("DayPlanViewModel", it.message.toString())
             })
+    }
+
+    fun addDayPlan(cityName: String, arrivalTime: String, departureTime: String, startDate: String, endDate: String,  travelId: String){
+        dayPlanApiService.getDayPlan(cityName, arrivalTime, departureTime, startDate, endDate)
+                .applySchedulers()
+                .subscribe({
+                    postDayPlan(it.first(), travelId)
+                },{
+                    Log.e("DayPlanViewModel", it.message.toString())
+                })
+    }
+
+    fun postDayPlan(dayP: DayPlan, travelId: String){
+        travelApiService.postDayPlan(dayP, travelId)
+                .applySchedulers()
+                .subscribe ({
+                    setTravelId(travelId)
+                },{
+                    Log.e("DayPlanViewModel", it.message.toString())
+                })
     }
 }

@@ -42,7 +42,7 @@ namespace TravelPlanner.Repositories
             }
         }
 
-        async public Task AddPoiToWayPoint(Poi newPoi, IEnumerable<Attribution> attributions, string pointId, string locationId)
+        async public Task AddPoiToWayPoint(Poi newPoi, string pointId, string locationId)
         {
             await GraphClient.ConnectAsync();
             var resp = await GraphClient.Cypher

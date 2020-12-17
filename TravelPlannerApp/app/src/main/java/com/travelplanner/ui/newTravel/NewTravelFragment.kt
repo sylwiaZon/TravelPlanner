@@ -62,13 +62,13 @@ class NewTravelFragment : Fragment() {
             }
         }
         startDateButton.setOnClickListener{
-            context?.showFlightDatePickerDialog { localDate ->
+            context?.showDatePickerDialog { localDate ->
                 startDateValue = localDate
                 startDate.text = localDate.format(formatter)
             }
         }
         endDateButton.setOnClickListener{
-            context?.showFlightDatePickerDialog { localDate ->
+            context?.showDatePickerDialog { localDate ->
                 endDateValue = localDate
                 endDate.text = localDate.format(formatter)
             }

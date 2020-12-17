@@ -185,11 +185,12 @@ namespace TravelPlanner.Services
                 var dbPoint = CityWalkConverter.ToDbWayPoint(domainPoint);
                 var point = await CityWalkRepository.AddWayPoint(dbPoint, walk.CityWalkId);
                 var poi = PoiConverter.ToDbPoi(domainPoint.Poi);
-                var attributions = new List<DbAttribution>();
                 if (domainPoint.Poi.Attribution != null)
-                    attributions = domainPoint.Poi.Attribution.Select(a => PoiConverter.ToDbAttribution(a)).ToList();
-                await PoiRepository.AddPoiToWayPoint(poi, attributions, point.WayPointId, location.LocationId);
-                await PoiRepository.AddAttributionToPoi(poi.PoiId, attributions);
+                {
+                    var attributions = domainPoint.Poi.Attribution.Select(a => PoiConverter.ToDbAttribution(a)).ToList();
+                    await PoiRepository.AddAttributionToPoi(poi.PoiId, attributions);
+                }
+                await PoiRepository.AddPoiToWayPoint(poi, point.WayPointId, location.LocationId);
             }
         }
         
@@ -233,8 +234,11 @@ namespace TravelPlanner.Services
                     await DayPlanRepository.AddItineraryItem(dbItem, dbDay.ItineraryId);
                     var poi = PoiConverter.ToDbPoi(item.Poi);
                     await PoiRepository.AddPoiToDayItem(poi, item.ItineraryItemId, location.LocationId);
-                    var attributions = item.Poi.Attribution.Select(a => PoiConverter.ToDbAttribution(a));
-                    await PoiRepository.AddAttributionToPoi(poi.PoiId, attributions);
+                    if (item.Poi.Attribution != null)
+                    {
+                        var attributions = item.Poi.Attribution.Select(a => PoiConverter.ToDbAttribution(a)).ToList();
+                        await PoiRepository.AddAttributionToPoi(poi.PoiId, attributions);
+                    }
                 }
             }
         }

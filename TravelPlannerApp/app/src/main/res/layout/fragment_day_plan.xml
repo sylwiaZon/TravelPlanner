@@ -43,31 +43,6 @@
             android:layout_marginRight="10dp"
             android:textAppearance="?attr/textAppearanceBody1"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Select date:"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginRight="10dp"
-                    android:textAppearance="?attr/textAppearanceBody1"/>
-
-                    <EditText
-                        android:id="@+id/day_plan_start_date"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="datetime"
-                        android:layout_marginBottom="20dp" />
-
-            </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,22 +51,76 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select time:"
-                android:layout_marginBottom="20dp"
                 android:layout_marginRight="10dp"
-                android:textAppearance="?attr/textAppearanceBody1"/>
+                android:layout_weight="1"
+                android:text="Select date:"
+                android:textAppearance="?attr/textAppearanceBody1" />
 
-            <EditText
-                android:id="@+id/day_plan_start_time"
-                android:layout_width="100dp"
+            <TextView
+                android:id="@+id/day_plan_start_date"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="datetime"
-                android:layout_marginBottom="20dp" />
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Date"
+                android:textAppearance="?attr/textAppearanceBody1" />
+            <Button
+                android:id="@+id/new_day_plan_start_date_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Set date" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="Select time:"
+                android:textAppearance="?attr/textAppearanceBody1" />
+
+            <TextView
+                android:id="@+id/day_plan_start_time"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Time"
+                android:textAppearance="?attr/textAppearanceBody1" />
+            <Button
+                android:id="@+id/new_day_plan_start_time_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Set time" />
 
         </LinearLayout>
 
@@ -102,6 +131,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginRight="10dp"
             android:textAppearance="?attr/textAppearanceBody1"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,22 +139,36 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select date:"
-                android:layout_marginBottom="20dp"
                 android:layout_marginRight="10dp"
-                android:textAppearance="?attr/textAppearanceBody1"/>
+                android:layout_weight="1"
+                android:text="Select date:"
+                android:textAppearance="?attr/textAppearanceBody1" />
 
-            <EditText
+            <TextView
                 android:id="@+id/day_plan_end_date"
-                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="datetime"
-                android:layout_marginBottom="20dp" />
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Date"
+                android:textAppearance="?attr/textAppearanceBody1" />
+            <Button
+                android:id="@+id/day_plan_end_date_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Set date" />
 
         </LinearLayout>
 
@@ -135,30 +179,45 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select time:"
-                android:layout_marginBottom="20dp"
                 android:layout_marginRight="10dp"
-                android:textAppearance="?attr/textAppearanceBody1"/>
+                android:layout_weight="1"
+                android:text="Select time:"
+                android:textAppearance="?attr/textAppearanceBody1" />
 
-            <EditText
+            <TextView
                 android:id="@+id/day_plan_end_time"
-                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="datetime"
-                android:layout_marginBottom="20dp" />
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Time"
+                android:textAppearance="?attr/textAppearanceBody1" />
+            <Button
+                android:id="@+id/day_plan_end_time_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Set time" />
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/search_city_walk_button"
+            android:id="@+id/search_day_plan_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search for new plan!"
+            android:layout_marginTop="20dp"
+            android:text="Add new plan!"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

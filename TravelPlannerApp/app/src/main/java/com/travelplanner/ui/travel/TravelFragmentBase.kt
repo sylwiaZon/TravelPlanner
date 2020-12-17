@@ -83,6 +83,7 @@ abstract class TravelFragmentBase : Fragment() {
             dayPlanButton.setOnClickListener{
                 val intent = Intent(activity, DayPlanActivity::class.java)
                 intent.putExtra(DayPlanFragment.EXTRA_TRAVEL_ID, t?.travelId)
+                intent.putExtra(DayPlanFragment.EXTRA_CITY_NAME, t?.travelDestination?.city)
                 activity?.startActivity(intent)
             }
             cityWalkButton.setOnClickListener{

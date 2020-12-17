@@ -9,5 +9,5 @@ interface DayPlannerApiService {
     @GET("dayplanner")
     fun getDayPlan(@Query("locationId") cityName: String, @Query("arrivalTime") arrivalTime: String,
                    @Query("departureTime") departureTime: String, @Query("startDate") startDate: String,
-                   @Query("string") string: String): Single<List<DayPlan>>
+                   @Query("endDate") string: String): Single<List<DayPlan>>
 }
