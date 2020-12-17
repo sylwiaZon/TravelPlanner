@@ -26,7 +26,7 @@ class ToDoListViewModel : ViewModel() {
         travelApiService.getToDoItem(travelId)
                 .applySchedulers()
                 .subscribe ({ t ->
-                    _toDoList.value = t
+                    _toDoList.postValue(t)
                 },{
                     Log.e("ToDoListViewModel", it.message.toString())
                 })

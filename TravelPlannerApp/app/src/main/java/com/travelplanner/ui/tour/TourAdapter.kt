@@ -1,15 +1,20 @@
 package com.travelplanner.ui.tour
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.travelplanner.R
+import com.travelplanner.models.ToSeeItem
 import com.travelplanner.models.Tour
 
-class TourAdapter() : RecyclerView.Adapter<TourAdapter.ViewHolder>() {
+
+class TourAdapter(val onClicked: (url: String) -> Unit) : RecyclerView.Adapter<TourAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -42,8 +47,10 @@ class TourAdapter() : RecyclerView.Adapter<TourAdapter.ViewHolder>() {
             durationRow.visibility = View.GONE
         else
             duration.text = toursList[position].duration.toString() + " " + toursList[position].durationUnit
-        val vendor = holderView.findViewById<TextView>(R.id.tour_vendor_url)
-        vendor.text = toursList[position].vendorTourUrl
+        val vendor = holderView.findViewById<LinearLayout>(R.id.tour_vendor)
+        vendor.setOnClickListener{
+            onClicked(toursList[position].vendorTourUrl)
+        }
     }
 
     public fun setData(data: List<Tour>) {

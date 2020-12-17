@@ -22,7 +22,7 @@ class ToSeeListViewModel : ViewModel() {
         travelApiService.getToSeeItem(travelId)
                 .applySchedulers()
                 .subscribe ({ t ->
-                    _toSeeList.value = t
+                    _toSeeList.postValue(t)
                 },{
                     Log.e("ToSeeListViewModel", it.message.toString())
                 })

@@ -25,7 +25,7 @@ class NewTravelViewModel : ViewModel() {
         travelApiService.postTravel(travel)
                 .applySchedulers()
                 .subscribe({ t ->
-                    _travel.value = t
+                    _travel.postValue(t)
                 }, {
                     _toastError.value = "Travel not added. Try again later"
                 })

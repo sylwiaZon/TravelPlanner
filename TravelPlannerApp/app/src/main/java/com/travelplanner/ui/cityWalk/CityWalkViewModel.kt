@@ -23,7 +23,7 @@ class CityWalkViewModel : ViewModel() {
         travelApiService.getCityWalk(travelId)
                 .applySchedulers()
                 .subscribe ({ t ->
-                    _cityWalk.value = t
+                    _cityWalk.postValue(t)
                 }, {
                     Log.e("ToSeeListViewModel", it.message.toString())
                 })
@@ -55,7 +55,6 @@ class CityWalkViewModel : ViewModel() {
         travelApiService.postCityWalk(cityWalk, travelId)
                 .applySchedulers()
                 .subscribe({
-                    _added.value = it.body()
                     setTravelId(travelId)
                 },{
                     Log.e("ToSeeListViewModel", it.message.toString())

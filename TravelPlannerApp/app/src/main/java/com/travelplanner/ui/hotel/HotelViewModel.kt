@@ -20,7 +20,7 @@ class HotelViewModel : ViewModel() {
         travelApiService.getHotel(travelId)
                 .applySchedulers()
                 .subscribe({ t ->
-                    _hotel.value = t
+                    _hotel.postValue(t)
                 }, {
                     _hotel.value = null
                 })

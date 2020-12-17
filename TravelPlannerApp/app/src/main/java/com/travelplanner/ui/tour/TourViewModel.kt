@@ -18,7 +18,7 @@ class TourViewModel : ViewModel() {
         travelApiService.getTour(travelId)
                 .applySchedulers()
                 .subscribe ({ t ->
-                    _tours.value = t
+                    _tours.postValue(t)
                 },{
                     Log.e("TourViewModel", it.message.toString())
                 })

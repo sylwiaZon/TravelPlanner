@@ -1,9 +1,12 @@
 package com.travelplanner.ui.tour
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,7 +28,10 @@ class TourFragment : Fragment() {
             viewModel.setTravelId(it)
         }
         val recycler = v.findViewById<RecyclerView>(R.id.tours_recycler)
-        val adapter = TourAdapter()
+        val adapter = TourAdapter(){
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+            startActivity(browserIntent)
+        }
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         viewModel.tours.observe(viewLifecycleOwner, Observer {

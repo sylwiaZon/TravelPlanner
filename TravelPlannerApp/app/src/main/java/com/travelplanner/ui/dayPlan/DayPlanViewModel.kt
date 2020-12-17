@@ -21,7 +21,7 @@ class DayPlanViewModel : ViewModel() {
         travelApiService.getDayPlan(travelId)
             .applySchedulers()
             .subscribe ({ t ->
-                _dayPlan.value = t
+                _dayPlan.postValue(t)
             },{
                 Log.e("DayPlanViewModel", it.message.toString())
             })

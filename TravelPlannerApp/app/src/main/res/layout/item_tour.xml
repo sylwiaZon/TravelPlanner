@@ -83,7 +83,8 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/tour_vendor"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
@@ -93,13 +94,11 @@
                     android:text="Vendor"
                     android:textAppearance="?attr/textAppearanceBody1"/>
 
-                <TextView
-                    android:id="@+id/tour_vendor_url"
+                <ImageView
+                    android:id="@+id/tour_vendor_icon"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="URL"
-                    android:textAppearance="?attr/textAppearanceBody2"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_launch_24"/>
 
             </LinearLayout>
         </LinearLayout>

@@ -32,7 +32,7 @@ interface TravelApiService {
     fun getCityWalk(@Query("travelIdentity") travelIdentity: String): Single<List<CityWalk>>
 
     @POST("travel/citywalk")
-    fun postCityWalk(@Body cityWalk: CityWalk, @Query("travelIdentity") travelIdentity: String): Single<Response<String>>
+    fun postCityWalk(@Body cityWalk: CityWalk, @Query("travelIdentity") travelIdentity: String): Single<Response<Void>>
 
     @GET("travel/dayplan")
     fun getDayPlan(@Query("travelIdentity") travelIdentity: String): Single<List<DayPlan>>

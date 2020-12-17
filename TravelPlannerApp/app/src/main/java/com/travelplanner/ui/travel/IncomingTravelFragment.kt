@@ -4,11 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.travelplanner.R
+import com.travelplanner.ui.newTravel.NewTravelFragment
+
 
 class IncomingTravelFragment : TravelFragmentBase() {
     override fun getViewModel(): TravelViewModelBase {
@@ -35,6 +42,14 @@ class IncomingTravelFragment : TravelFragmentBase() {
                 noIncTravel?.visibility = View.GONE
             }
         }
+        val addTravelButton = noIncTravel?.findViewById<Button>(R.id.incoming_travel_add_new_travel)
+        addTravelButton?.setOnClickListener {
+            changeFragment()
+        }
         return view
+    }
+
+    private fun changeFragment() {
+        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.nav_add_travel)
     }
 }
