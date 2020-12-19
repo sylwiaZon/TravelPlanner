@@ -7,7 +7,15 @@ using TravelPlanner.Core.HotelsApi.Search;
 
 namespace TravelPlanner.Repositories
 {
-    public class HotelsApiClient
+    public interface IHotelsApiClient
+    {
+        Task<HotelSearch> GetHotels(string cityName);
+        Task<HotelPhotos> GetHotelPhotos(string hotelId);
+        Task<HotelDetails> GetHotelDetails(string hotelId);
+        Task<HotelDetails> GetHotelDetails(string hotelId, string checkIn, string checkOut, int adultsNumber, string childrenAges);
+    }
+
+    public class HotelsApiClient : IHotelsApiClient
     {
         private readonly HttpClient Client;
         private readonly string Path = "https://hotels4.p.rapidapi.com/";

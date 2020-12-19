@@ -43,31 +43,41 @@ namespace TravelPlanner.Services
 
     public class TravelService : ITravelService
     {
-        private TravelRepository TravelRepository;
-        private LocationRepository LocationRepository;
-        private FlightRepository FlightRepository;
-        private HotelRepository HotelRepository;
-        private CityWalkRepository CityWalkRepository;
-        private PoiRepository PoiRepository;
-        private DayPlanRepository DayPlanRepository;
-        private TourRepository TourRepository;
-        private ListsRepository ListsRepository;
-        private HotelsApiClient HotelsApiClient;
-        private TriposoApiClient TriposoApiClient;
+        private ITravelRepository TravelRepository;
+        private ILocationRepository LocationRepository;
+        private IFlightRepository FlightRepository;
+        private IHotelRepository HotelRepository;
+        private ICityWalkRepository CityWalkRepository;
+        private IPoiRepository PoiRepository;
+        private IDayPlanRepository DayPlanRepository;
+        private ITourRepository TourRepository;
+        private IListsRepository ListsRepository;
+        private IHotelsApiClient HotelsApiClient;
+        private ITriposoApiClient TriposoApiClient;
 
-        public TravelService(DbSettings dbSettings)
+        public TravelService(ITravelRepository travelRepository, 
+            ILocationRepository locationRepository, 
+            IFlightRepository flightRepository, 
+            IHotelRepository hotelRepository, 
+            ICityWalkRepository cityWalkRepository, 
+            IPoiRepository poiRepository, 
+            IDayPlanRepository dayPlanRepository, 
+            ITourRepository tourRepository, 
+            IListsRepository listsRepository, 
+            IHotelsApiClient hotelsApiClient, 
+            ITriposoApiClient triposoApiClient)
         {
-            TravelRepository = new TravelRepository(dbSettings);
-            LocationRepository = new LocationRepository(dbSettings);
-            FlightRepository = new FlightRepository(dbSettings);
-            HotelRepository = new HotelRepository(dbSettings);
-            CityWalkRepository = new CityWalkRepository(dbSettings);
-            PoiRepository = new PoiRepository(dbSettings);
-            DayPlanRepository = new DayPlanRepository(dbSettings);
-            TourRepository = new TourRepository(dbSettings);
-            ListsRepository = new ListsRepository(dbSettings);
-            HotelsApiClient = new HotelsApiClient();
-            TriposoApiClient = new TriposoApiClient();
+            TravelRepository = travelRepository;
+            LocationRepository = locationRepository;
+            FlightRepository = flightRepository;
+            HotelRepository = hotelRepository;
+            CityWalkRepository = cityWalkRepository;
+            PoiRepository = poiRepository;
+            DayPlanRepository = dayPlanRepository;
+            TourRepository = tourRepository;
+            ListsRepository = listsRepository;
+            HotelsApiClient = hotelsApiClient;
+            TriposoApiClient = triposoApiClient;
         }
 
         public async Task<IEnumerable<TravelsResponse>> GetTravels(string userMail)

@@ -9,7 +9,13 @@ using TravelPlanner.Core.Exceptions;
 
 namespace TravelPlanner.Repositories
 {
-    public class TourRepository
+    public interface ITourRepository
+    {
+        Task AddTour(Tour newTour, string travelIdentity);
+        Task<Tour[]> GetTours(string travelIdentity);
+    }
+
+    public class TourRepository : ITourRepository
     {
         private static string Login;
         private static string Password;

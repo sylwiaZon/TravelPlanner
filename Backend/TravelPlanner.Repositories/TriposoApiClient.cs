@@ -7,7 +7,22 @@ using TravelPlanner.Core.Triposo;
 
 namespace TravelPlanner.Repositories
 {
-    public class TriposoApiClient
+    public interface ITriposoApiClient
+    {
+        Task<IEnumerable<Location>> GetLocationInfo(string cityName);
+        Task<Tag[]> GetAvailableTags(string cityName);
+        Task<Article[]> GetArticles(string cityName);
+        Task<Article[]> GetArticlesWithSpecifiedTag(string cityName, string tag);
+        Task<CityWalk[]> GetCityWalksWithSpecifiedLocation(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels, int latitude, int longitude);
+        Task<CityWalk[]> GetCityWalks(string cityName, int totalTime, bool optimal, bool goInside, string tagLabels);
+        Task<DayPlan[]> GetDayPlan(DayPlannerRequest dayPlannerRequest);
+        Task<CommonTagLabel[]> GetCommonTagLabels();
+        Task<LocalHighlights[]> GetLocalHighlights(int latitude, int longitude, int? maxDistance);
+        Task<Tour[]> GetTourInformation(string locationIds, string poiId, string tagLabels);
+        Task<Tour[]> GetTourInformation(string locationIds);
+    }
+
+    public class TriposoApiClient : ITriposoApiClient
     {
         private static readonly HttpClient Client = new HttpClient();
         private static readonly string ApiPath = "https://www.triposo.com/api/20200803/";

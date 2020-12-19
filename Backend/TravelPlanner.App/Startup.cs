@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.Filters;
 using TravelPlanner.App.Helpers;
 using TravelPlanner.App.Middleware;
 using TravelPlanner.Core;
+using TravelPlanner.Repositories;
 using TravelPlanner.Services;
 
 namespace TravelPlanner.App
@@ -60,6 +61,17 @@ namespace TravelPlanner.App
             services.AddScoped<ITravelInfoService, TravelInfoService>();
             services.AddScoped<ITravelService, TravelService>();
             services.AddScoped<IWeatherForecastService, WeatherForecastService>();
+            services.AddScoped<ITravelRepository, TravelRepository>();
+            services.AddScoped<ILocationRepository, LocationRepository>();
+            services.AddScoped<IFlightRepository, FlightRepository>();
+            services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<ICityWalkRepository, CityWalkRepository>();
+            services.AddScoped<IPoiRepository, PoiRepository>();
+            services.AddScoped<IDayPlanRepository, DayPlanRepository>();
+            services.AddScoped<ITourRepository, TourRepository>();
+            services.AddScoped<IListsRepository, ListsRepository>();
+            services.AddScoped<IHotelsApiClient, HotelsApiClient>();
+            services.AddScoped<ITriposoApiClient, TriposoApiClient>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

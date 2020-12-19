@@ -10,7 +10,17 @@ using TravelPlanner.Core.Exceptions;
 
 namespace TravelPlanner.Repositories
 {
-    public class PoiRepository
+    public interface IPoiRepository
+    {
+        Task AddPoi(Poi poi);
+        Task AddPoiToWayPoint(Poi newPoi, string pointId, string locationId);
+        Task AddAttributionToPoi(string poiId, IEnumerable<Attribution> attributions);
+        Task<IEnumerable<Attribution>> GetPoiAttributions(string poiId);
+        Task AddPoiToDayItem(Poi newPoi, string dayPlanItem, string locationId);
+        Task<Poi> GetPoi(string id);
+    }
+
+    public class PoiRepository : IPoiRepository
     {
         private static string Login;
         private static string Password;

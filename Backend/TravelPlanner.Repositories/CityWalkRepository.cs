@@ -11,7 +11,16 @@ using TravelPlanner.Core.Exceptions;
 
 namespace TravelPlanner.Repositories
 {
-    public class CityWalkRepository
+    public interface ICityWalkRepository
+    {
+        Task<CityWalk> AddCityWalk(CityWalk newWalk, string travelIdentity, string locationId);
+        Task<WayPoint> AddWayPoint(WayPoint newPoint, string walkId);
+        Task<IEnumerable<CityWalk>> GetCityWalks(string travelIdentity);
+        Task<WayPoint[]> GetWayPoints(string cityWalkId);
+        Task<Poi> GetPoi(string wayPointId);
+    }
+
+    public class CityWalkRepository : ICityWalkRepository
     {
         private static string Login;
         private static string Password;

@@ -9,7 +9,15 @@ using TravelPlanner.Core.Exceptions;
 
 namespace TravelPlanner.Repositories
 {
-    public class FlightRepository
+    public interface IFlightRepository
+    {
+        Task AddToFlight(Flight newFlight, string travelIdentity);
+        Task AddFromFlight(Flight newFlight, string travelIdentity);
+        Task<Flight> GetToFlight(string travelIdentity);
+        Task<Flight> GetFromFlight(string travelIdentity);
+    }
+
+    public class FlightRepository : IFlightRepository
     {
         private static string Login;
         private static string Password;

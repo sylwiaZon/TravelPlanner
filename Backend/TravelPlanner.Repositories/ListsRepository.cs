@@ -10,7 +10,18 @@ using TravelPlanner.Core.Exceptions;
 
 namespace TravelPlanner.Repositories
 {
-    public class ListsRepository
+    public interface IListsRepository
+    {
+        Task<ToDoItem> AddToDoItem(ToDoItem newItem, string travelIdentity);
+        Task<ToDoItem> EditToDoItem(ToDoItem editedItem);
+        Task<IEnumerable<ToDoItem>> GetToDoItems(string travelIdentity);
+        Task<ToSeeItem> AddToSeeItem(ToSeeItem newItem, string travelIdentity);
+        Task<ToSeeItem> EditToSeeItem(ToSeeItem editedItem);
+        Task<IEnumerable<ToSeeItem>> GetToSeeItems(string travelIdentity);
+        Task<Poi> GetToSeeItemPoi(string itemId);
+    }
+
+    public class ListsRepository : IListsRepository
     {
         private static string Login;
         private static string Password;

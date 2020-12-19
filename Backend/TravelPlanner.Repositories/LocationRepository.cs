@@ -10,7 +10,14 @@ using TravelPlanner.Core.Exceptions;
 
 namespace TravelPlanner.Repositories
 {
-    public class LocationRepository
+    public interface ILocationRepository
+    {
+        Task<Location> AddLocation(Location newLocation, string travelIdentity);
+        Task<Location> GetLocation(string travelIdentity);
+        Task<IEnumerable<Poi>> GetPoisForLocation(string travelIdentity);
+    }
+
+    public class LocationRepository : ILocationRepository
     {
         private static string Login;
         private static string Password;

@@ -10,7 +10,13 @@ using TravelPlanner.Core.Exceptions;
 
 namespace TravelPlanner.Repositories
 {
-    public class TravelRepository
+    public interface ITravelRepository
+    {
+        Task<Travel> AddTravelToUser(Travel travel, string userMail);
+        Task<IEnumerable<Travel>> GetTravels(string userMail);
+    }
+
+    public class TravelRepository : ITravelRepository
     {
         private static string Login;
         private static string Password;

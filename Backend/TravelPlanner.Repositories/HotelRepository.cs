@@ -10,7 +10,16 @@ using TravelPlanner.Core.Exceptions;
 
 namespace TravelPlanner.Repositories
 {
-    public class HotelRepository
+    public interface IHotelRepository
+    {
+        Task AddHotel(Hotel newHotel, string travelIdentity);
+        Task<Hotel> GetHotel(string travelIdentity);
+        Task AddHotelTransport(string hotelId, HotelTransport transportCategory, IEnumerable<TransportLocation> transports);
+        Task<IEnumerable<HotelTransport>> GetTransportCategories(string hotelId);
+        Task<IEnumerable<TransportLocation>> GetTransport(string hotelId, string category);
+    }
+
+    public class HotelRepository : IHotelRepository
     {
         private static string Login;
         private static string Password;
