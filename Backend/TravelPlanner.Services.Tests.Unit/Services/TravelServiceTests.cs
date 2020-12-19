@@ -15,6 +15,7 @@ using Travel = TravelPlanner.Core.DataBaseModels.Travel;
 
 namespace TravelPlanner.Tests.Unit.Services
 {
+    [TestFixture]
     public class TravelServiceTests
     {
         private ITravelRepository _travelRepository;

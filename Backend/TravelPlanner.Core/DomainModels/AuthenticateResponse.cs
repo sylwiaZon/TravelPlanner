@@ -9,6 +9,9 @@ namespace TravelPlanner.Core.DomainModels
         public string Name { get; set; }
         public string Token { get; set; }
 
+        public AuthenticateResponse()
+        {
+        }
 
         public AuthenticateResponse(User user, string token)
         {

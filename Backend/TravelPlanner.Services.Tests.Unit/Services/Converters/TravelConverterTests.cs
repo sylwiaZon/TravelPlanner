@@ -7,6 +7,7 @@ using Travel = TravelPlanner.Core.DataBaseModels.Travel;
 
 namespace TravelPlanner.Tests.Unit.Services.Converters
 {
+    [TestFixture]
     public class TravelConverterTests
     {
         private Fixture _fixture;
