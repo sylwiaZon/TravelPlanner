@@ -73,33 +73,49 @@ class SearchFlightFragment : Fragment() {
         }
 
         fromFlightButton.setOnClickListener {
-            context?.showLocationDialog(fromFlightInput.text.toString()){
-                fromLocation = it
-                context?.showAirportDialog(fromLocation?.latitude!!, fromLocation?.longitude!!){
-                    fromAirport = it
-                    fromFlightCity.text = it.names[0]
-                    fromFlightAirportCode.text = it.airportCode
-                    fromFlightAirportDistance.text = it.distanceValue.toString() + " " + it.distanceUnit
-                    fromFlightCard.visibility = View.VISIBLE
-                    if(fromAirport != null && toAirport != null) searchFlightButton.visibility = View.VISIBLE
+            getLocations(fromFlightInput.text.toString()){
+                context?.showLocationDialog(it){
+                    fromLocation = it
+                    context?.showAirportDialog(fromLocation?.latitude!!, fromLocation?.longitude!!){
+                        fromAirport = it
+                        fromFlightCity.text = it.names[0]
+                        fromFlightAirportCode.text = it.airportCode
+                        fromFlightAirportDistance.text = it.distanceValue.toString() + " " + it.distanceUnit
+                        fromFlightCard.visibility = View.VISIBLE
+                        if(fromAirport != null && toAirport != null) searchFlightButton.visibility = View.VISIBLE
+                    }
                 }
             }
         }
 
         toFlightButton.setOnClickListener {
-            context?.showLocationDialog(toFlightInput.text.toString()){
-                toLocation = it
-                context?.showAirportDialog(toLocation?.latitude!!, toLocation?.longitude!!){
-                    toAirport = it
-                    toFlightCity.text = it.names[0]
-                    toFlightAirportCode.text = it.airportCode
-                    toFlightAirportDistance.text = it.distanceValue.toString() + " " + it.distanceUnit
-                    toFlightCard.visibility = View.VISIBLE
-                    if(fromAirport != null && toAirport != null) searchFlightButton.visibility = View.VISIBLE
+            getLocations(toFlightInput.text.toString()) {
+                context?.showLocationDialog(emptyList()) {
+                    toLocation = it
+                    context?.showAirportDialog(toLocation?.latitude!!, toLocation?.longitude!!) {
+                        toAirport = it
+                        toFlightCity.text = it.names[0]
+                        toFlightAirportCode.text = it.airportCode
+                        toFlightAirportDistance.text =
+                            it.distanceValue.toString() + " " + it.distanceUnit
+                        toFlightCard.visibility = View.VISIBLE
+                        if (fromAirport != null && toAirport != null) searchFlightButton.visibility =
+                            View.VISIBLE
+                    }
                 }
             }
         }
         return v
+    }
+
+    fun getLocations(cityName: String, locationChosen: (List<Location>) -> Unit) {
+        DIContainer.locationInfoApiService.getLocation(cityName)
+            .applySchedulers()
+            .subscribe({
+                locationChosen(it)
+            }, {
+                Log.e("showLocationDialog", it.message.toString())
+            })
     }
 
     companion object{

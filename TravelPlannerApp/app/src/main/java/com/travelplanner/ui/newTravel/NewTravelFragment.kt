@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.travelplanner.R
+import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Location
 import com.travelplanner.models.Travel
 import com.travelplanner.models.TravelDestination
@@ -21,6 +22,7 @@ import com.travelplanner.ui.flight.search.showFlightDatePickerDialog
 import com.travelplanner.ui.location.showLocationDialog
 import com.travelplanner.ui.travel.TravelFragment
 import com.travelplanner.ui.travelDetails.TravelDetailsActivity
+import org.jetbrains.annotations.TestOnly
 import org.w3c.dom.Text
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -35,8 +37,10 @@ class NewTravelFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        newTravelViewModel =
-                ViewModelProvider(this).get(NewTravelViewModel::class.java)
+        if(!this::newTravelViewModel.isInitialized)
+            newTravelViewModel =
+                ViewModelProvider(this, NewTravelViewModelFactory())
+                    .get(NewTravelViewModel::class.java)
         val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
         val root = inflater.inflate(R.layout.fragment_new_travel, container, false)
         val locationInput = root.findViewById<EditText>(R.id.new_travel_location)
@@ -55,11 +59,7 @@ class NewTravelFragment : Fragment() {
         var endDateValue: LocalDate? = null
         var travel: Travel? = null
         searchLocationButton.setOnClickListener{
-            context?.showLocationDialog(locationInput.text.toString()){
-                location = it
-                val locationName = it.name + ", " + it.countryId
-                locationInput.setText(locationName)
-            }
+            newTravelViewModel.getLocations(locationInput.text.toString())
         }
         startDateButton.setOnClickListener{
             context?.showDatePickerDialog { localDate ->
@@ -97,6 +97,18 @@ class NewTravelFragment : Fragment() {
             intent.putExtra(TravelFragment.EXTRA_TRAVEL, travel)
             activity?.startActivity(intent)
         })
+        newTravelViewModel.locations.observe(viewLifecycleOwner, Observer { locations ->
+            context?.showLocationDialog(locations){
+                location = it
+                val locationName = it.name + ", " + it.countryId
+                locationInput.setText(locationName)
+            }
+        })
         return root
+    }
+
+    @TestOnly
+    fun setViewModel(viewModel: NewTravelViewModel) {
+        newTravelViewModel = viewModel
     }
 }
