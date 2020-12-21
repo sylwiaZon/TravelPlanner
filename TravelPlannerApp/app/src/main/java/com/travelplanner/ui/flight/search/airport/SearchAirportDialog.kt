@@ -8,12 +8,12 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.travelplanner.R
-import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Airport
 import com.travelplanner.models.Location
 import com.travelplanner.ui.location.SearchLocationAdapter
 import com.travelplanner.ui.location.showLocationDialog
+import com.travelplanner.utils.applySchedulers
 
 fun Context.showAirportDialog(latitude: Float, longitude: Float, onAirportChosen: (Airport) -> Unit){
     val v = LayoutInflater.from(this).inflate(R.layout.airport_search_view, null, false)

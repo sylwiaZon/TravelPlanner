@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.travelplanner.R
-import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Airport
 import com.travelplanner.models.Flight
+import com.travelplanner.utils.applySchedulers
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

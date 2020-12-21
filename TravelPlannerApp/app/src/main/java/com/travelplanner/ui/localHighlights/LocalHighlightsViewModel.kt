@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Poi
+import com.travelplanner.utils.applySchedulers
 
 class LocalHighlightsViewModel : ViewModel() {
     private val travelApiService = DIContainer.travelApiService

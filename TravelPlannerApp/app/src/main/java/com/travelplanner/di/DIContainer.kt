@@ -2,10 +2,12 @@ package com.travelplanner.di
 
 import com.travelplanner.api.*
 import com.travelplanner.api.createRetrofit
+import com.travelplanner.utils.RxSchedulers
 
 object DIContainer{
 
     private val retrofit = createRetrofit()
+    val schedulers: RxSchedulers = RxSchedulers()
     val usersApiService = retrofit.create(UserApiService::class.java)
     val travelApiService = retrofit.create(TravelApiService::class.java)
     val cityWalkApiService = retrofit.create(CityWalkApiService::class.java)

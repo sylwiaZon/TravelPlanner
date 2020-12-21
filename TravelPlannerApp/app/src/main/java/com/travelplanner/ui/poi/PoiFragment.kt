@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.travelplanner.R
-import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer.travelApiService
 import com.travelplanner.models.Poi
+import com.travelplanner.utils.applySchedulers
 
 class PoiFragment : Fragment(){
 

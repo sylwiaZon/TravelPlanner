@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.ToDoItem
 import com.travelplanner.models.ToSeeItem
+import com.travelplanner.utils.applySchedulers
 
 class ToDoListViewModel : ViewModel() {
     private val travelApiService = DIContainer.travelApiService

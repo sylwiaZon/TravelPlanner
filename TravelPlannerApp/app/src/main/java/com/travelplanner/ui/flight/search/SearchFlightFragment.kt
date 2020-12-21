@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.card.MaterialCardView
 import com.travelplanner.R
-import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Airport
 import com.travelplanner.models.Flight
@@ -20,6 +19,7 @@ import com.travelplanner.models.Location
 import com.travelplanner.ui.dayPlan.DayPlanFragment
 import com.travelplanner.ui.flight.search.airport.showAirportDialog
 import com.travelplanner.ui.location.showLocationDialog
+import com.travelplanner.utils.applySchedulers
 import io.reactivex.subjects.BehaviorSubject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

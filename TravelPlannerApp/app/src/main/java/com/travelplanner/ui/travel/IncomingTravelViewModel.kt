@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
-import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Travel
+import com.travelplanner.utils.applySchedulers
 import io.reactivex.Observable
 import java.time.LocalDate
 import java.time.LocalDateTime

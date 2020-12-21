@@ -48,8 +48,3 @@ internal fun createRetrofit(): Retrofit {
         .client(client)
         .build()
 }
-
-fun <T> Single<T>.applySchedulers(): Single<T> {
-    return this.subscribeOn(Schedulers.io())
-    .observeOn(AndroidSchedulers.mainThread())
-}

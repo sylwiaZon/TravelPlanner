@@ -7,23 +7,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.travelplanner.api.LocationInfoApiService
 import com.travelplanner.api.TravelApiService
-import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.Location
 import com.travelplanner.models.Travel
+import com.travelplanner.utils.RxSchedulers
+import com.travelplanner.utils.applySchedulers
 
 class NewTravelViewModelFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return NewTravelViewModel(
             DIContainer.travelApiService,
-            DIContainer.locationInfoApiService
+            DIContainer.locationInfoApiService,
+            DIContainer.schedulers
         ) as T
     }
 }
 
 open class NewTravelViewModel(
     private val travelApiService: TravelApiService,
-    private val locationInfoApiService: LocationInfoApiService
+    private val locationInfoApiService: LocationInfoApiService,
+    private val schedulers: RxSchedulers
 ) : ViewModel() {
 
     private val _toastError = MutableLiveData<String>()
@@ -40,7 +43,7 @@ open class NewTravelViewModel(
 
     fun postTravel(travel: Travel) {
         travelApiService.postTravel(travel)
-            .applySchedulers()
+            .applySchedulers(schedulers)
             .subscribe({ t ->
                 _travel.postValue(t)
             }, {
@@ -50,7 +53,7 @@ open class NewTravelViewModel(
 
     open fun getLocations(cityName: String) {
         locationInfoApiService.getLocation(cityName)
-            .applySchedulers()
+            .applySchedulers(schedulers)
             .subscribe({
                 _locations.postValue(it)
             }, {
@@ -60,7 +63,7 @@ open class NewTravelViewModel(
 
     fun postLocation(location: Location, travelId: String) {
         travelApiService.postLocation(location, travelId)
-            .applySchedulers()
+            .applySchedulers(schedulers)
             .subscribe({
                 _location.value = ""
             }, {

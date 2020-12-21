@@ -1,13 +1,12 @@
 package com.travelplanner.ui.cityWalk
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.travelplanner.api.applySchedulers
 import com.travelplanner.di.DIContainer
 import com.travelplanner.models.CityWalk
+import com.travelplanner.utils.applySchedulers
 
 class CityWalkViewModel : ViewModel() {
     private val travelApiService = DIContainer.travelApiService
