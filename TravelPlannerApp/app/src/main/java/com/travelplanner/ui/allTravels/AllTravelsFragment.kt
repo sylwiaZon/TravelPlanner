@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.travelplanner.R
 import com.travelplanner.ui.travel.TravelFragment
 import com.travelplanner.ui.travelDetails.TravelDetailsActivity
+import com.travelplanner.utils.di
 
 class AllTravelsFragment : Fragment() {
 
@@ -26,7 +27,7 @@ class AllTravelsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         allTravelsViewModel =
-                ViewModelProvider(this).get(AllTravelsViewModel::class.java)
+                ViewModelProvider(this, AllTravelViewModelFactory(di().travelApiService)).get(AllTravelsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_all_travels, container, false)
         val adapter = AllTravelsAdapter {
             val intent = Intent(activity, TravelDetailsActivity::class.java)
